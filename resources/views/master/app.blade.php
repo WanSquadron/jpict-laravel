@@ -5,11 +5,12 @@
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+    <meta name="description" content="Sistem Jawatankuasa Pemandu ICT JPN Perak">
+    <meta name="author" content="Sektor Pengurusan Maklumat ICT">
+    <meta name="keywords" content="jpict jpnperak sict">
 
     <!-- Title Page-->
+    @yield('title')
     <title>Sistem Jawatankuasa Pemandu ICT - Jabatan Pendidikan Negeri Perak</title>
 
     <!-- Fontfaces CSS-->
@@ -36,7 +37,6 @@
 
 </head>
 
-@if(auth()->user()->role == "Sekolah")
 <body class="animsition">
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
@@ -51,60 +51,7 @@
                     <div class="image img-cir img-120">
                         <img src="{{ asset('bootstrap/images/icon/avatar-big-01.jpg')}}" alt="John Doe" />
                     </div>
-                    <h4 class="name"> {{ auth()->user()->name }}</h4>
-                    <a class="" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Keluar</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                </div>
-                <nav class="navbar-sidebar2">
-                    <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a  href="/user">
-                                <i class="fas fa-tachometer-alt"></i>Utama</a>
-                        </li>
-                    </ul>
-                    <ul class="list-unstyled navbar__list">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Permohonan
-                                <span class="arrow">
-                                    <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="/permohonan-baru">
-                                        <i class="fas fa-book"></i>Permohonan Baru</a>
-                                </li>
-                                <li>
-                                    <a href="/senarai-permohonan">
-                                        <i class="fas fa-user"></i>Senarai Permohonan</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        <!-- END MENU SIDEBAR-->
-@endif
-@if(auth()->user()->role == "SuperAdmin")
-<body class="animsition">
-    <div class="page-wrapper">
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar2">
-            <div class="logo">
-                <a href="#">
-                    <img src="{{ asset('bootstrap/images/icon/logo-white.png')}}" alt="Cool Admin" />
-                </a>
-            </div>
-            <div class="menu-sidebar2__content js-scrollbar1">
-                <div class="account2">
-                    <div class="image img-cir img-120">
-                        <img src="{{ asset('bootstrap/images/icon/avatar-big-01.jpg')}}" alt="John Doe" />
-                    </div>
-                    <h4 class="name">{{ auth()->user()->name }}</h4>
+                    <h4 class="name"></h4>
                     <a class="" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Keluar</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -153,7 +100,7 @@
             </div>
         </aside>
         <!-- END MENU SIDEBAR-->
-@endif
+
          <!-- PAGE CONTAINER-->
         <div class="page-container2">
             <!-- HEADER DESKTOP-->
@@ -163,7 +110,7 @@
                         <div class="header-wrap2">
                             <div class="logo d-block d-lg-none">
                                 <a href="#">
-                                    <img src="images/icon/logo-white.png" alt="CoolAdmin" />
+                                    <img src="images/icon/logo-white.png" alt="Sekolah" />
                                 </a>
                             </div>
                             <div class="header-button2">
@@ -262,80 +209,18 @@
 
  <!-- BREADCRUMB-->
             <section class="au-breadcrumb m-t-75">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="au-breadcrumb-content">
-                                    <div class="au-breadcrumb-left">
-                                        <span class="au-breadcrumb-span">Anda di Ruangan:</span>
-                                        <ul class="list-unstyled list-inline au-breadcrumb__list">
-                                            <li class="list-inline-item active">
-                                                <a href="#">Utama</a>
-                                            </li>
-                                            <li class="list-inline-item seprate">
-                                                <span>/</span>
-                                            </li>
-                                            <li class="list-inline-item">Dashboard</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @yield('breadcrumb')
             </section>
             <!-- END BREADCRUMB-->
             
              <!-- STATISTIC-->
             <section class="statistic">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">10,368</h2>
-                                    <span class="desc">members online</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-account-o"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">388,688</h2>
-                                    <span class="desc">items sold</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-shopping-cart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">1,086</h2>
-                                    <span class="desc">this week</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">$1,060,386</h2>
-                                    <span class="desc">total earnings</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-money"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @yield('statistic')
             </section>
             <!-- END STATISTIC-->
 
             <!-- Main Container -->
-            <section>
+            <section class="statistic">
                         @yield('content')
             </section>
             <!-- Main Container END -->

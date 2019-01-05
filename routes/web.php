@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/permohonan-baru', 'SekolahController@PeruntukanKewangan');
 Route::auth();
 Route::get('/home', 'HomeController@index');
 Route::get('/access-denied', 'HomeController@AccessDenied');
