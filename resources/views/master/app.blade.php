@@ -110,7 +110,7 @@
                         <div class="header-wrap2">
                             <div class="logo d-block d-lg-none">
                                 <a href="#">
-                                    <img src="images/icon/logo-white.png" alt="Sekolah" />
+                                    <img src="images/icon/logo-white.png" alt="JPICT JPN Perak" />
                                 </a>
                             </div>
                             <div class="header-button2">
@@ -263,6 +263,7 @@
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.min.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.sampledata.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.world.js') }}"></script>
+    <script src="{{ asset('bootstrap/vendor/sweetalert/sweetalert.min.js') }}"></script>
 
     <!-- Main JS-->
     <script src="{{ asset('bootstrap/js/main.js') }}"></script>

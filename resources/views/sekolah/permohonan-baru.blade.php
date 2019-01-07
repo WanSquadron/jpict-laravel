@@ -82,7 +82,7 @@
 @section('content')
 <div class="section__content section__content--p30">
     <div class="container-fluid">
-    	<form data-toggle="validator" role="form" method="post" action="core/DaftarPermohonan.php">
+    	<form data-toggle="validator" role="form" method="post" action="/daftar-permohonan">
 		<div class="row">
             <div class="col-lg-12">						
 				<div class="card mb-3">	
@@ -94,6 +94,8 @@
 							<div class="form-group col-md-6">                            
 								<label for="example1">Kod Sekolah / Nama Sekolah</label>
 							 	<input class="form-control" type="text" placeholder="AEA2044 / SMK Gunung Rapat" readonly>
+							 	<input class="form-control" type="hidden" name="kodsklh" value="AEA2044">
+							 	<input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
 							</div>	
 							<div class="form-group col-md-6">
 								<label for="alamat">Alamat</label>
@@ -107,7 +109,7 @@
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<lable for="NamaPegawai">Nama Pegawai Bertanggungjawab</lable>
-									<input class="form-control" type="text" name="pegawai"placeholder="Sila isikan Nama Pegawai Bertanggungjawab" >
+									<input class="form-control" type="text" name="pegawai" placeholder="Sila isikan Nama Pegawai Bertanggungjawab" >
 								</div>
 							</div>
 							<div class="form-row">
@@ -143,7 +145,7 @@
 								<select class="form-control" name="sumberp" placeholder="Sila pilih Sumber Peruntukan">
 									<option value="">Sila pilih Sumber Peruntukan...</option>
 									@foreach ($peruntukan as $kew)
-									<option value="{{ $kew->id}}"> {{ $kew->deskripsi} }</option>
+									<option value="{{ $kew->per_codeduit }}"> {{ $kew->per_deskrips }}</option>
 									@endforeach
 								</select>
 							</div>

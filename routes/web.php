@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 
+Route::get('/daftar-permohonan', 'SekolahController@DaftarPermohonan');
 Route::get('/permohonan-baru', 'SekolahController@PeruntukanKewangan');
 Route::auth();
 Route::get('/home', 'HomeController@index');
