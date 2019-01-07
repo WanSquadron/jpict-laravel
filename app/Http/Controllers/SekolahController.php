@@ -25,7 +25,7 @@ class SekolahController extends Controller
     # Insert Maklumat Permohonan (permohonan-baru.blade.php)
     public function DaftarPermohonan(Request $request)
     {
-    	$kodsek = $request->input('kodsklh');
+    	$kodsek  = $request->input('kodsklh');
     	$pegawai = $request->input('pegawai');
     	$notepon = $request->input('notepon');
     	$nomfaks = $request->input('nomfaks');
@@ -38,6 +38,18 @@ class SekolahController extends Controller
     	$statbli = $request->input('statbli');
     	$tahunbl = $request->input('tahunbl');
 
-    	SweetAlert("Controller Daftar Masuk");
+    	# Insert
+    	$mohon = new Mohon;
+    	$mohon->moh_kodsklh = $kodsek;
+    	$mohon->moh_sumberp = $sumberp;
+    	$mohon->moh_ketrngn = $sumdesc;
+    	$mohon->moh_tujuanb = $tujubli;
+    	$mohon->moh_justfks = $justfks;
+    	$mohon->save();
+
+    	redirect('.sekolah/permohonan-baru?msg=success');
+
+
+
     }
 }

@@ -94,7 +94,6 @@
 							<div class="form-group col-md-6">                            
 								<label for="example1">Kod Sekolah / Nama Sekolah</label>
 							 	<input class="form-control" type="text" placeholder="AEA2044 / SMK Gunung Rapat" readonly>
-							 	<input class="form-control" type="hidden" name="kodsklh" value="AEA2044">
 							 	<input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
 							</div>	
 							<div class="form-group col-md-6">

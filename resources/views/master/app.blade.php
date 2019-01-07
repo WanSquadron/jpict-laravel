@@ -31,10 +31,16 @@
     <link href="{{ asset('bootstrap/vendor/select2/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/vector-map/jqvmap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.6/assets/css/emojione.min.css"/>
 
     <!-- Main CSS-->
     <link href="{{ asset('bootstrap/css/theme.css') }}" rel="stylesheet">
 
+    <script>
+        window.Laravel = <?php echo json_encode([
+           'csrfToken' => csrf_token(),
+            ]); ?>
+    </script>
 </head>
 
 <body class="animsition">
