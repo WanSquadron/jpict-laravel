@@ -15,9 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/sekolah', function() {
+	return view('/sekolah/sekolah');
+});
 
-Route::get('/daftar-permohonan', 'SekolahController@DaftarPermohonan');
-Route::get('/permohonan-baru', 'SekolahController@PeruntukanKewangan');
+#Sekolah
+#Permohonan
+Route::post('/sekolah/simpan-permohonan', 'SekolahController@SavePermohonan');
+Route::get('/sekolah/permohonan-baru', 'SekolahController@PermohonanBaru');
+Route::get('/getdata', 'SekolahController@GetData');
+
+
+#Global Authentication
 Route::auth();
 Route::get('/home', 'HomeController@index');
 Route::get('/access-denied', 'HomeController@AccessDenied');

@@ -31,16 +31,12 @@
     <link href="{{ asset('bootstrap/vendor/select2/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/vector-map/jqvmap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.6/assets/css/emojione.min.css"/>
+    <link href="{{ asset('bootstrap/sweetalert/dist/sweetalert2.min.css') }}" rel="stylesheet">
 
     <!-- Main CSS-->
     <link href="{{ asset('bootstrap/css/theme.css') }}" rel="stylesheet">
 
-    <script>
-        window.Laravel = <?php echo json_encode([
-           'csrfToken' => csrf_token(),
-            ]); ?>
-    </script>
+
 </head>
 
 <body class="animsition">
@@ -57,7 +53,7 @@
                     <div class="image img-cir img-120">
                         <img src="{{ asset('bootstrap/images/icon/avatar-big-01.jpg')}}" alt="John Doe" />
                     </div>
-                    <h4 class="name"></h4>
+                    <h4 class="name" align="center">{{ Auth::user()->name }}</h4>
                     <a class="" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Keluar</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -66,10 +62,35 @@
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a  href="/user">
+                            <a  href="/sekolah">
                                 <i class="fas fa-tachometer-alt"></i>Utama</a>
                         </li>
                     </ul>
+                    @if(Auth::user()->role == 'Sekolah')
+                    <ul class="list-unstyled navbar__list">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Permohonan
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="/sekolah/permohonan-baru">
+                                        <i class="fas fa-book"></i>Permohonan Baru</a>
+                                </li>
+                            </ul>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="/permohonan-baru">
+                                        <i class="fas fa-book"></i>Senarai Permohonan</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    @else if(Auth::user()->role == 'SuperAdmin')
                     <ul class="list-unstyled navbar__list">
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -102,10 +123,60 @@
                             </ul>
                         </li>
                     </ul>
+                    @endif
                 </nav>
             </div>
         </aside>
         <!-- END MENU SIDEBAR-->
+
+        <!-- Start Section Statistic -->
+@section('statistic')
+@if(Auth::user()->role == 'Sekolah')
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item">
+                    <h2 class="number">2</h2>
+                    <span class="desc">Permohonan Anda</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-email-open"></i>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item">
+                    <h2 class="number">31</h2>
+                        <span class="desc">Jumlah Semua Permohonan</span>
+                            <div class="icon">
+                                <i class="zmdi zmdi-shopping-cart"></i>
+                            </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item">
+                    <h2 class="number">0</h2>
+                    <span class="desc">Ditolak</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-account-box"></i>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item">
+                    <h2 class="number">1</h2>
+                        <span class="desc">Lulus</span>
+                            <div class="icon">
+                                <i class="zmdi zmdi-money"></i>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+@endif
+<!-- End Section Statistic -->
 
          <!-- PAGE CONTAINER-->
         <div class="page-container2">
@@ -269,10 +340,22 @@
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.min.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.sampledata.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('bootstrap/vendor/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/sweetalert/dist/sweetalert2.min.js') }}"></script>
 
     <!-- Main JS-->
     <script src="{{ asset('bootstrap/js/main.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/ajax.js') }}"></script>
+        <script>
+        window.Laravel = <?php echo json_encode([
+           'csrfToken' => csrf_token(),
+            ]); ?>
+
+        jQuery(document).ready(function() {
+            @yield('jquery')
+            jQuery('#sumberp').select2();
+
+        });
+    </script>
 </body>
 
 </html>

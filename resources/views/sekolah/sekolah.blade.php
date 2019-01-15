@@ -1,3 +1,4 @@
+@if(Auth::user()->role == 'Sekolah')
 @extends('master.app')
 
 @section('content')
@@ -350,3 +351,4 @@
                     </div>
                 </div>
 @endsection
+@endif
