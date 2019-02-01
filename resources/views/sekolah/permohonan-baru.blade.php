@@ -1,6 +1,5 @@
 
 
-@if(Auth::user()->role == 'Sekolah')
 <!-- Include template from app.blade.php -->
 @extends('master.app')
 
@@ -31,9 +30,6 @@
 @endsection
 <!-- End Section Breadcrumbs -->
 
-@section('jquery')
-
-@endsection
 <!-- Start Section Main Content -->
 @section('content')
 
@@ -110,7 +106,6 @@
 
 
 </script>
-
 <div class="section__content section__content--p30">
     <div class="container-fluid">
     	<form data-toggle="validator" role="form" method="post" action="/sekolah/simpan-permohonan" onsubmit="return ValidateBorang();">
@@ -125,11 +120,12 @@
 							<div class="form-group col-md-6">                            
 								<label for="example1">Kod Sekolah / Nama Sekolah</label>
 							 	<input class="form-control" type="text" value="{{ $maklumat->kodsekolah }} - {{ $maklumat->name }}" readonly>
+							 	<input type="hidden" name="kodsek" id="kodsek" value="{{ $maklumat->kodsekolah }}">
 							 	<input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
 							</div>	
 							<div class="form-group col-md-6">
 								<label for="alamat">Alamat</label>
-								<input class="form-control" type="text" placeholder="Sila isikan Alamat" >
+								<input class="form-control" type="text" name="alamat" id="alamat" placeholder="Sila isikan Alamat" >
 							</div>
 						</div>
 						<div class="form-row">
@@ -163,7 +159,7 @@
 						<div class="form-row">
 								<div class="form-group col-md-6">
 									<lable for="NamaPegawai">Nama Pegawai Bertanggungjawab</lable>
-									<input class="form-control" type="text" name="pegawai" id="pegawai" placeholder="Sila isikan Nama Pegawai Bertanggungjawab" autofocus>
+									<input class="form-control" type="text" name="pegawai" id="pegawai" placeholder="Sila isikan Nama Pegawai Bertanggungjawab">
 								</div>
 							</div>
 	                    </div>
@@ -184,18 +180,10 @@
 							<div class="form-group col-md-6">
 								<label for="NoSurat">Sumber Peruntukan</label>
 								<select class="form-control" name="sumberp" id="sumberp" placeholder="Sila pilih Sumber Peruntukan">
-									<option value="">Sila pilih Sumber Peruntukan...</option>
-									@foreach ($peruntukan->where('parent_id', '0')->all() as $kew)
-										<optgroup label="{{ $kew->per_deskrips }}">
-											@foreach ($peruntukan->where('parent_id', $kew->per_codeduit)->all() as $kew_child)
-												<optgroup label="&nbsp; &nbsp; {{ $kew_child->per_deskrips }}">
-													@foreach ($peruntukan->where('parent_id', $kew_child->per_codeduit)->all() as $kew_grandchild)
-													<option value="{{ $kew_grandchild->per_codeduit }}">&nbsp; &nbsp;{{ $kew_grandchild->per_deskrips }}</option>
-													@endforeach
-												</optgroup>
-											@endforeach
-										</optgroup>
-									@endforeach
+									<option value="">Sila Pilih Sumber Peruntukan</option>
+									@foreach ($peruntukan as $kew)
+										<option value="{{ $kew->id_peruntukan }}">{{ $kew->per_deskrips }}</option>
+									@endforeach		
 								</select>
 							</div>
 							<div class="form-group col-md-6">
@@ -227,83 +215,23 @@
 							</div>
 							<div class="form-group col-md-4">
 								<label for="Status Pembelian">Status Pembelian</label>
-								<select class="form-control" name="statbli">
+								<select class="form-control" name="statbli" id="statbli">
 									<option value="">Sila pilih Status Pembelian</option>
-									<option value="Sudah">Telah Dibeli</option>
-									<option value="Belum">Belum Dibeli</option>
+									<option value="1">Telah Dibeli</option>
+									<option value="2">Belum Dibeli</option>
 								</select>
 							</div>
 							<div class="form-group col-md-4">
 								<label for="TahunBeli">Tahun Dibeli (Jika peralatan TELAH DIBELI)</label>
-								<input class="form-control" type="text" name="tahunbl" placeholder="Sila isi Tahun Dibeli">
+								<input class="form-control" type="text" name="tahunbl" id="tahunbl" placeholder="Sila isi Tahun Dibeli">
 							</div>
 						</div>
 							<input type="hidden" name="action" id="action" value="daftar">
 							<input class="btn btn-primary" type="submit" name="submit" value="Seterusnya" nofocus>				
 						</div>
 					</div>
-				</div>
-	<div class="container-fluid">
-		<div class="row">
-            <div class="col-lg-12">						
-				<div class="card mb-3">	
-					<div class="card-header">
-						<i class="fa fa-users"></i> <b>  C.  Muatnaik Dokumen</b>
-					</div>	
-					<div class="card-body"> 
-						<div class="form-row">   
-							<div class="form-group col-md-6">                            
-								<label for="example1">Sebutharga Syarikat</label>
-							 	<button type="button" id="btn-quot" class="btn btn-sm btn-primary">
-                                    <i class="fa fa-user push-5-r"></i>Pilih Fail
-                                </button>
-							</div>	
-							<div class="form-group col-md-6">
-								<label for="alamat">Alamat</label>
-								<input class="form-control" type="text" placeholder="Sila isikan Alamat" >
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-4">
-									<label for="Poskod">Poskod </label>
-									<input class="form-control" type="text" name="poskod" id="poskod" value="{{ $maklumat->poskod }}">
-								</div>
-							<div class="form-group col-md-4">
-								<label for="Daerah">Daerah</label>
-								<input class="form-control" type="text" name="daerah" id="daerah" value="{{ $maklumat->ppd }}">
-							</div>
-							<div class="form-group col-md-4">
-								<label for="Negeri">Negeri</label>
-								<input class="form-control" type="text" name="negeri" id="negeri" value="Perak">
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-4">
-									<label for="NoTel">No. Telefon Pejabat / HP </label>
-									<input class="form-control" type="text" name="notepon" value="{{ $maklumat->notel }}">
-								</div>
-							<div class="form-group col-md-4">
-								<label for="faks">No. Faks</label>
-								<input class="form-control" type="text" name="nomfaks" value="{{ $maklumat->nofaks }}">
-							</div>
-							<div class="form-group col-md-4">
-								<label for="Email">Alamat Email Rasmi</label>
-								<input class="form-control" type="text" name="almtmel" value="{{ $maklumat->email }}">
-							</div>
-						</div>
-						<div class="form-row">
-								<div class="form-group col-md-6">
-									<lable for="NamaPegawai">Nama Pegawai Bertanggungjawab</lable>
-									<input class="form-control" type="text" name="pegawai" id="pegawai" placeholder="Sila isikan Nama Pegawai Bertanggungjawab">
-								</div>
-							</div>
-	                    </div>
-					</div>	<!-- end card body -->	
-				</div>
-			</div>
-		</div>
 			</form>
 		</div>
 	</div>
-@endsection <!-- End Section Main Content -->
-@endif
+@endsection 
+<!-- End Section Main Content -->

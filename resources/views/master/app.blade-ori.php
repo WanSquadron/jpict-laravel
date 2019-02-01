@@ -279,8 +279,6 @@
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.sampledata.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.world.js') }}"></script>
     <script src="{{ asset('bootstrap/sweetalert/dist/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/dropzone/dropzone.js') }}"></script>
-    @yield('js')
 
     <!-- Main JS-->
     <script src="{{ asset('bootstrap/js/main.js') }}"></script>
@@ -293,7 +291,6 @@
         jQuery(document).ready(function() {
             @yield('jquery')
             jQuery('#sumberp').select2();
-            jQuery('#statbli').select2();
 
         });
     </script>

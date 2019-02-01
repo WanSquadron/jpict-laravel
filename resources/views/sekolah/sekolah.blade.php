@@ -1,6 +1,52 @@
-@if(Auth::user()->role == 'Sekolah')
 @extends('master.app')
-
+@section('statistic')
+@if(Auth::user()->role == 'Sekolah')
+    
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item">
+                    <h2 class="number">{{ $jumlahpermohonan }}</h2>
+                    <span class="desc">Permohonan Anda</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-email-open"></i>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item">
+                    <h2 class="number">31</h2>
+                        <span class="desc">Jumlah Semua Permohonan</span>
+                            <div class="icon">
+                                <i class="zmdi zmdi-shopping-cart"></i>
+                            </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item">
+                    <h2 class="number">{{ $ditolak }}</h2>
+                    <span class="desc">Ditolak</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-account-box"></i>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item">
+                    <h2 class="number">1</h2>
+                        <span class="desc">Lulus</span>
+                            <div class="icon">
+                                <i class="zmdi zmdi-money"></i>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+@endif
+<!-- End Section Statistic -->
 @section('content')
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
@@ -351,4 +397,3 @@
                     </div>
                 </div>
 @endsection
-@endif

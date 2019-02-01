@@ -40,6 +40,9 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 /*                   GENERIC                           */
 /*-----------------------------------------------------*/
 /* ----- Normalize ----- */
+.hide {
+    display:none;
+}
 * {
     margin: 0;
     padding: 0;
