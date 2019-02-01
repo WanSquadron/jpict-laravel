@@ -42,7 +42,7 @@
                     	<th>Bil</th>
                         <th>No. Permohonan</th>
                         <th>Status Pembelian</th>
-                        <th>Harga</th>
+                        <th>Harga Pembelian</th>
                         <th>Tarikh Permohonan</th>
                         <th>Status Permohonan</th>
                         <th>Tindakan</th>
