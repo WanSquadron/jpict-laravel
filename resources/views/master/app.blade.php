@@ -12,7 +12,7 @@
     <!-- Title Page-->
     @yield('title')
     <title>Sistem Jawatankuasa Pemandu ICT - Jabatan Pendidikan Negeri Perak</title>
-
+    @yield('css')
     <!-- Fontfaces CSS-->
     <link href="{{ asset('bootstrap/css/font-face.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/font-awesome-4.7/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -112,6 +112,7 @@
                 </nav>
             </div>
         </aside>
+    </div>
         <!-- END MENU SIDEBAR-->
 
         <!-- Start Section Statistic -->
@@ -236,7 +237,7 @@
 
             <!-- Main Container -->
             <section class="statistic">
-                        @yield('content')
+                @yield('content')
             </section>
             <!-- Main Container END -->
 
@@ -253,8 +254,6 @@
             </section>
             <!-- END PAGE CONTAINER-->
         </div>
-
-    </div>
 
     <!-- Jquery JS-->
     <script src="{{ asset('bootstrap/vendor/jquery-3.2.1.min.js') }}"></script>
@@ -279,7 +278,7 @@
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.sampledata.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.world.js') }}"></script>
     <script src="{{ asset('bootstrap/sweetalert/dist/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/dropzone/dropzone.js') }}"></script>
+
     @yield('js')
 
     <!-- Main JS-->
@@ -297,4 +296,6 @@
 
         });
     </script>
+</body>
+</html>
 <!-- end document-->>

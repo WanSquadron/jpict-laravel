@@ -3,6 +3,11 @@
 <!-- Include template from app.blade.php -->
 @extends('master.app')
 
+@section('css')
+<link href="{{ asset('bootstrap/vendor/dropzone/dropzone.min.css') }}" rel="stylesheet">
+<link href="{{ asset('bootstrap/vendor/dropzone/dropzone.css') }}" rel="stylesheet">
+@endsection
+
 <!-- Start Section Breadcrumbs -->
 @section('breadcrumb')
 
@@ -41,6 +46,7 @@
 
 <script src="{{ asset('bootstrap/dropzone/dropzone.js') }}"></script>
 <script src="{{ asset('bootstrap/dropzone/dropzone-config.js') }}"></script>
+<script src="{{ asset('bootstrap/dropzone/dropzone.min.js') }}"></script>
 
 @endsection
 <!-- End Section Javascript -->
