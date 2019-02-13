@@ -1,7 +1,5 @@
-<!-- Include template from app.blade.php -->
 @extends('master.app')
 
-<!-- Start Section Breadcrumbs -->
 @section('breadcrumb')
 <div class="section__content section__content--p30">
     <div class="container-fluid">
@@ -22,9 +20,7 @@
     </div>
 </div>
 @endsection
-<!-- End Section Breadcrumbs -->
 
-<!-- Start Section Main Content -->
 @section('content')
 
 <div class="section__content section__content--p30">
@@ -53,11 +49,11 @@
                     <tr>
                     	<td>{{ $index +1 }}.</td>
                         <td>{{ $list->moh_numbers }}</td>
-                        <td>{{ $list->description }}</td>
+                        <td>{{ $list->statusbeli->description }}</td>
                         <td>RM{{ $list->moh_hrgaict }}</td>
                         <td>{{ $list->created_at }}</td>
                         <td>Tidak Lengkap</td>
-                        <td>Edit   |   Padam</td>
+                        <td><a href="/sekolah/permohonan-edit?id={{ $list->moh_numbers }}">Kemaskini</a>   |   Padam</td>
                     </tr>
                     @endforeach
             	</tbody>

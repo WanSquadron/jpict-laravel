@@ -2,27 +2,23 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sistem Jawatankuasa Pemandu ICT JPN Perak">
     <meta name="author" content="Sektor Pengurusan Maklumat ICT">
     <meta name="keywords" content="jpict jpnperak sict">
 
-    <!-- Title Page-->
     @yield('title')
+
     <title>Sistem Jawatankuasa Pemandu ICT - Jabatan Pendidikan Negeri Perak</title>
+
     @yield('css')
-    <!-- Fontfaces CSS-->
+
     <link href="{{ asset('bootstrap/css/font-face.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/font-awesome-4.7/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/font-awesome-5/css/fontawesome-all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/mdi-font/css/material-design-iconic-font.min.css') }}" rel="stylesheet">
-
-    <!-- Bootstrap CSS-->
     <link href="{{ asset('bootstrap/vendor/bootstrap-4.1/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Vendor CSS-->
     <link href="{{ asset('bootstrap/vendor/animsition/animsition.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/wow/animate.css') }}" rel="stylesheet">
@@ -32,16 +28,11 @@
     <link href="{{ asset('bootstrap/vendor/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/vector-map/jqvmap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/sweetalert/dist/sweetalert2.min.css') }}" rel="stylesheet">
-
-    <!-- Main CSS-->
     <link href="{{ asset('bootstrap/css/theme.css') }}" rel="stylesheet">
-
-
 </head>
 
 <body class="animsition">
     <div class="page-wrapper">
-        <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar2">
             <div class="logo">
                 <a href="#">
@@ -113,13 +104,8 @@
             </div>
         </aside>
     </div>
-        <!-- END MENU SIDEBAR-->
 
-        <!-- Start Section Statistic -->
-
-         <!-- PAGE CONTAINER-->
         <div class="page-container2">
-            <!-- HEADER DESKTOP-->
             <header class="header-desktop2">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
@@ -221,25 +207,18 @@
                     </div>
                 </div>
             </header>
-            <!-- END HEADER DESKTOP-->
 
- <!-- BREADCRUMB-->
             <section class="au-breadcrumb m-t-75">
                 @yield('breadcrumb')
             </section>
-            <!-- END BREADCRUMB-->
-            
-             <!-- STATISTIC-->
+    
             <section class="statistic">
                 @yield('statistic')
             </section>
-            <!-- END STATISTIC-->
 
-            <!-- Main Container -->
             <section class="statistic">
                 @yield('content')
             </section>
-            <!-- Main Container END -->
 
             <section>
                 <div class="container-fluid">
@@ -252,17 +231,12 @@
                     </div>
                 </div>
             </section>
-            <!-- END PAGE CONTAINER-->
         </div>
 
-    <!-- Jquery JS-->
-    <script src="{{ asset('bootstrap/vendor/jquery-3.2.1.min.js') }}"></script>
 
-    <!-- Bootstrap JS-->
+    <script src="{{ asset('bootstrap/vendor/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/bootstrap-4.1/popper.min.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>
-
-    <!-- Vendor JS       -->
     <script src="{{ asset('bootstrap/vendor/slick/slick.min.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/wow/wow.min.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/animsition/animsition.min.js') }}"></script>
@@ -278,13 +252,12 @@
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.sampledata.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/vector-map/jquery.vmap.world.js') }}"></script>
     <script src="{{ asset('bootstrap/sweetalert/dist/sweetalert2.min.js') }}"></script>
-
-    @yield('js')
-
-    <!-- Main JS-->
     <script src="{{ asset('bootstrap/js/main.js') }}"></script>
     <script src="{{ asset('bootstrap/js/ajax.js') }}"></script>
-        <script>
+
+    @yield('js')
+        
+    <script>
         window.Laravel = <?php echo json_encode([
            'csrfToken' => csrf_token(),
             ]); ?>

@@ -29,11 +29,14 @@ Route::group(['middleware' => ['role:SuperAdmin']], function()
 
 //Route::group(['middleware' => ['role:Sekolah']], function()
 //{
+	Route::get('/sekolah','SekolahController@Index');
 	Route::get('/sekolah/permohonan','SekolahController@SenaraiPermohonan');
 	Route::get('/sekolah/permohonan-baru', 'SekolahController@CreatePermohonan');
+	Route::get('/sekolah/permohonan-edit', 'SekolahController@EditPermohonan');
 	Route::post('/sekolah/simpan-permohonan', 'SekolahController@SavePermohonan');
-	Route::get('/sekolah/upload-dokumen', 'SekolahController@UploadDokumen');
-	Route::get('/sekolah','SekolahController@Index');
+	Route::get('/sekolah/dokumen', 'SekolahController@Dokumen');
+	Route::post('/sekolah/upload', 'SekolahController@SaveDokumen');
+	
 
 //});
 
