@@ -19,9 +19,14 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('role', 20);
+            $table->string('ppd', 50);
+            $table->string('kodsekolah', 10);
+            $table->integer('poskod', 6);
+            $table->string('notel', 12);
+            $table->string('nofaks', 12);
             $table->rememberToken();
             $table->timestamps();
-            $table->boolean(‘isAdmin’)->nullable();
         });
     }
 
