@@ -20,7 +20,7 @@ class Permohonan extends Model
 
     public function peralatan()
     {
-    	return $this->hasMany('App\Peralatan', 'moh_numbers', 'pra_idmohon');
+    	return $this->hasMany('App\Peralatan', 'pra_idmohon', 'moh_numbers');
     }
 }
 
