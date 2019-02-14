@@ -46,23 +46,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if(count($peralatan) == 0)
+                @if (count($peralatan) == 0)
                     <tr>
                         <td colspan="5" class="text-center"><i>Tiada Maklumat Peralatan/Perisian</i></td>
                     </tr>
                 @else
-
                     @foreach($peralatan as $index => $alatan)
-
-                    
                         <tr>
-                            <td>{{ $index++ }}</td>
-                            <td>{{ $alatan->peralatan->perkara }}</td>
-                            <td>RM{{ $alatan->pra_hrgalat }}</td>
-                            <td>{{ $alatan->pra_statbli }}</td>
-                            <td></td>
-                        </tr>
-                    
+                            <td class="text-center">{{ $index++ }}.</td>
+                            <td class="text-left">{{ $alatan->alat->perkara }}</td>
+                            <td class="text-center">RM {{ $alatan->pra_hrgalat }}</td>
+                            <td class="text-center">{{ $alatan->StatusBeli }}</td>
+                            <td class="text-center"></td>
+                        </tr>                    
                     @endforeach
                 @endif
                 </tbody>
