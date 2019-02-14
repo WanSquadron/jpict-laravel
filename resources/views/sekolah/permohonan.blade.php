@@ -37,25 +37,29 @@
                     <tr>
                     	<th>Bil</th>
                         <th>No. Permohonan</th>
-                        <th>Status Pembelian</th>
-                        <th>Harga Pembelian</th>
+                        <th>Sumber Peruntukan</th>
                         <th>Tarikh Permohonan</th>
                         <th>Status Permohonan</th>
                         <th>Tindakan</th>
                     </tr>
                 </thead>
                 <tbody>
-                	@foreach($senarai as $index => $list)
+                    @if(count($senarai) == 0)
                     <tr>
-                    	<td>{{ $index +1 }}.</td>
-                        <td>{{ $list->moh_numbers }}</td>
-                        <td>{{ $list->statusbeli->description }}</td>
-                        <td>RM{{ $list->moh_hrgaict }}</td>
-                        <td>{{ $list->created_at }}</td>
-                        <td>Tidak Lengkap</td>
-                        <td><a href="/sekolah/permohonan-edit?id={{ $list->moh_numbers }}">Kemaskini</a>   |   Padam</td>
+                        <td colspan="6" class="text-center"><i>Tiada Maklumat Permohonan</i></td>
                     </tr>
-                    @endforeach
+                    @else
+                	   @foreach($senarai as $index => $list)
+                         <tr>
+                         	<td>{{ $index++ }}.</td>
+                             <td>{{ $list->moh_numbers }}</td>
+                             <td>{{ $list->sumberperuntukan->per_deskrips }}</td>
+                             <td>{{ $list->created_at }}</td>
+                             <td>Tidak Lengkap</td>
+                             <td><a href="/sekolah/permohonan-edit?id={{ $list->moh_numbers }}">Kemaskini</a>   |   Padam</td>
+                         </tr>
+                         @endforeach
+                    @endif
             	</tbody>
             </table>
         </div>

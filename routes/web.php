@@ -34,6 +34,8 @@ Route::group(['middleware' => ['role:SuperAdmin']], function()
 	Route::get('/sekolah/permohonan-baru', 'SekolahController@CreatePermohonan');
 	Route::get('/sekolah/permohonan-edit', 'SekolahController@EditPermohonan');
 	Route::post('/sekolah/simpan-permohonan', 'SekolahController@SavePermohonan');
+	Route::post('/sekolah/simpan-peralatan', 'SekolahController@SavePeralatan');
+	Route::get('sekolah/peralatan/{idmohon}', 'SekolahController@Peralatan');
 	Route::get('/sekolah/dokumen', 'SekolahController@Dokumen');
 	Route::post('/sekolah/upload', 'SekolahController@SaveDokumen');
 	

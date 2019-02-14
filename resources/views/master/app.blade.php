@@ -36,20 +36,20 @@
         <aside class="menu-sidebar2">
             <div class="logo">
                 <a href="#">
-                    <img src="{{ asset('bootstrap/images/icon/logo-white.png')}}" alt="Cool Admin" />
+                    <img src="{{ asset('bootstrap/images/icon/logo-white.png')}}" alt="JPICT-JPN Perak" />
                 </a>
             </div>
             <div class="menu-sidebar2__content js-scrollbar1">
                 <div class="account2">
                     <div class="image img-cir img-120">
-                        <img src="{{ asset('bootstrap/images/icon/avatar-big-01.jpg')}}" alt="John Doe" />
+                        <img src="{{ asset('bootstrap/images/icon/avatar-big-01.jpg')}}" />
                     </div>
-                    <h4 class="name" align="center">{{ Auth::user()->name }}<br> {{ Auth::user()->role }}</h4>
+                    <h4 class="name" align="center">{{ Auth::user()->kodsekolah }}<br> {{ Auth::user()->name }}</h4>
                     <a class="" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Keluar</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
                 </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
@@ -57,6 +57,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Utama</a>
                         </li>
                     </ul>
+
                     @if(Auth::user()->role == 'Sekolah')
                     <ul class="list-unstyled navbar__list">
                         <li class="has-sub">
@@ -100,6 +101,7 @@
                         </li>
                     </ul>
                     @endif
+
                 </nav>
             </div>
         </aside>
@@ -112,7 +114,7 @@
                         <div class="header-wrap2">
                             <div class="logo d-block d-lg-none">
                                 <a href="#">
-                                    <img src="images/icon/logo-white.png" alt="JPICT JPN Perak" />
+                                    <img src="{{ asset('bootstrap/images/icon/logo-white.png') }}" alt="JPICT JPN Perak" />
                                 </a>
                             </div>
                             <div class="header-button2">
@@ -266,6 +268,7 @@
             @yield('jquery')
             jQuery('#sumberp').select2();
             jQuery('#statbli').select2();
+            jQuery('#pralatn').select2();
 
         });
     </script>
