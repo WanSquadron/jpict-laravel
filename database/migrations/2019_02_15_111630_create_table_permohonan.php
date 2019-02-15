@@ -19,8 +19,8 @@ class CreateTablePermohonan extends Migration
             $table->string('idpermohonan', 100);
             $table->string('fk_kodppd', 10);
             $table->string('fk_kodsekolah', 11);
-            $table->integer('fk_idsumberkewangan', 11);
-            $table->integer('fk_statusmohon', 11);
+            $table->integer('fk_idsumberkewangan');
+            $table->integer('fk_statusmohon');
             $table->string('keterangan', 255);
             $table->string('tujuanbeli', 255);
             $table->string('justifikasi', 255);

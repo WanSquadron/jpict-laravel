@@ -17,9 +17,9 @@ class CreateTablePembelianPeralatan extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('fk_idpermohonan', 20);
-            $table->integer('fk_idperalatan', 11);
-            $table->integer('fk_idstatusbeli', 11);
-            $table->integer('kuantiti', 11);
+            $table->integer('fk_idperalatan');
+            $table->integer('fk_idstatusbeli');
+            $table->integer('kuantiti');
             $table->decimal('hargaseunit', 10,2);
             $table->timestamps();
         });

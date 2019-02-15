@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('hasRole', 20);
-            $table->integer('poskod', 6);
+            $table->integer('poskod');
             $table->string('notelsekolah', 12)->nullable();
             $table->string('nofaksekolah', 12)->nullable();
             $table->rememberToken();

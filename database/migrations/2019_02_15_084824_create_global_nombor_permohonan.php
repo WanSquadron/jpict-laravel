@@ -15,7 +15,8 @@ class CreateGlobalNomborPermohonan extends Migration
     {
         Schema::create('global_nombor_permohonan', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->integer('nombor_permohonan', 11);
+            $table->increments('id');
+            $table->integer('nombor_permohonan')->unique();
             $table->timestamps();
          });
     }

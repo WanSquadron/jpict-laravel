@@ -16,7 +16,7 @@ class CreateGlobalSenaraiPeralatan extends Migration
         Schema::create('global_senarai_peralatan', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('fk_idkategori', 11);
+            $table->string('fk_idkategori', 11);
             $table->string('nama_peralatan', 255);
             $table->timestamps();
         });
