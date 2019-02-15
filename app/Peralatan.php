@@ -21,8 +21,8 @@ class Peralatan extends Model
 
     public function getStatusBeliAttribute()
     {
-    	$status_beli = App\StatusBeli::where('idbeli', $this->pra_statbli);
-    	return $status_beli->description;
+    	$status_beli = StatusBeli::where('idbeli', $this->pra_statbli)->first();
+      	return $status_beli->description;
     }
   
 }

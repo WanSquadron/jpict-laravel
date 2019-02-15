@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStatusbeli extends Migration
+class CreateGlobalStatusBeli extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateStatusbeli extends Migration
      */
     public function up()
     {
-        Schema::create('statusbeli', function (Blueprint $table) {
-            $table->increments('idbeli');
-            $table->string('description', 100);
+        Schema::create('global_status_beli', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('idstatusbeli');
+            $table->string('nama_statusbeli', 100);
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateStatusbeli extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('statusbeli');
+        Schema::dropIfExists('global_status_beli');
     }
 }

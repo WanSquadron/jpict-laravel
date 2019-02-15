@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePeruntukanKewangan extends Migration
+class CreateGlobalPeruntukanKewangan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreatePeruntukanKewangan extends Migration
      */
     public function up()
     {
-        Schema::create('peruntukan_kewangan', function (Blueprint $table) {
-            $table->increments('id_peruntukan');
-            $table->string('per_deskrips');
+        Schema::create('global_peruntukan_kewangan', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('idsumberkewangan');
+            $table->string('nama_sumberkewangan', 255);
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreatePeruntukanKewangan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('peruntukan_kewangan');
+        Schema::dropIfExists('global_peruntukan_kewangan');
     }
 }

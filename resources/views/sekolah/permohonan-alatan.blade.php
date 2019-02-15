@@ -38,11 +38,11 @@
             <table class="table table-borderless table-data3">
                 <thead>
                     <tr>
-                        <th>Bil</th>
-                        <th>Peralatan/Perisian</th>
-                        <th>Harga Anggaran (RM)</th>
-                        <th>Status Pembelian</th>
-                        <th>Konfigurasi</th>
+                        <th class="text-left">Bil</th>
+                        <th class="text-left">Peralatan/Perisian</th>
+                        <th class="text-center">Harga Anggaran (RM)</th>
+                        <th class="text-center">Status Pembelian</th>
+                        <th class="text-left">Konfigurasi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,11 +53,11 @@
                 @else
                     @foreach($peralatan as $index => $alatan)
                         <tr>
-                            <td class="text-center">{{ $index++ }}.</td>
+                            <td class="text-left">{{ $index +1 }}.</td>
                             <td class="text-left">{{ $alatan->alat->perkara }}</td>
                             <td class="text-center">RM {{ $alatan->pra_hrgalat }}</td>
                             <td class="text-center">{{ $alatan->StatusBeli }}</td>
-                            <td class="text-center"></td>
+                            <td class="text-left">Edit | Padam</td>
                         </tr>                    
                     @endforeach
                 @endif
@@ -117,7 +117,7 @@
                                 <input class="btn btn-primary" type="submit" name="submit" value="Simpan" nofocus>
                             </div>
                         </div>
-                    </div>  <!-- end card body -->  
+                    </div>
                 </div>
             </div>
             </form>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKategoriPerkakasan extends Migration
+class CreateGlobalKategoriPeralatan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateKategoriPerkakasan extends Migration
      */
     public function up()
     {
-        Schema::create('kategori_perkakasan', function (Blueprint $table) {
-            $table->increments('id_prkakas');
-            $table->string('prk_deskrip');
+        Schema::create('global_kategori_peralatan', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('idkategori');
+            $table->string('nama_peralatan', 255);
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateKategoriPerkakasan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori_perkakasan');
+        Schema::dropIfExists('global_kategori_peralatan');
     }
 }
