@@ -70,6 +70,55 @@ function DeleteData(id) {
         }
     });
 }
+
+function ValidateBorang() 
+ {
+    if($('#pralatan').val().length == 0)
+    {
+        Swal({
+                type: 'error',
+                title: 'Tidak Lengkap!',
+                text: 'Sila Pilih Perkakasan/Perisian!',
+        });
+        $('#pralatan').focus();
+        return false;
+    }
+
+    if($('#kuantti').val().length == 0)
+    {
+        Swal({
+                type: 'error',
+                title: 'Tidak Lengkap!',
+                text: 'Sila Lengkapkan Kuantiti!',
+        });
+        $('#kuantti').focus();
+        return false;
+    }
+
+    if($('#hrgalat').val().length == 0)
+    {
+        Swal({
+                type: 'error',
+                title: 'Tidak Lengkap!',
+                text: 'Sila Lengkapkan Harga Peralatan/Perisian!',
+        });
+        $('#hrgalat').focus();
+        return false;
+    }
+
+    if($('#statbli').val().length == 0)
+    {
+        Swal({
+                type: 'error',
+                title: 'Tidak Lengkap!',
+                text: 'Sila Lengkapkan Status Pembelian!',
+        });
+        $('#statbli').focus();
+        return false;
+    }
+    return true;
+}
+
 </script>
 
 <div class="section__content section__content--p30">
@@ -91,7 +140,7 @@ function DeleteData(id) {
                 <tbody>
                 @if (count($peralatan) == 0)
                     <tr>
-                        <td colspan="5" class="text-center"><i>Tiada Maklumat Peralatan/Perisian</i></td>
+                        <td colspan="6" class="text-center"><i>Tiada Maklumat Peralatan/Perisian</i></td>
                     </tr>
                 @else
                     @foreach($peralatan as $index => $alatan)
@@ -101,13 +150,13 @@ function DeleteData(id) {
                             <td class="text-left">RM {{ $alatan->hargaseunit }}</td>
                             <td class="text-center">{{ $alatan->kuantiti }}</td>
                             <td class="text-left">RM{{ number_format($jumlah = $alatan->kuantiti * $alatan->hargaseunit, 2, "." , ",") }}</td>
-                            <td class="text-left"><button class="au-btn au-btn-icon au-btn--green au-btn--small" onclick="javascript:DeleteData('{{ $alatan->id }}'); return false;">
+                            <td class="text-left"><button class="btn btn-danger" onclick="javascript:DeleteData('{{ $alatan->id }}'); return false;"><i class="fa fa-times"></i>
                                                     Padam</button></td>
                         </tr>                    
                     @endforeach
                         <tr>
-                            <td colspan="4" class="text-right"><b>Jumlah Keseluruhan</b></td>
-                            <td class="text-left"><b>RM {{ number_format($jumlaharga, 2, ".",",") }}</b></td>
+                            <td colspan="4" class="text-right"><h4>Jumlah Keseluruhan</h4></td>
+                            <td class="text-left"><h4>RM {{ number_format($jumlaharga, 2, ".",",") }}</h4></td>
                             <td></td>
                         </tr>
                 @endif

@@ -488,9 +488,9 @@ class SekolahController extends Controller
         $peralatan = new PembelianPeralatan;
         $peralatan->fk_idpermohonan = $idmohon;
         $peralatan->fk_idperalatan = $pralatn;
+        $peralatan->fk_idstatusbeli = $statbli;
         $peralatan->kuantiti = $kuantti;
         $peralatan->hargaseunit = $hrgalat;
-        $peralatan->fk_idstatusbeli = $statbli;
         $peralatan->save();
 
         $jumlaharga = 0;
@@ -503,24 +503,16 @@ class SekolahController extends Controller
                 $jumlaharga += ($beli->hargaseunit * $beli->kuantiti);
             }
 
-        return view('sekolah.permohonan-alatan',[ 
-                        'idmohon' => $idmohon,
-                        'perkakasan' => GlobalSenaraiPeralatan::all(),
-                        'peralatan' => PembelianPeralatan::where('fk_idpermohonan','=', $idmohon)->get(),
-                        'jumlaharga' => $jumlaharga,
-                        'jumlah' => $jumlah
-        ]);
+        return redirect('/sekolah/peralatan/' .$idmohon);
 
     }
 
     public function DeletePeralatan($id)
     {
+        $alat = PembelianPeralatan::where('id',$id)->first();
 
         PembelianPeralatan::destroy($id);
-        echo "swal(\"Rekod anda telah berjaya dipadam.\");";
-        echo "setTimeout(function(){ window.location.reload(); }, 100);";
+        echo "setTimeout(function(){ window.location.href = '/sekolah/peralatan/".$alat->fk_idpermohonan."'; }, 10);";
         echo "$('#alatan_$id').remove();";
-
-
     }
 }
