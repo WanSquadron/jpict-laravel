@@ -30,14 +30,16 @@ Route::group(['middleware' => ['role:SuperAdmin']], function()
 //Route::group(['middleware' => ['role:Sekolah']], function()
 //{
 	Route::get('/sekolah','SekolahController@Index');
-	Route::get('/sekolah/permohonan','SekolahController@SenaraiPermohonan');
-	Route::get('/sekolah/permohonan-baru', 'SekolahController@CreatePermohonan');
+	Route::get('/sekolah/permohonan/{kodsekolah}','SekolahController@SenaraiPermohonan');
+	Route::get('/sekolah/permohonan-baru/{kodsekolah}', 'SekolahController@CreatePermohonan');
 	Route::get('/sekolah/permohonan-edit', 'SekolahController@EditPermohonan');
-	Route::post('/sekolah/simpan-permohonan', 'SekolahController@SavePermohonan');
-	Route::post('/sekolah/simpan-peralatan', 'SekolahController@SavePeralatan');
+	Route::post('/sekolah/simpan-permohonan/{kodsekolah}', 'SekolahController@SavePermohonan');
+	Route::post('/sekolah/simpan-peralatan/{id}', 'SekolahController@SavePeralatan');
 	Route::get('/sekolah/peralatan/{idmohon}', 'SekolahController@Peralatan');
+	Route::get('/sekolah/peralatan', 'SekolahController@Peralatan');
 	Route::get('/sekolah/dokumen', 'SekolahController@Dokumen');
 	Route::post('/sekolah/upload', 'SekolahController@SaveDokumen');
+	Route::get('/sekolah/peralatan/padam/{id}', 'SekolahController@DeletePeralatan');
 	
 
 //});

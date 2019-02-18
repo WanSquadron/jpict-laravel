@@ -13,7 +13,7 @@ class CreateTablePermohonan extends Migration
      */
     public function up()
     {
-        Schema::create('table_permohonan', function (Blueprint $table) {
+        Schema::create('permohonan', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('idpermohonan', 100);

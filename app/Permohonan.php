@@ -10,17 +10,17 @@ class Permohonan extends Model
 
     public function SumberPeruntukan() 
     {
-    	return $this->hasOne('App\PeruntukanKewangan', 'id_peruntukan', 'moh_sumberp');
+    	return $this->hasOne('App\GlobalPeruntukanKewangan', 'idsumberkewangan', 'fk_idsumberkewangan');
     }
 
     public function DokumenPermohonan()
     {
-    	return $this->hasMany('App\UploadDokumen','id_permohonan','moh_numbers');
+    	return $this->hasMany('App\UploadDokumen','id_permohonan','fk_idpermohonan');
     }
 
     public function peralatan()
     {
-    	return $this->hasMany('App\Peralatan', 'pra_idmohon', 'moh_numbers');
+    	return $this->hasMany('App\Peralatan', 'fk_idpermohonan', 'idpermohonan');
     }
 }
 

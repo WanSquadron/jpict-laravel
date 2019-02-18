@@ -13,7 +13,7 @@ class CreateTableMaklumat extends Migration
      */
     public function up()
     {
-        Schema::create('table_maklumat', function (Blueprint $table) {
+        Schema::create('maklumat', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('idmaklumat');
             $table->string('fk_kodppd', 10);

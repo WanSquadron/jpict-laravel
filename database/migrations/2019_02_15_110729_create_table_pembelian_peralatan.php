@@ -13,7 +13,7 @@ class CreateTablePembelianPeralatan extends Migration
      */
     public function up()
     {
-        Schema::create('table_pembelian_peralatan', function (Blueprint $table) {
+        Schema::create('pembelian_peralatan', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('fk_idpermohonan', 20);

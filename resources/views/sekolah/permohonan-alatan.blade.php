@@ -30,18 +30,61 @@
 </div>
 @endsection
 
+
+
 @section('content')
+
+<script type="text/javascript">
+function DeleteData(id) {
+  if (id.length == 0) { return false; }
+    
+    swal({
+        title: "Padam Rekod ?",
+        html: "Anda pasti untuk padam rekod ini ?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Batal",
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function() {
+            return new Promise(function(resolve, reject) {
+                $.ajax({
+                    method: "GET",
+                    url: "/sekolah/peralatan/padam/"+id,
+                    success: function(data) {
+                        resolve();
+                        eval(data);
+                    },
+                    error: function(xhr, status, err) {
+                        reject();
+                        console.log("AjxErr: ("+status+") "+err);
+                    },
+                    fail: function(xhr, status) {
+                        reject();
+                        console.log("AjxErr: "+status);
+                    }
+                });
+            });
+        }
+    });
+}
+</script>
 
 <div class="section__content section__content--p30">
     <div class="container-fluid">
+       <h4> Senarai Peralatan Ingin Dibeli : </h4><br>
+
         <div class="table-responsive m-b-40">
             <table class="table table-borderless table-data3">
                 <thead>
                     <tr>
                         <th class="text-left">Bil</th>
                         <th class="text-left">Peralatan/Perisian</th>
-                        <th class="text-center">Harga Anggaran (RM)</th>
-                        <th class="text-center">Status Pembelian</th>
+                        <th class="text-left">Harga Seunit</th>
+                        <th class="text-center">Kuantiti (Unit)</th>
+                        <th class="text-left">Jumlah</th>
                         <th class="text-left">Konfigurasi</th>
                     </tr>
                 </thead>
@@ -52,20 +95,27 @@
                     </tr>
                 @else
                     @foreach($peralatan as $index => $alatan)
-                        <tr>
+                        <tr id="alatan_{{ $alatan->id }}">
                             <td class="text-left">{{ $index +1 }}.</td>
-                            <td class="text-left">{{ $alatan->alat->perkara }}</td>
-                            <td class="text-center">RM {{ $alatan->pra_hrgalat }}</td>
-                            <td class="text-center">{{ $alatan->StatusBeli }}</td>
-                            <td class="text-left">Edit | Padam</td>
+                            <td class="text-left">{{ $alatan->alat->nama_peralatan }}</td>
+                            <td class="text-left">RM {{ $alatan->hargaseunit }}</td>
+                            <td class="text-center">{{ $alatan->kuantiti }}</td>
+                            <td class="text-left">RM{{ number_format($jumlah = $alatan->kuantiti * $alatan->hargaseunit, 2, "." , ",") }}</td>
+                            <td class="text-left"><button class="au-btn au-btn-icon au-btn--green au-btn--small" onclick="javascript:DeleteData('{{ $alatan->id }}'); return false;">
+                                                    Padam</button></td>
                         </tr>                    
                     @endforeach
+                        <tr>
+                            <td colspan="4" class="text-right"><b>Jumlah Keseluruhan</b></td>
+                            <td class="text-left"><b>RM {{ number_format($jumlaharga, 2, ".",",") }}</b></td>
+                            <td></td>
+                        </tr>
                 @endif
-                </tbody>
+
             </table>
         </div>
 
-        <form data-toggle="validator" role="form" method="post" action="/sekolah/simpan-peralatan" onsubmit="return ValidateBorang();">
+        <form data-toggle="validator" role="form" method="post" action="/sekolah/simpan-peralatan/{{ $idmohon }}" onsubmit="return ValidateBorang();">
         <div class="row">
             <div class="col-lg-12">                     
                 <div class="card mb-3"> 
@@ -79,7 +129,7 @@
                                 <select class="form-control" name="pralatn" id="pralatn" placeholder="Sila pilih Peralatan/Perisian">
                                     <option value="">Sila Pilih Peralatan/Perisian</option>
                                     @foreach ($perkakasan as $alatan)
-                                        <option value="{{ $alatan->kod_hware }}">{{ $alatan->perkara }}</option>
+                                        <option value="{{ $alatan->idperalatan }}">{{ $alatan->nama_peralatan }}</option>
                                     @endforeach     
                                 </select>
                                 <input type="hidden" name="idmohon" id="idmohon" value="{{ $idmohon }}">

@@ -30,6 +30,6 @@ class User extends Authenticatable
 
     public function Permohonan()
     {
-        return $this->hasMany('App\Permohonan', 'moh_codesek', 'kodsekolah');
+        return $this->hasMany('App\Permohonan', 'fk_kodsekolah', 'kodsekolah');
     }
 }

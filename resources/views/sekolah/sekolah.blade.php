@@ -1,6 +1,6 @@
 @extends('master.app')
 @section('statistic')
-@if(Auth::user()->role == 'Sekolah')
+@if(Auth::user()->hasRole == 'Sekolah')
     
 <div class="section__content section__content--p30">
     <div class="container-fluid">

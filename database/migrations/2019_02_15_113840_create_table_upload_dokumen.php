@@ -13,7 +13,7 @@ class CreateTableUploadDokumen extends Migration
      */
     public function up()
     {
-        Schema::create('table_upload_dokumen', function (Blueprint $table) {
+        Schema::create('upload_dokumen', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('fk_kodsurat');

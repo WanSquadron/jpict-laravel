@@ -58,16 +58,16 @@
                         </li>
                     </ul>
 
-                    @if(Auth::user()->role == 'Sekolah')
+                    @if(Auth::user()->hasRole == 'Sekolah')
                     <ul class="list-unstyled navbar__list">
                         <li class="has-sub">
-                            <a href="/sekolah/permohonan">
+                            <a href="/sekolah/permohonan/{{ Auth::User()->kodsekolah }}">
                                 <i class="fas fa-copy"></i>Permohonan
                             </a>
                         </li>
                     </ul>
 
-                    @elseif(Auth::user()->role == 'SuperAdmin')
+                    @elseif(Auth::user()->hasRole == 'SuperAdmin')
                     <ul class="list-unstyled navbar__list">
                         <li class="has-sub">
                             <a class="js-arrow" href="#">

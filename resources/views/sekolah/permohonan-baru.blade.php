@@ -122,7 +122,7 @@
 </script>
 <div class="section__content section__content--p30">
     <div class="container-fluid">
-    	<form data-toggle="validator" role="form" method="post" action="/sekolah/simpan-permohonan" onsubmit="return ValidateBorang();">
+    	<form data-toggle="validator" role="form" method="post" action="/sekolah/simpan-permohonan/{{ Auth::User()->kodsekolah }}" onsubmit="return ValidateBorang();">
 		<div class="row">
             <div class="col-lg-12">						
 				<div class="card mb-3">	
@@ -134,7 +134,7 @@
 							<div class="form-group col-md-4">                            
 								<label for="example1">Nama Pegawai Bertanggungjawab</label>
 							 	<input class="form-control" type="text" name="pegawai" id="pegawai" placeholder="Sila isikan Nama Pegawai Bertanggungjawab">
-							 	<input type="hidden" name="kodsek" id="kodsek" value="{{ $maklumat->kodsekolah }}">
+							 	<input type="hidden" name="kodsek" id="kodsek" value="{{ Auth::User()->kodsekolah }}">
 							 	<input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
 							</div>	
 							<div class="form-group col-md-4">
@@ -167,7 +167,7 @@
 								<select class="form-control" name="sumberp" id="sumberp" placeholder="Sila pilih Sumber Peruntukan">
 									<option value="">Sila Pilih Sumber Peruntukan</option>
 									@foreach ($peruntukan as $kew)
-										<option value="{{ $kew->id_peruntukan }}">{{ $kew->per_deskrips }}</option>
+										<option value="{{ $kew->idsumberkewangan }}">{{ $kew->nama_sumberkewangan }}</option>
 									@endforeach		
 								</select>
 							</div>

@@ -26,7 +26,7 @@
 <div class="section__content section__content--p30">
     <div class="container-fluid">
     	<div class="table-data__tool-right">
-    		<a href="/sekolah/permohonan-baru">
+    		<a href="/sekolah/permohonan-baru/{{ $kodsekolah }}">
             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
              	<i class="zmdi zmdi-plus"></i>tambah
            	</button></a>
@@ -35,12 +35,12 @@
             <table class="table table-borderless table-data3">
                 <thead>
                     <tr>
-                    	<th>Bil</th>
-                        <th>No. Permohonan</th>
-                        <th>Sumber Peruntukan</th>
-                        <th>Tarikh Permohonan</th>
-                        <th>Status Permohonan</th>
-                        <th>Tindakan</th>
+                    	<th class="text-left">Bil</th>
+                        <th class="text-left">No. Permohonan</th>
+                        <th class="text-left">Sumber Peruntukan</th>
+                        <th class="text-left">Tarikh Permohonan</th>
+                        <th class="text-left">Status Permohonan</th>
+                        <th class="text-center">Tindakan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,9 +51,9 @@
                     @else
                 	   @foreach($senarai as $index => $list)
                          <tr>
-                         	<td>{{ $index++ }}.</td>
-                             <td>{{ $list->moh_numbers }}</td>
-                             <td>{{ $list->sumberperuntukan->per_deskrips }}</td>
+                         	<td class="text-left">{{ $index +1 }}.</td>
+                             <td class="text-left">{{ $list->idpermohonan }}</td>
+                             <td>{{ $list->sumberperuntukan->nama_sumberkewangan }}</td>
                              <td>{{ $list->created_at }}</td>
                              <td>Tidak Lengkap</td>
                              <td><a href="/sekolah/permohonan-edit?id={{ $list->moh_numbers }}">Kemaskini</a>   |   Padam</td>
