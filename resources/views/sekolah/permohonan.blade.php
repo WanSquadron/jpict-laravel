@@ -40,7 +40,7 @@
                         <th class="text-left">Sumber Peruntukan</th>
                         <th class="text-left">Tarikh Permohonan</th>
                         <th class="text-left">Status Permohonan</th>
-                        <th class="text-center">Tindakan</th>
+                        <th class="text-right">Tindakan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,11 +52,20 @@
                 	   @foreach($senarai as $index => $list)
                          <tr>
                          	<td class="text-left">{{ $index +1 }}.</td>
-                             <td class="text-left">{{ $list->idpermohonan }}</td>
-                             <td>{{ $list->sumberperuntukan->nama_sumberkewangan }}</td>
-                             <td>{{ $list->created_at }}</td>
-                             <td>Tidak Lengkap</td>
-                             <td><a href="/sekolah/permohonan-edit?id={{ $list->moh_numbers }}">Kemaskini</a>   |   Padam</td>
+                            <td class="text-left">{{ $list->idpermohonan }}</td>
+                            <td>{{ $list->sumberperuntukan->nama_sumberkewangan }}</td>
+                            <td>{{ $list->created_at }}</td>
+                            <td>Tidak Lengkap</td>
+                            <td class="text-left">
+                                <div class="table-data-feature text-left">
+                                    <a href="/sekolah/permohonan/kemaskini/{{ $list->idpermohonan }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Kemaskini">
+                                        <i class="zmdi zmdi-edit"></i>
+                                    </button></a>&nbsp;&nbsp;
+                                    <a href=""><button class="item" data-toggle="tooltip" data-placement="top" title="Padam">
+                                        <i class="zmdi zmdi-delete"></i>
+                                    </button></a>
+                                </div>
+                            </td>
                          </tr>
                          @endforeach
                     @endif

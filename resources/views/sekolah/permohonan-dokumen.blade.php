@@ -48,7 +48,7 @@ var Upload_BorangPermohonan = $('#wk_doc_1').dropzone({
     params: {
         _token: "{{ csrf_token() }}",
         _jenis: "borang-permohonan",
-        _nomohon: "{{ $id }}"
+        _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
     maxFilesize: 2,
@@ -87,7 +87,7 @@ var Upload_SuratIringanMohon = $('#wk_doc_2').dropzone({
     params: {
         _token: "{{ csrf_token() }}",
         _jenis: "surat-iringan",
-        _nomohon: "{{ $id }}"
+        _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
     maxFilesize: 2,
@@ -127,7 +127,7 @@ var Upload_KedudukanKewangan = $('#wk_doc_3').dropzone({
     params: {
         _token: "{{ csrf_token() }}",
         _jenis: "surat-kedudukankewangan",
-        _nomohon: "{{ $id }}"
+        _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
     maxFilesize: 2,
@@ -167,7 +167,7 @@ var Upload_BorangPPKP = $('#wk_doc_4').dropzone({
     params: {
         _token: "{{ csrf_token() }}",
         _jenis: "borang-ppkp",
-        _nomohon: "{{ $id }}"
+        _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
     maxFilesize: 2,
@@ -207,7 +207,7 @@ var Upload_KelulusanPeruntukan = $('#wk_doc_5').dropzone({
     params: {
         _token: "{{ csrf_token() }}",
         _jenis: "surat-kelulusangunaperuntukan",
-        _nomohon: "{{ $id }}"
+        _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
     maxFilesize: 2,
@@ -247,7 +247,7 @@ var Upload_MinitMesyuarat = $('#wk_doc_6').dropzone({
     params: {
         _token: "{{ csrf_token() }}",
         _jenis: "surat-minitmesyuarat",
-        _nomohon: "{{ $id }}"
+        _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
     maxFilesize: 2,
@@ -287,7 +287,7 @@ var Upload_SebutHarga1 = $('#wk_doc_7').dropzone({
     params: {
         _token: "{{ csrf_token() }}",
         _jenis: "sebutharga-1",
-        _nomohon: "{{ $id }}"
+        _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
     maxFilesize: 2,
@@ -327,7 +327,7 @@ var Upload_SebutHarga2 = $('#wk_doc_8').dropzone({
     params: {
         _token: "{{ csrf_token() }}",
         _jenis: "sebutharga-2",
-        _nomohon: "{{ $id }}"
+        _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
     maxFilesize: 2,
@@ -367,7 +367,7 @@ var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
     params: {
         _token: "{{ csrf_token() }}",
         _jenis: "sebutharga-3",
-        _nomohon: "{{ $id }}"
+        _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
     maxFilesize: 2,
@@ -412,7 +412,7 @@ var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
             <div class="col-lg-12">						
 				<div class="card mb-3">	
 					<div class="card-header">
-						<i class="fa fa-users"></i> <b>  C.  MuatNaik Dokumen Sokongan</b>
+						<i class="fa fa-envelope"></i>  C. &nbsp;&nbsp;&nbsp;Muatnaik Dokumen
 					</div>	
 					<div class="card-body">
                         <div class="form-row">   
@@ -481,5 +481,15 @@ var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
 			</div>
 		</div>
 	</div>
+
+    <div class="container-fluid">
+        <div vlass="col-lg-12">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                   <a href="/sekolah/permohonan/{{ Auth::User()->kodsekolah }}"><input class="btn btn-success" type="submit" name="submit" value="Simpan" nofocus></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection	

@@ -35,45 +35,10 @@
 @section('content')
 
 <script type="text/javascript">
-function DeleteData(id) {
-  if (id.length == 0) { return false; }
-    
-    swal({
-        title: "Padam Rekod ?",
-        html: "Anda pasti untuk padam rekod ini ?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Ya",
-        cancelButtonText: "Batal",
-        showLoaderOnConfirm: true,
-        allowOutsideClick: false,
-        preConfirm: function() {
-            return new Promise(function(resolve, reject) {
-                $.ajax({
-                    method: "GET",
-                    url: "/sekolah/peralatan/padam/"+id,
-                    success: function(data) {
-                        resolve();
-                        eval(data);
-                    },
-                    error: function(xhr, status, err) {
-                        reject();
-                        console.log("AjxErr: ("+status+") "+err);
-                    },
-                    fail: function(xhr, status) {
-                        reject();
-                        console.log("AjxErr: "+status);
-                    }
-                });
-            });
-        }
-    });
-}
 
 function ValidateBorang() 
  {
-    if($('#pralatan').val().length == 0)
+    if($('#pralatn').val().length == 0)
     {
         Swal({
                 type: 'error',
@@ -117,6 +82,43 @@ function ValidateBorang()
         return false;
     }
     return true;
+}
+
+
+function DeleteData(id) {
+  if (id.length == 0) { return false; }
+    
+    swal({
+        title: "Padam Rekod ?",
+        html: "Anda pasti untuk padam rekod ini ?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Batal",
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function() {
+            return new Promise(function(resolve, reject) {
+                $.ajax({
+                    method: "GET",
+                    url: "/sekolah/peralatan/padam/"+id,
+                    success: function(data) {
+                        resolve();
+                        eval(data);
+                    },
+                    error: function(xhr, status, err) {
+                        reject();
+                        console.log("AjxErr: ("+status+") "+err);
+                    },
+                    fail: function(xhr, status) {
+                        reject();
+                        console.log("AjxErr: "+status);
+                    }
+                });
+            });
+        }
+    });
 }
 
 </script>
@@ -164,7 +166,7 @@ function ValidateBorang()
             </table>
         </div>
 
-        <form data-toggle="validator" role="form" method="post" action="/sekolah/simpan-peralatan/{{ $idmohon }}" onsubmit="return ValidateBorang();">
+        <form data-toggle="validator" role="form" method="post" action="/sekolah/simpan-peralatan/{{ $idmohon }}" onsubmit="javascript:return ValidateBorang();">
         <div class="row">
             <div class="col-lg-12">                     
                 <div class="card mb-3"> 
@@ -210,11 +212,18 @@ function ValidateBorang()
                                 </select>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="form-row"
-                            <div class="form-group col-md-4">
-                                <input class="btn btn-primary" type="submit" name="submit" value="Simpan" nofocus>
-                            </div>
+            <div class="container-fluid">
+                <div vlass="col-lg-12">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                           <input class="btn btn-primary" type="submit" name="submit" value="Simpan" nofocus>
+                        </div>
+                        <div class="form-group col-md-6 text-right">
+                            <a href="/sekolah/permohonan/dokumen/{{ $idmohon }}"><input class="btn btn-primary" type="submit" name="seterusnya" value="Seterusnya" nofocus></a>
                         </div>
                     </div>
                 </div>
