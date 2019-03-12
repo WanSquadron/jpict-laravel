@@ -15,7 +15,7 @@
                             <li class="list-inline-item seprate">
                             	<span>/</span>
                             </li>
-                            <li class="list-inline-item">Edit Permohonan</li>
+                            <li class="list-inline-item">Kemaskini Permohonan</li>
                         </ul>
                     </div>
                 </div>
@@ -113,6 +113,36 @@
 		$('#statbli').focus();
 		return false;
  	}
+ 	 	if($('#surat_iringan').val().length == 0)
+ 	{
+ 		Swal({
+  				type: 'error',
+  				title: 'Tidak Lengkap!',
+  				text: 'Sila Lengkapkan No Rujukan Surat Iringan!',
+		});
+		$('#surat_iringan').focus();
+		return false;
+ 	}
+ 	 	if($('#surat_kelulusan_guna').val().length == 0)
+ 	{
+ 		Swal({
+  				type: 'error',
+  				title: 'Tidak Lengkap!',
+  				text: 'Sila Lengkapkan Baki Peruntukan Tahun Semasa!',
+		});
+		$('#surat_kelulusan_guna').focus();
+		return false;
+ 	}
+ 	 	if($('#minit_mesyuarat').val().length == 0)
+ 	{
+ 		Swal({
+  				type: 'error',
+  				title: 'Tidak Lengkap!',
+  				text: 'Sila Lengkapkan Baki Peruntukan Tahun Semasa!',
+		});
+		$('#minit_mesyuarat').focus();
+		return false;
+ 	}
  	return true;
  }
 
@@ -125,7 +155,7 @@
 
 <div class="section__content section__content--p30">
     <div class="container-fluid">
-    	<form data-toggle="validator" role="form" method="post" action="/sekolah/simpan-permohonan/{{ $maklumat->idpermohonan }}" onsubmit="return ValidateBorang();">
+    	<form data-toggle="validator" role="form" method="post" action="/sekolah/kemaskini-permohonan/{{ $maklumat->idpermohonan }}" onsubmit="return ValidateBorang();">
 		<div class="row">
             <div class="col-lg-12">						
 				<div class="card mb-3">	
@@ -134,11 +164,13 @@
 					</div>	
 					<div class="card-body"> 
 						<div class="form-row">   
-							<div class="form-group col-md-4">                            
+							<div class="form-group col-md-8">                            
 								<label for="example1">Nama Pegawai Bertanggungjawab</label>
 							 	<input class="form-control" type="text" name="pegawai" id="pegawai" placeholder="Sila isikan Nama Pegawai Bertanggungjawab" value="{{ $maklumat->pegawaitanggungjawab }}">
 							 	<input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
 							</div>	
+						</div>
+						<div class="row">
 							<div class="form-group col-md-4">
 								<label for="NoMykad">No. Mykad </label>
 								<input class="form-control" type="text" name="nomykad" id="nomykad" placeholder="Sila Masukkan Nombor Mykad tanpa '-'" value="{{ $maklumat->mykadpegawai }}" >

@@ -1,30 +1,5 @@
 @extends('master.app')
 
-@section('breadcrumb')
-<div class="section__content section__content--p30">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="au-breadcrumb-content">
-                    <div class="au-breadcrumb-left">
-                        <span class="au-breadcrumb-span">Anda di Ruangan:</span>
-                        <ul class="list-unstyled list-inline au-breadcrumb__list">
-                            <li class="list-inline-item active">
-                                <a href="#">Permohonan</a>
-                            </li>
-                            <li class="list-inline-item seprate">
-                            	<span>/</span>
-                            </li>
-                            <li class="list-inline-item">Permohonan Baru</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-
 @section('content')
 
 
@@ -120,8 +95,7 @@
 
 
 </script>
-<div class="section__content section__content--p30">
-    <div class="container-fluid">
+
     	<form data-toggle="validator" role="form" method="post" action="/sekolah/simpan-permohonan/{{ Auth::User()->kodsekolah }}" onsubmit="return ValidateBorang();">
 		<div class="row">
             <div class="col-lg-12">						
@@ -131,12 +105,14 @@
 					</div>	
 					<div class="card-body"> 
 						<div class="form-row">   
-							<div class="form-group col-md-4">                            
+							<div class="form-group col-md-8">                            
 								<label for="example1">Nama Pegawai Bertanggungjawab</label>
 							 	<input class="form-control" type="text" name="pegawai" id="pegawai" placeholder="Sila isikan Nama Pegawai Bertanggungjawab">
 							 	<input type="hidden" name="kodsek" id="kodsek" value="{{ Auth::User()->kodsekolah }}">
 							 	<input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
 							</div>	
+						</div>
+						<div class="row">
 							<div class="form-group col-md-4">
 								<label for="NoMykad">No. Mykad </label>
 								<input class="form-control" type="text" name="nomykad" id="nomykad" placeholder="Sila Masukkan Nombor Mykad tanpa '-'" >
@@ -150,10 +126,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
 
-	<div class="container-fluid">
         <div class="row">
             <div class="col-md-12">						
 				<div class="card mb-3">
@@ -207,9 +181,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="container-fluid">
 		<div class="row">
 	        <div class="col-lg-12">						
 				<div class="card mb-3">	
@@ -235,11 +207,11 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="container-fluid">
+
+
 		<input class="btn btn-primary" type="submit" name="submit" value="Seterusnya">
-	</div>
+
 	</form>
 </div>
 

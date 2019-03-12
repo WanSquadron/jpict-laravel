@@ -29,178 +29,105 @@
     <link href="{{ asset('bootstrap/vendor/vector-map/jqvmap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/sweetalert/dist/sweetalert2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/css/theme.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/vendor/dropzone/dropzone.min.css') }}" rel="stylesheet">
+    <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+
 </head>
 
 <body class="animsition">
-    <div class="page-wrapper">
-        <aside class="menu-sidebar2">
+    
+        <!-- HEADER MOBILE-->
+        
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
-                    <img src="{{ asset('bootstrap/images/icon/logo-white.png')}}" alt="JPICT-JPN Perak" />
+                <a href="/dashboard">
+                    <img src="{{ asset('bootstrap/images/icon/logos.png')}}"/>
                 </a>
             </div>
-            <div class="menu-sidebar2__content js-scrollbar1">
-                <div class="account2">
-                    <div class="image img-cir img-120">
-                        <img src="{{ asset('bootstrap/images/icon/avatar-big-01.jpg')}}" />
-                    </div>
-                    <h4 class="name" align="center">{{ Auth::user()->kodsekolah }}<br> {{ Auth::user()->name }}</h4>
-                    <a class="" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Keluar</a>
-                </div>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                <nav class="navbar-sidebar2">
+            <div class="menu-sidebar__content js-scrollbar3">
+                <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a  href="/sekolah">
-                                <i class="fas fa-tachometer-alt"></i>Utama</a>
+                            <a class="js-arrow" href="/dashboard">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
-                    </ul>
-
-                    @if(Auth::user()->hasRole == 'Sekolah')
-                    <ul class="list-unstyled navbar__list">
-                        <li class="has-sub">
+                    @if( Auth::User()->hasRole == "Sekolah")
+                        <li>
                             <a href="/sekolah/permohonan/{{ Auth::User()->kodsekolah }}">
-                                <i class="fas fa-copy"></i>Permohonan
-                            </a>
+                                <i class="fas fa-copy"></i>Permohonan</a>
                         </li>
-                    </ul>
-
-                    @elseif(Auth::user()->hasRole == 'SuperAdmin')
-                    <ul class="list-unstyled navbar__list">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Permohonan
-                                <span class="arrow">
-                                    <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="/permohonan-baru">
-                                        <i class="fas fa-book"></i>Senarai Permohonan</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="list-unstyled navbar__list">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Kelulusan
-                                <span class="arrow">
-                                    <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="/permohonan-baru">
-                                        <i class="fas fa-book"></i>Senarai Permohonan</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
                     @endif
 
+                    @if( Auth::User()->hasRole == "SuperAdmin")
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Permohonan &nbsp;
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                    <li>
+                                        <a href="/superadmin/permohonan">
+                                            <i class="fas fa-list-alt"></i>Senarai</a>
+                                    </li>
+                            </ul>
+
+                        </li>
+                    @endif
+                    <li>
+                        <a href="{{ url('/logout') }}">
+                            <i class="zmdi zmdi-power"></i>Log Keluar</a>
+                        </li>    
+                    </ul>
                 </nav>
             </div>
         </aside>
-    </div>
+        <!-- END MENU SIDEBAR-->
 
-        <div class="page-container2">
-            <header class="header-desktop2">
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
                 <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap2">
-                            <div class="logo d-block d-lg-none">
-                                <a href="#">
-                                    <img src="{{ asset('bootstrap/images/icon/logo-white.png') }}" alt="JPICT JPN Perak" />
-                                </a>
-                            </div>
-                            <div class="header-button2">
-                                <div class="header-button-item js-item-menu">
-                                    <i class="zmdi zmdi-search"></i>
-                                    <div class="search-dropdown js-dropdown">
-                                        <form action="">
-                                            <input class="au-input au-input--full au-input--h65" type="text" placeholder="Search for datas &amp; reports..." />
-                                            <span class="search-dropdown__icon">
-                                                <i class="zmdi zmdi-search"></i>
-                                            </span>
-                                        </form>
+                    <div class="header-wrap">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                        </form>
+                        <div class="header-button">
+                            <div class="account-wrap">
+                                <div class="account-item clearfix js-item-menu">
+                                    <div class="image">
+                                        <img src="{{ asset('bootstrap/images/icon/avatar-01.jpg')}}" />
                                     </div>
-                                </div>
-                                <div class="header-button-item has-noti js-item-menu">
-                                    <i class="zmdi zmdi-notifications"></i>
-                                    <div class="notifi-dropdown js-dropdown">
-                                        <div class="notifi__title">
-                                            <p>You have 3 Notifications</p>
-                                        </div>
-                                        <div class="notifi__item">
-                                            <div class="bg-c1 img-cir img-40">
-                                                <i class="zmdi zmdi-email-open"></i>
+                                    <div class="content">
+                                        <a class="js-acc-btn" href="#">{{ ucwords(strtolower(Auth::User()->name)) }}</a>
+                                    </div>
+                                    <div class="account-dropdown js-dropdown">
+                                        <div class="info clearfix">
+                                            <button id="avatar_user" type="button">
+                                            <div class="image">
+                                                <img src="{{ asset('bootstrap/images/icon/avatar-01.jpg')}}" />
                                             </div>
                                             <div class="content">
-                                                <p>You got a email notification</p>
-                                                <span class="date">April 12, 2018 06:50</span>
+                                                <h5 class="name">
+                                                    {{ Auth::User()->name }}
+                                                </h5>
+                                                <span class="email">{{ Auth::User()->email }}</span>
                                             </div>
+                                        </button>
                                         </div>
-                                        <div class="notifi__item">
-                                            <div class="bg-c2 img-cir img-40">
-                                                <i class="zmdi zmdi-account-box"></i>
+                                        <div class="account-dropdown__body">
+                                            <div class="account-dropdown__item">
+                                                <a href="/sekolah/profil/{{ Auth::User()->kodsekolah }}">
+                                                    <i class="zmdi zmdi-account"></i>Profil Sekolah</a>
                                             </div>
-                                            <div class="content">
-                                                <p>Your account has been blocked</p>
-                                                <span class="date">April 12, 2018 06:50</span>
+                                        <div class="account-dropdown__footer">
+                                            <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="zmdi zmdi-power"></i>Log Keluar</a>
                                             </div>
-                                        </div>
-                                        <div class="notifi__item">
-                                            <div class="bg-c3 img-cir img-40">
-                                                <i class="zmdi zmdi-file-text"></i>
-                                            </div>
-                                            <div class="content">
-                                                <p>You got a new file</p>
-                                                <span class="date">April 12, 2018 06:50</span>
-                                            </div>
-                                        </div>
-                                        <div class="notifi__footer">
-                                            <a href="#">All notifications</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="header-button-item mr-0 js-sidebar-btn">
-                                    <i class="zmdi zmdi-menu"></i>
-                                </div>
-                                <div class="setting-menu js-right-sidebar d-none d-lg-block">
-                                    <div class="account-dropdown__body">
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-account"></i>Account</a>
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-settings"></i>Setting</a>
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                        </div>
-                                    </div>
-                                    <div class="account-dropdown__body">
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-globe"></i>Language</a>
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-pin"></i>Location</a>
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-email"></i>Email</a>
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-notifications"></i>Notifications</a>
                                         </div>
                                     </div>
                                 </div>
@@ -209,31 +136,21 @@
                     </div>
                 </div>
             </header>
+            <!-- HEADER DESKTOP-->
 
-            <section class="au-breadcrumb m-t-75">
-                @yield('breadcrumb')
-            </section>
-    
-            <section class="statistic">
-                @yield('statistic')
-            </section>
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
 
-            <section class="statistic">
-                @yield('content')
-            </section>
-
-            <section>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="copyright">
-                                <p> © 2018 Sektor Pengurusan Maklumat ICT, Jabatan Pendidikan Negeri Perak.</p>
-                            </div>
-                        </div>
-                    </div>
+                     @yield('content')
+                    <br/>
                 </div>
-            </section>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
         </div>
+
+    
 
 
     <script src="{{ asset('bootstrap/vendor/jquery-3.2.1.min.js') }}"></script>
@@ -256,6 +173,9 @@
     <script src="{{ asset('bootstrap/sweetalert/dist/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/main.js') }}"></script>
     <script src="{{ asset('bootstrap/js/ajax.js') }}"></script>
+    <script src="{{ asset('bootstrap/vendor/dropzone/dropzone.min.js') }}"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 
     @yield('js')
         
@@ -270,8 +190,57 @@
             jQuery('#statbli').select2();
             jQuery('#pralatn').select2();
 
+            $('#mohon').DataTable( {
+                "language": {
+                    "lengthMenu": "Papar _MENU_ rekod / halaman",
+                    "zeroRecords": "Maaf, tiada maklumat diperolehi",
+                    "info": "_PAGE_ - _PAGES_ / _MAX_ rekod",
+                    "infoEmpty": "Tiada Maklumat",
+                    "infoFiltered": "(Filter _MAX_ jumlah rekod)",
+                    "search": "Filter :",
+                    "paginate":
+                    {
+                    "previous": "<",
+                    "next": ">"
+                    }
+                }
+            } );
+        } );
+    
+
+
+        var Upload_Avatar = $('#avatar_user').dropzone({
+            url: '{{ url('/profil/avatar') }}',
+            params: {
+                _token: "{{ csrf_token() }}",
+                _jenis: "avatar"
+            },
+            acceptedFiles: 'application/pdf',
+            maxFilesize: 2,
+            maxFiles: 1,
+            createImageThumbnails: false,
+            previewTemplate : '<div style="display:none"></div>',
+            init: function()
+            {
+                this.on("success", function(file) {
+                    var ret = file.xhr.response;
+                    var txt = ret.split('|');
+                    if (txt[0] == "OK") {
+                    } else {
+                        alert('Error: ' + txt[0]);
+                    }
+                });
+                this.on("complete", function() {
+                    if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
+                this.removeAllFiles();
+                    }
+                });
+                this.on("error", function(file, errorMessage) {
+                    console.log(errorMessage);
+                });
+            }
         });
-    </script>
+</script>
 </body>
 </html>
 <!-- end document-->>

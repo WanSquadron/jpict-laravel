@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+Use Carbon\Carbon;
 
 class Permohonan extends Model
 {
@@ -21,6 +22,17 @@ class Permohonan extends Model
     public function peralatan()
     {
     	return $this->hasMany('App\PembelianPeralatan', 'fk_idpermohonan', 'idpermohonan');
+    }
+
+    public function getTarikhPermohonanAttribute()
+    {
+        return $this->created_at->format('d/m/Y');
+    }
+
+    public function getNamaSekolahAttribute()
+    {
+        $namasekolah = \App\User::where('kodsekolah', $this->fk_kodsekolah)->first();
+        return $namasekolah->name."(".$this->fk_kodsekolah.")";
     }
 }
 

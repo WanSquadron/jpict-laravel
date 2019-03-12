@@ -11,41 +11,49 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+## Global Route
+Route::get('/dashboard', function () { return view('dashboard');});
+Route::get('/', function () { return view('auth.login');});
 Route::auth();
 Route::get('/home', 'HomeController@index');
 Route::get('/access-denied', 'HomeController@AccessDenied');
 
-Route::group(['middleware' => ['role:SuperAdmin']], function() 
+Route::group(['middleware' => ['role:Sekolah']], function()
 {
-	Route::get('/superadmin', function () {
-		return view('superadmin.superadmin');
-	});
-});
 
-
-//Route::group(['middleware' => ['role:Sekolah']], function()
-//{
+## User Role Sekolah
+# Profil
 	Route::get('/sekolah','SekolahController@Index');
-	Route::get('/sekolah/permohonan/{kodsekolah}','SekolahController@SenaraiPermohonan');
-	Route::get('/sekolah/permohonan-baru/{kodsekolah}', 'SekolahController@CreatePermohonan');
-	Route::get('/sekolah/permohonan/kemaskini/{idmohon}', 'SekolahController@EditPermohonan');
+	Route::get('/sekolah/{status}','SekolahController@Index');
+	Route::get('/profil/avatar', 'SekolahController@Avatar');
+	Route::get('/sekolah/profil/{kodsekolah}', 'SekolahController@Profil');
+	Route::post('sekolah/kemaskini-profil/{kodsekolah}', 'SekolahController@KemaskiniProfil');
+
+# Permohonan GET
 	Route::get('/sekolah/peralatan/{idmohon}', 'SekolahController@Peralatan');
 	Route::get('/sekolah/permohonan/dokumen/{idmohon}', 'SekolahController@Dokumen');
+	Route::get('/sekolah/permohonan/{kodsekolah}','SekolahController@SenaraiPermohonan');
+	Route::get('/sekolah/permohonan-baru/{kodsekolah}', 'SekolahController@CreatePermohonan');
+
+# Permohonan EDIT
+	Route::get('/sekolah/permohonan/kemaskini/{idmohon}', 'SekolahController@EditPermohonan');
+	Route::post('/sekolah/kemaskini-permohonan/{idmohon}', 'SekolahController@UpdatePermohonan');
+
+#Permohonan DELETE
 	Route::get('/sekolah/peralatan/padam/{id}', 'SekolahController@DeletePeralatan');
-	Route::post('/sekolah/upload', 'SekolahController@SaveDokumen');
-	Route::post('/sekolah/simpan-permohonan/{kodsekolah}', 'SekolahController@SavePermohonan');
-	Route::post('/sekolah/simpan-peralatan/{id}', 'SekolahController@SavePeralatan');
-
+	Route::get('/sekolah/permohonan/padam/{id}', 'SekolahController@DeletePermohonan');
 	
+# Permohonan SAVE
+	Route::post('/sekolah/upload', 'SekolahController@SaveDokumen');
+	Route::post('/sekolah/simpan-peralatan/{id}', 'SekolahController@SavePeralatan');
+	Route::post('/sekolah/simpan-permohonan/{kodsekolah}', 'SekolahController@SavePermohonan');
 
-//});
+});
 
+Route::group(['middleware' => ['role:SuperAdmin']], function()
+{
+## User Role Superadmin
 
-#Global Authentication
-
-
+	Route::get('superadmin/permohonan', 'SuperadminController@SenaraiPermohonan');
+});
 

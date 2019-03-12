@@ -49,6 +49,17 @@ function ValidateBorang()
         return false;
     }
 
+    if($('#catatan').val().length == 0)
+    {
+        Swal({
+                type: 'error',
+                title: 'Tidak Lengkap!',
+                text: 'Sila Lengkapkan Kuantiti!',
+        });
+        $('#catatan').focus();
+        return false;
+    }
+
     if($('#kuantti').val().length == 0)
     {
         Swal({
@@ -123,15 +134,14 @@ function DeleteData(id) {
 
 </script>
 
-<div class="section__content section__content--p30">
-    <div class="container-fluid">
+
        <h4> Senarai Peralatan Ingin Dibeli : </h4><br>
 
-        <div class="table-responsive m-b-40">
-            <table class="table table-borderless table-data3">
+        <div class="table-responsive table--no-card m-b-40">
+            <table class="table table-borderless table-striped table-earning">
                 <thead>
                     <tr>
-                        <th class="text-left">Bil</th>
+                        <th class="text-left">#</th>
                         <th class="text-left">Peralatan/Perisian</th>
                         <th class="text-left">Harga Seunit</th>
                         <th class="text-center">Kuantiti (Unit)</th>
@@ -148,12 +158,11 @@ function DeleteData(id) {
                     @foreach($peralatan as $index => $alatan)
                         <tr id="alatan_{{ $alatan->id }}">
                             <td class="text-left">{{ $index +1 }}.</td>
-                            <td class="text-left">{{ $alatan->alat->nama_peralatan }}</td>
+                            <td class="text-left">{{ $alatan->alat->nama_peralatan }} - {{ $alatan->catatan }}</td>
                             <td class="text-left">RM {{ $alatan->hargaseunit }}</td>
                             <td class="text-center">{{ $alatan->kuantiti }}</td>
                             <td class="text-left">RM{{ number_format($jumlah = $alatan->kuantiti * $alatan->hargaseunit, 2, "." , ",") }}</td>
-                            <td class="text-left"><button class="btn btn-danger" onclick="javascript:DeleteData('{{ $alatan->id }}'); return false;"><i class="fa fa-times"></i>
-                                                    Padam</button></td>
+                            <td class="text-left"><button class="btn btn-danger" onclick="javascript:DeleteData('{{ $alatan->id }}'); return false;"><i class="fa fa-times"></i>&nbsp;Padam</button></td>
                         </tr>                    
                     @endforeach
                         <tr>
@@ -171,7 +180,7 @@ function DeleteData(id) {
             <div class="col-lg-12">                     
                 <div class="card mb-3"> 
                     <div class="card-header">
-                        <i class="fa fa-users"></i>  C. &nbsp;&nbsp;&nbsp;Maklumat Peralatan & Perisian
+                        <i class="fa fa-users"></i>  D. &nbsp;&nbsp;&nbsp;Maklumat Peralatan & Perisian
                     </div>  
                     <div class="card-body"> 
                         <div class="form-row">   
@@ -187,6 +196,13 @@ function DeleteData(id) {
                                 <input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
                             </div> 
                         </div> 
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="NoMykad">Jenama & Model </label>
+                                <input class="form-control" type="text" name="catatan" id="catatan" placeholder="Sila Masukkan Catatan Tambahan (jika ada)" >
+                            </div>
+                        </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -230,7 +246,5 @@ function DeleteData(id) {
             </div>
             </form>
         </div>
-    </div>
-</div>
 
 @endsection

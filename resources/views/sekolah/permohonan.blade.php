@@ -1,30 +1,52 @@
 @extends('master.app')
 
-@section('breadcrumb')
-<div class="section__content section__content--p30">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="au-breadcrumb-content">
-                    <div class="au-breadcrumb-left">
-                        <span class="au-breadcrumb-span">Anda di Ruangan:</span>
-                        <ul class="list-unstyled list-inline au-breadcrumb__list">
-                            <li class="list-inline-item active">
-                                <a href="#">Permohonan</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@section('js')
+<script type="text/javascript">
+
+function confirmation(id) 
+ {
+    if (id.length == 0) { return false; }
+    swal({
+        title: "Padam Rekod ?",
+        html: "Anda pasti untuk padam rekod ini ?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Batal",
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function() {
+            return new Promise(function(resolve, reject) {
+                $.ajax({
+                    method: "GET",
+                    _token: "{{ csrf_token() }}",
+                    url: "/sekolah/permohonan/padam/"+id,
+                    success: function(data) {
+                        resolve();
+                        eval(data);
+                    },
+                    error: function(xhr, status, err) {
+                        reject();
+                        console.log("AjxErr: ("+status+") "+err);
+                    },
+                    fail: function(xhr, status) {
+                        reject();
+                        console.log("AjxErr: "+status);
+                    }
+                });
+            });
+        }
+    });
+}
+
+
+
+</script>
 @endsection
 
 @section('content')
 
-<div class="section__content section__content--p30">
-    <div class="container-fluid">
     	<div class="table-data__tool-right">
     		<a href="/sekolah/permohonan-baru/{{ $kodsekolah }}">
             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -32,10 +54,10 @@
            	</button></a>
         </div><br/>
     	<div class="table-responsive m-b-40">
-            <table class="table table-borderless table-data3">
+            <table class="table table-borderless table-data3" id="mohon">
                 <thead>
                     <tr>
-                    	<th class="text-left">Bil</th>
+                    	<th class="text-left">#</th>
                         <th class="text-left">No. Permohonan</th>
                         <th class="text-left">Sumber Peruntukan</th>
                         <th class="text-left">Tarikh Permohonan</th>
@@ -53,15 +75,28 @@
                          <tr>
                          	<td class="text-left">{{ $index +1 }}.</td>
                             <td class="text-left">{{ $list->idpermohonan }}</td>
-                            <td>{{ $list->sumberperuntukan->nama_sumberkewangan }}</td>
-                            <td>{{ $list->created_at }}</td>
+                            <td>{{ $list->sumberperuntukan->nama_sumberkewangan }} - {{ $list->keterangan }}<br/><br/>
+                                <b>Dokumen Sokongan :-</b> <br/>
+
+                                     @foreach(App\UploadDokumen::where('fk_idpermohonan',$list->idpermohonan)->get() as $index => $doc)
+                                     {{ $index +1 }}. &nbsp; {{ $doc->fail_deskripsi }} : 
+                                        @if(!empty($doc->nama_fail)) 
+                                            <img src="{{ asset('bootstrap/images/icon/check.png')}}"/><br/>
+                                            @else
+                                                <img src="{{ asset('bootstrap/images/icon/close.png')}}"/><br/>
+                                        @endif
+                                    @endforeach
+
+                                
+                            </td>
+                            <td>{{ $list->TarikhPermohonan }}</td>
                             <td>Tidak Lengkap</td>
                             <td class="text-left">
                                 <div class="table-data-feature text-left">
                                     <a href="/sekolah/permohonan/kemaskini/{{ $list->idpermohonan }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Kemaskini">
                                         <i class="zmdi zmdi-edit"></i>
                                     </button></a>&nbsp;&nbsp;
-                                    <a href=""><button class="item" data-toggle="tooltip" data-placement="top" title="Padam">
+                                    <button class="item" data-toggle="tooltip" data-placement="top" onclick="javascript:confirmation('{{ $list->id }}'); return false;" title="Padam">
                                         <i class="zmdi zmdi-delete"></i>
                                     </button></a>
                                 </div>
@@ -72,7 +107,4 @@
             	</tbody>
             </table>
         </div>
-    </div>
-</div>
-
 @endsection

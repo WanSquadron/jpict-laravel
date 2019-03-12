@@ -4,37 +4,6 @@
 <link href="{{ asset('bootstrap/vendor/dropzone/dropzone.min.css') }}" rel="stylesheet">
 @endsection
 
-@section('breadcrumb')
-
-<div class="section__content section__content--p30">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="au-breadcrumb-content">
-                    <div class="au-breadcrumb-left">
-                        <span class="au-breadcrumb-span">Anda di Ruangan:</span>
-                        <ul class="list-unstyled list-inline au-breadcrumb__list">
-                            <li class="list-inline-item active">
-                                <a href="#">Permohonan</a>
-                            </li>
-                            <li class="list-inline-item seprate">
-                            	<span>/</span>
-                            </li>
-                            <li class="list-inline-item">Permohonan Baru</li>
-                            <li class="list-inline-item seprate">
-                            	<span>/</span>
-                            </li>
-                            <li class="list-inline-item">Muatnaik Dokumen</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-@endsection
-
 @section('js')
 
 <script src="{{ asset('bootstrap/vendor/dropzone/dropzone.min.js') }}"></script>
@@ -405,91 +374,78 @@ var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
 @endsection
 
 @section('content')
-
-<div class="section__content section__content--p30">
-    <div class="container-fluid">   
-		<div class="row">
-            <div class="col-lg-12">						
-				<div class="card mb-3">	
-					<div class="card-header">
-						<i class="fa fa-envelope"></i>  C. &nbsp;&nbsp;&nbsp;Muatnaik Dokumen
-					</div>	
-					<div class="card-body">
-                        <div class="form-row">   
-                            <div class="form-group col-md-12">                        
-                                <label for="example1">1. Borang Permohonan JPICT (Lampiran 9):</label><br>
-                                <div id="wk_doc_1_processing"></div>
-                                <button id="wk_doc_1" class="btn btn-primary" type="button">Muatnaik</button><br>
-                            </div>
-                        </div> 
-						<div class="form-row">   
-							<div class="form-group col-md-12">                        
-								<label for="example1">2. Surat Iringan Permohonan JPICT :</label><br>
-								<div id="wk_doc_2_processing"></div>
-							 	<button id="wk_doc_2" class="btn btn-primary" type="button">Muatnaik</button><br>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-12">                            
-								<label for="example1">3. Lampiran Kedudukan Kewangan Sekolah (Lampiran 8) :</label><br>
-								<div id="wk_doc_3_processing"></div>
-							 	<button id="wk_doc_3" class="btn btn-primary" type="button">Muatnaik</button><br>
-							</div>
-						</div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">                            
-                                <label for="example1">4. Borang PPKP (Lampiran 10) :</label><br>
-                                <div id="wk_doc_4_processing"></div>
-                                <button id="wk_doc_4" class="btn btn-primary" type="button">Muatnaik</button><br>
-                            </div>
-                        </div>
-						@if($kew == 2)
-						<div class="form-row">
-							<div class="form-group col-md-12">                            
-								<label for="example1">5. Surat Kelulusan Penggunaan Peruntukan :</label><br>
-								<div id="wk_doc_5_processing"></div>
-							 	<button id="wk_doc_5" class="btn btn-primary" type="button">Muatnaik</button><br>
-							</div>
-						</div>
-						@endif
-						<div class="form-row">
-							<div class="form-group col-md-12">    
-							@if($kew == 2)                        
-								<label for="example1">6. Minit Mesyuarat Persetujuan Penggunaan Peruntukan :</label>
-							@else <label for="example1">5. Minit Mesyuarat Persetujuan Penggunaan Peruntukan :</label>
-							@endif<br>
-								<div id="wk_doc_6_processing"></div>
-							 	<button id="wk_doc_6" class="btn btn-primary" type="button">Muatnaik</button><br>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-12">  
-							@if($kew == 2)                          
-								<label for="example1">7. Tiga (3) Sebutharga daripada Syarikat :</label>
-							@else <label for="example1">6. Tiga (3) Sebutharga daripada Syarikat :</label>
-							@endif <br>
-								<div id="wk_doc_7_processing"></div>
-								<div id="wk_doc_8_processing"></div>
-								<div id="wk_doc_9_processing"></div>
-							 	<button id="wk_doc_7" class="btn btn-primary" type="button">Muatnaik Sebut Harga 1</button>
-							 	<button id="wk_doc_8" class="btn btn-primary" type="button">Muatnaik Sebut Harga 2</button>
-							 	<button id="wk_doc_9" class="btn btn-primary" type="button">Muatnaik Sebut Harga 3</button><br>
-							</div>
-						</div>
+  
+<div class="row">
+    <div class="col-lg-12">						
+		<div class="card mb-3">	
+			<div class="card-header">
+				<i class="fa fa-envelope"></i>  E. &nbsp;&nbsp;&nbsp;Muatnaik Dokumen
+			</div>	
+			<div class="card-body">
+                <div class="form-row">   
+                    <div class="form-group col-md-12">                        
+                        <label for="example1">1. Borang Permohonan JPICT (Lampiran 9):</label><br>
+                        <div id="wk_doc_1_processing"></div>
+                        <button id="wk_doc_1" class="btn btn-primary" type="button">Muatnaik</button><br>
+                    </div>
+                </div> 
+				<div class="form-row">   
+					<div class="form-group col-md-12">                        
+						<label for="example1">2. Surat Iringan Permohonan JPICT :</label><br>
+						<div id="wk_doc_2_processing"></div>
+					 	<button id="wk_doc_2" class="btn btn-primary" type="button">Muatnaik</button><br>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">                            
+						<label for="example1">3. Lampiran Kedudukan Kewangan Sekolah (Lampiran 8) :</label><br>
+						<div id="wk_doc_3_processing"></div>
+					 	<button id="wk_doc_3" class="btn btn-primary" type="button">Muatnaik</button><br>
+					</div>
+				</div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">                            
+                        <label for="example1">4. Borang PPKP (Lampiran 10) :</label><br>
+                        <div id="wk_doc_4_processing"></div>
+                        <button id="wk_doc_4" class="btn btn-primary" type="button">Muatnaik</button><br>
+                    </div>
+                </div>
+				@if($kew == 2)
+				<div class="form-row">
+					<div class="form-group col-md-12">                            
+						<label for="example1">5. Surat Kelulusan Penggunaan Peruntukan :</label><br>
+						<div id="wk_doc_5_processing"></div>
+					 	<button id="wk_doc_5" class="btn btn-primary" type="button">Muatnaik</button><br>
+					</div>
+				</div>
+				@endif
+				<div class="form-row">
+					<div class="form-group col-md-12">    
+					@if($kew == 2)                        
+						<label for="example1">6. Minit Mesyuarat Persetujuan Penggunaan Peruntukan :</label>
+					@else <label for="example1">5. Minit Mesyuarat Persetujuan Penggunaan Peruntukan :</label>
+					@endif<br>
+						<div id="wk_doc_6_processing"></div>
+					 	<button id="wk_doc_6" class="btn btn-primary" type="button">Muatnaik</button><br>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">  
+					@if($kew == 2)                          
+						<label for="example1">7. Tiga (3) Sebutharga daripada Syarikat :</label>
+					@else <label for="example1">6. Tiga (3) Sebutharga daripada Syarikat :</label>
+					@endif <br>
+						<div id="wk_doc_7_processing"></div>
+						<div id="wk_doc_8_processing"></div>
+						<div id="wk_doc_9_processing"></div>
+					 	<button id="wk_doc_7" class="btn btn-primary" type="button">Muatnaik Sebut Harga 1</button>
+					 	<button id="wk_doc_8" class="btn btn-primary" type="button">Muatnaik Sebut Harga 2</button>
+					 	<button id="wk_doc_9" class="btn btn-primary" type="button">Muatnaik Sebut Harga 3</button><br>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-    <div class="container-fluid">
-        <div vlass="col-lg-12">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                   <a href="/sekolah/permohonan/{{ Auth::User()->kodsekolah }}"><input class="btn btn-success" type="submit" name="submit" value="Simpan" nofocus></a>
-                </div>
-            </div>
-        </div>
-    </div>
+        <a href="/sekolah/permohonan/{{ Auth::User()->kodsekolah }}"><input class="btn btn-success" type="submit" name="submit" value="Simpan" nofocus></a>
 </div>
 @endsection	

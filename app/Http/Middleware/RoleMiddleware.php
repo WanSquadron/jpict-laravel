@@ -22,11 +22,11 @@ class RoleMiddleware
             $user = User::find(Auth::user()->id);
 
             if(strtolower($role) == 'superadmin') {
-                if(Auth::check() && ($user->role == 'SuperAdmin')) {
+                if(Auth::check() && ($user->hasRole == 'SuperAdmin')) {
                     return $next($request);
                 } else 
                 {
-                    die('testing');//return redirect('/access-denied');
+                    return redirect('/access-denied');
                 }
                 
             }
@@ -34,7 +34,7 @@ class RoleMiddleware
 
             else if(strtolower($role) == 'sekolah') 
             {
-                if(Auth::check() && ($user->role == 'Sekolah')){
+                if(Auth::check() && ($user->hasRole == 'Sekolah')){
                     return $next($request);
                 } else 
                 {
@@ -43,7 +43,7 @@ class RoleMiddleware
             }
             else 
             {
-                if(Auth::check() && ($user->role == $role)){
+                if(Auth::check() && ($user->hasRole == $role)){
                     return $next($request);
                 } 
                 else 

@@ -35,24 +35,15 @@ class SekolahController extends Controller
 
     
     # Query data Statistic Home Page
-    public function Index()
+    public function Index(Request $request)
     {
-    	//$jumlahpermohonan = DB::table('permohonan')
-    	//					->select('kodsekolah')
-    	//					->where('moh_codesek','=',Auth::user()->kodsekolah)->count();
 
         $jumlahpermohonan = Auth::User()->Permohonan()->count();
-
-    	//$ditolak = DB::table('permohonan')
-    	//			->select('kodsekolah')
-    	//			->where('moh_codesek','=', Auth::user()->kodsekolah)
-    	//			->where('moh_statusm','=', '3')
-    	//			->count();
-
         $ditolak = Auth::User()->Permohonan()->where('fk_statusmohon', '=', 3)->count();
 		return view('sekolah.sekolah', [
 			'jumlahpermohonan' => $jumlahpermohonan,
-			'ditolak' => $ditolak
+			'ditolak' => $ditolak,
+            'status' => $request->status
 		]);
     }
 
@@ -135,7 +126,7 @@ class SekolahController extends Controller
                 $dokumen->fk_kodsurat = "1";
                 $dokumen->nama_fail = $newFilename;
                 $dokumen->fail_deskripsi = "Borang Permohonan JPICT";
-                echo var_dump($dokumen->save());  
+                $dokumen->save();  
             } else {
                 $dokumen = UploadDokumen::where([
                                             ['fk_idpermohonan', '=', $NomborPermohonan],
@@ -188,7 +179,7 @@ class SekolahController extends Controller
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
                 $dokumen->fk_kodsurat = "3";
                 $dokumen->nama_fail = $newFilename;
-                $dokumen->fail_deskripsi = "Surat Kedudukan Kewangan Sekolah";
+                $dokumen->fail_deskripsi = "Surat Kedudukan Kewangan";
                 $dokumen->save();  
             } else {
                 $dokumen = UploadDokumen::where([
@@ -196,7 +187,7 @@ class SekolahController extends Controller
                                             ['fk_kodsurat', '=', 3]
                                         ])->first();
                 $dokumen->nama_fail = $newFilename;
-                $dokumen->fail_deskripsi = "Surat Kedudukan Kewangan Sekolah";
+                $dokumen->fail_deskripsi = "Surat Kedudukan Kewangan";
                 $dokumen->save();
             }
         }
@@ -241,7 +232,7 @@ class SekolahController extends Controller
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
                 $dokumen->fk_kodsurat = "5";
                 $dokumen->nama_fail = $newFilename;
-                $dokumen->fail_deskripsi = "Surat Kelulusan Menggunakan Peruntukan Kewangan";
+                $dokumen->fail_deskripsi = "Surat Kelulusan Guna Peruntukan Kewangan";
                 $dokumen->save();  
             } else {
                 $dokumen = UploadDokumen::where([
@@ -249,7 +240,7 @@ class SekolahController extends Controller
                                             ['fk_kodsurat', '=', 5]
                                         ])->first();
                 $dokumen->nama_fail = $newFilename;
-                $dokumen->fail_deskripsi = "Surat Kelulusan Menggunakan Peruntukan Kewangan";
+                $dokumen->fail_deskripsi = "Surat Kelulusan Guna Peruntukan Kewangan";
                 $dokumen->save();
             }
         }
@@ -389,7 +380,7 @@ class SekolahController extends Controller
                                             ['fk_kodsurat', '=', '6']])
                                             ->first();
 
-    return view('sekolah.permohonan-edit', [ 
+    return view('sekolah.permohonan-baru-edit', [ 
         'maklumat' => $maklumat,
         'surat_iringan' => $surat_iringan,
         'surat_kelulusan' => $surat_kelulusan,
@@ -409,7 +400,7 @@ class SekolahController extends Controller
     {
     	$numohon = GlobalNomborPermohonan::first();
         $mesyuarat = SesiMesyuarat::where('sesi_mesyuarat', '=', 1)->first();
-    	$numbers = date('Y')."-".$mesyuarat->sesi_mesyuarat."-".$numohon->nombor_permohonan;
+    	$idpermohonan = date('Y')."-".$mesyuarat->sesi_mesyuarat."-".$numohon->nombor_permohonan;
     	$kodsek  = htmlentities($request->input('kodsek'),ENT_QUOTES);
     	$pegawai = htmlentities($request->input('pegawai'),ENT_QUOTES);
     	$notelfn = htmlentities($request->input('notelfn'),ENT_QUOTES);
@@ -426,7 +417,7 @@ class SekolahController extends Controller
            
     	# Insert
     	$mohon = new Permohonan;
-    	$mohon->idpermohonan = $numbers;
+    	$mohon->idpermohonan = $idpermohonan;
     	$mohon->fk_kodsekolah = $kodsek;
         $mohon->fk_kodppd = Auth::User()->fk_kodppd;
     	$mohon->fk_idsumberkewangan = $sumberp;
@@ -443,26 +434,66 @@ class SekolahController extends Controller
 
         #Insert No Rujukan
         $rujukan1 = new UploadDokumen;
-        $rujukan1->fk_idpermohonan = $numbers;
-        $rujukan1->fk_kodsurat = "2";
-        $rujukan1->no_rujukan = $iringan;
+        $rujukan1->fk_idpermohonan = $idpermohonan;
+        $rujukan1->fk_kodsurat = "1";
+        $rujukan1->fail_deskripsi = "Borang Permohonan JPICT";
         $rujukan1->save();
 
         $rujukan2 = new UploadDokumen;
-        $rujukan2->fk_idpermohonan = $numbers;
-        $rujukan2->fk_kodsurat = "5";
-        $rujukan2->no_rujukan = $gunaperuntukan;
+        $rujukan2->fk_idpermohonan = $idpermohonan;
+        $rujukan2->fk_kodsurat = "2";
+        $rujukan2->fail_deskripsi = "Surat Iringan Permohonan JPICT";
+        $rujukan2->no_rujukan = $iringan;
         $rujukan2->save();
 
         $rujukan3 = new UploadDokumen;
-        $rujukan3->fk_idpermohonan = $numbers;
-        $rujukan3->fk_kodsurat = "6";
-        $rujukan3->no_rujukan = $minit_mesyuarat;
+        $rujukan3->fk_idpermohonan = $idpermohonan;
+        $rujukan3->fk_kodsurat = "3";
+        $rujukan3->fail_deskripsi = "Surat Kedudukan Kewangan(Lampiran 8)";
         $rujukan3->save();
 
-        GlobalNomborPermohonan::increment('nombor_permohonan');
-    	//DB::table('glo_numohon')->increment('unique'); 
-    	return redirect('/sekolah/peralatan/'.$numbers);
+        if($sumberp == '2')
+        {
+            $rujukan4 = new UploadDokumen;
+            $rujukan4->fk_idpermohonan = $idpermohonan;
+            $rujukan4->fk_kodsurat = "4";
+            $rujukan4->fail_deskripsi = "Borang PPKP(Lampiran 10)";
+            $rujukan4->save();
+        }
+        $rujukan5 = new UploadDokumen;
+        $rujukan5->fk_idpermohonan = $idpermohonan;
+        $rujukan5->fk_kodsurat = "5";
+        $rujukan7->fail_deskripsi = "Surat Kelulusan Guna Peruntukan Kewangan";
+        $rujukan5->no_rujukan = $gunaperuntukan;
+        $rujukan5->save();
+
+        $rujukan6 = new UploadDokumen;
+        $rujukan6->fk_idpermohonan = $idpermohonan;
+        $rujukan6->fk_kodsurat = "6";
+        $rujukan6->fail_deskripsi="Surat Minit Mesyuarat Kelulusan Peruntukan Kewangan";
+        $rujukan6->no_rujukan = $minit_mesyuarat;
+        $rujukan6->save();
+
+        $rujukan7 = new UploadDokumen;
+        $rujukan7->fk_idpermohonan = $idpermohonan;
+        $rujukan7->fk_kodsurat = "7";
+        $rujukan7->fail_deskripsi = "Surat Sebutharga Pertama";
+        $rujukan7->save();
+
+        $rujukan8 = new UploadDokumen;
+        $rujukan8->fk_idpermohonan = $idpermohonan;
+        $rujukan8->fk_kodsurat = "8";
+        $rujukan8->fail_deskripsi="Surat Sebutharga Kedua";
+        $rujukan8->save();
+
+        $rujukan9 = new UploadDokumen;
+        $rujukan9->fk_idpermohonan = $idpermohonan;
+        $rujukan9->fk_kodsurat = "9";
+        $rujukan9->fail_deskripsi = "Surat Sebutharga Ketiga";
+        $rujukan9->save();
+
+        GlobalNomborPermohonan::increment('nombor_permohonan'); 
+    	return redirect('/sekolah/peralatan/'.$idpermohonan);
     }
 
     public function Peralatan($idmohon) 
@@ -491,14 +522,19 @@ class SekolahController extends Controller
 
         $idmohon = htmlentities($request->input('idmohon'),ENT_QUOTES);
         $pralatn = htmlentities($request->input('pralatn'),ENT_QUOTES);
+        $catatan = htmlentities($request->input('catatan'),ENT_QUOTES);
         $kuantti = htmlentities($request->input('kuantti'),ENT_QUOTES);
         $hrgalat = htmlentities($request->input('hrgalat'),ENT_QUOTES);
         $statbli = htmlentities($request->input('statbli'),ENT_QUOTES);
 
+        $kategori = GlobalSenaraiPeralatan::where('idperalatan', $pralatn)->first();
+
         $peralatan = new PembelianPeralatan;
         $peralatan->fk_idpermohonan = $idmohon;
+        $peralatan->fk_idkategori = $kategori->fk_idkategori;
         $peralatan->fk_idperalatan = $pralatn;
         $peralatan->fk_idstatusbeli = $statbli;
+        $peralatan->catatan = $catatan;
         $peralatan->kuantiti = $kuantti;
         $peralatan->hargaseunit = $hrgalat;
         $peralatan->save();
@@ -522,7 +558,132 @@ class SekolahController extends Controller
         $alat = PembelianPeralatan::where('id',$id)->first();
 
         PembelianPeralatan::destroy($id);
-        echo "setTimeout(function(){ window.location.href = '/sekolah/peralatan/".$alat->fk_idpermohonan."'; }, 10);";
+        echo "setTimeout(function(){ window.location.href = '/sekolah/peralatan/".$alat->fk_idpermohonan."'; }, 5);";
         echo "$('#alatan_$id').remove();";
+    }
+
+    public function UpdatePermohonan(Request $request, $idmohon)
+    {
+        $pegawai = htmlentities($request->input('pegawai'),ENT_QUOTES);
+        $notelfn = htmlentities($request->input('notelfn'),ENT_QUOTES);
+        $nomykad = htmlentities($request->input('nomykad'),ENT_QUOTES);
+        $sumberp = htmlentities($request->input('sumberp'),ENT_QUOTES);
+        $ketrngn = htmlentities($request->input('sumdesc'),ENT_QUOTES);
+        $tujubli = htmlentities($request->input('tujubli'),ENT_QUOTES);
+        $justfks = htmlentities($request->input('justfks'),ENT_QUOTES);
+        $jumwang = htmlentities($request->input('jumperuntukan'),ENT_QUOTES);
+        $bakwang = htmlentities($request->input('bakiperuntukan'),ENT_QUOTES);
+        $iringan = htmlentities($request->input('surat_iringan'),ENT_QUOTES);
+        $gunaperuntukan = htmlentities($request->input('surat_kelulusan_guna'),ENT_QUOTES);
+        $minit_mesyuarat = htmlentities($request->input('minit_mesyuarat'),ENT_QUOTES);
+
+        $mohon = Permohonan::where('idpermohonan', '=', $idmohon)->first();
+        $mohon->fk_idsumberkewangan = $sumberp;
+        $mohon->keterangan = $ketrngn;
+        $mohon->tujuanbeli = $tujubli;
+        $mohon->justifikasi = $justfks;
+        $mohon->pegawaitanggungjawab = $pegawai;
+        $mohon->mykadpegawai = $nomykad;
+        $mohon->notelpegawai = $notelfn;
+        $mohon->jumlahwang = $jumwang;
+        $mohon->bakiwang = $bakwang;
+        $mohon->save();
+
+        $rujukan1 = UploadDokumen::where([
+                                         ['fk_idpermohonan', '=', $idmohon],
+                                         ['fk_kodsurat', '=', '2']])
+                                        ->first();
+        $rujukan1->no_rujukan = $iringan;
+        $rujukan1->save();
+
+        $rujukan2 = UploadDokumen::where([
+                                         ['fk_idpermohonan', '=', $idmohon],
+                                         ['fk_kodsurat', '=', '5']])
+                                        ->first();
+        $rujukan2->no_rujukan = $gunaperuntukan;
+        $rujukan2->save();
+
+        $rujukan3 = UploadDokumen::where([
+                                         ['fk_idpermohonan', '=', $idmohon],
+                                         ['fk_kodsurat', '=', '6']])
+                                        ->first();
+        $rujukan3->no_rujukan = $minit_mesyuarat;
+        $rujukan3->save();
+
+        $jumlaharga = 0;
+        $jumlah = 0;
+
+        $pembelian = PembelianPeralatan::where('fk_idpermohonan', '=', $idmohon)->get();
+
+            foreach($pembelian as $beli)
+            {
+                $jumlaharga += ($beli->hargaseunit * $beli->kuantiti);
+            }
+
+            return view('sekolah.permohonan-alatan',[ 
+                        'idmohon' => $idmohon,
+                        'perkakasan' => GlobalSenaraiPeralatan::all(),
+                        'peralatan' => PembelianPeralatan::where('fk_idpermohonan','=', $idmohon)->get(),
+                        'jumlaharga' => $jumlaharga,
+                        'jumlah' => $jumlah
+        ]);
+
+    }
+
+    public function Profil($kodsekolah)
+    {
+        //$kodsekolah = htmlentities($request->input('kodsekolah'));
+        $maklumat = Auth::User()->where('kodsekolah', '=', $kodsekolah)->first();
+
+        return view('sekolah.profil', [ 'maklumat' => $maklumat ]);
+    }
+
+    public function KemaskiniProfil(Request $request, $kodsekolah)
+    {
+        $alamat = htmlentities($request->input('alamat'),ENT_QUOTES);
+        $poskod = htmlentities($request->input('poskod'),ENT_QUOTES);
+        $notelfn = htmlentities($request->input('notelfn'),ENT_QUOTES);
+        $nofaks = htmlentities($request->input('nofaks'),ENT_QUOTES);
+
+        $profil = Auth::User()->where('kodsekolah', '=', $kodsekolah)->first();
+        $profil->notelsekolah = $notelfn;
+        $profil->nofaksekolah = $nofaks;
+        $profil->alamat = $alamat;
+        $profil->poskod = $poskod;
+        $profil->save();
+
+        $jumlahpermohonan = Auth::User()->Permohonan()->count();
+        $ditolak = Auth::User()->Permohonan()->where('fk_statusmohon', '=', 3)->count();
+
+        return redirect('/sekolah/?status=success');
+
+
+    }
+
+    public function DeletePermohonan($id)
+    {
+        $kod = Permohonan::where('id', '=', $id)->first();
+        $dokumen = UploadDokumen::where('fk_idpermohonan', '=', $kod->idpermohonan)->get();
+        $alatan = PembelianPeralatan::where('fk_idpermohonan', '=', $kod->idpermohonan)->get();
+
+        foreach($dokumen as $doc)
+        {
+            $padamdokumen = UploadDokumen::destroy($doc->id);
+        }
+
+        foreach($alatan as $alat)
+        {
+            $padamalat = PembelianPeralatan::destroy($alat->id);
+        }
+
+        
+        $permohonan = Permohonan::destroy($id);
+
+       echo "setTimeout(function(){ window.location.href = '/sekolah/permohonan/".$kod->fk_kodsekolah."'; }, 5);";
+    }
+
+    public function Avatar(Request $request)
+    {
+        echo "hai";
     }
 }
