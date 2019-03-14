@@ -190,21 +190,25 @@
 					</div>	
 					<div class="card-body"> 
 						<div class="form-row">   
-							<div class="form-group col-md-4">                            
+							<div class="form-group col-lg-8">                            
 								<label for="SuratIringan">No. Rujukan Surat Iringan Permohonan JPICT</label>
 							 	<input class="form-control" type="text" name="surat_iringan" id="surat_iringan" placeholder="Sila isikan No. Rujukan Surat Iringan">
 							</div>	
-							<div class="form-group col-md-4">
+						</div>
+						<div class="form-row">
+							<div class="form-group col-lg-8">
 								<label for="SuratKelulusanGuna">No. Rujukan Surat Kelulusan Guna Peruntukan </label>
 								<input class="form-control" type="text" name="surat_kelulusan_guna" id="surat_kelulusan_guna" placeholder="Sila isikan No. Rujukan Surat Kelulusan Penggunaan Peruntukan" >
 							</div>
-							<div class="form-group col-md-4">
-								<label for="MinitMesyuarat">No. Rujukan Minit Mesyuarat</label>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-lg-8">
+								<label for="MinitMesyuarat">No. Rujukan Minit Mesyuarat Kelulusan Guna Peruntukan (SUWA shj)</label>
 								<input class="form-control" type="text" name="minit_mesyuarat" id="minit_mesyuarat" placeholder="Sila isikan No. Rujukan Minit Mesyuarat">
 							</div>
-	                	</div>
-					</div>	<!-- end card body -->	
-				</div>
+						</div>
+	                </div>
+				</div>	<!-- end card body -->	
 			</div>
 		</div>
 

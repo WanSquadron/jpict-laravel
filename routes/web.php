@@ -11,21 +11,28 @@
 |
 */
 
-## Global Route
-Route::get('/dashboard', function () { return view('dashboard');});
-Route::get('/', function () { return view('auth.login');});
+### Global Route
 Route::auth();
+Route::get('/', function () { return view('auth.login');});
+Route::get('/dashboard', function () { return view('dashboard');});
+
+
+## HomeController
 Route::get('/home', 'HomeController@index');
 Route::get('/access-denied', 'HomeController@AccessDenied');
+Route::post('/avatar/upload', 'HomeController@UploadAvatar');
 
+
+### Middleware Grouping
 Route::group(['middleware' => ['role:Sekolah']], function()
 {
 
 ## User Role Sekolah
 # Profil
+	Route::get('/avatar', 'HomeController@Avatar');
 	Route::get('/sekolah','SekolahController@Index');
 	Route::get('/sekolah/{status}','SekolahController@Index');
-	Route::get('/profil/avatar', 'SekolahController@Avatar');
+	Route::post('/avatar/upload', 'HomeController@UploadAvatar');
 	Route::get('/sekolah/profil/{kodsekolah}', 'SekolahController@Profil');
 	Route::post('sekolah/kemaskini-profil/{kodsekolah}', 'SekolahController@KemaskiniProfil');
 
@@ -50,11 +57,14 @@ Route::group(['middleware' => ['role:Sekolah']], function()
 
 });
 
+### Middleware Grouping
 Route::group(['middleware' => ['role:SuperAdmin']], function()
 {
-## User Role Superadmin
 
+## User Role Superadmin
 #Permohonan GET
+	Route::get('/avatar', 'HomeController@Avatar');
 	Route::get('superadmin/permohonan', 'SuperadminController@SenaraiPermohonan');
+	Route::post('/avatar/upload', 'HomeController@UploadAvatar');
 });
 

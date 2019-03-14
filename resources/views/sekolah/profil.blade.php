@@ -41,6 +41,40 @@
     }
     return true;
 }
+
+var UserAvatar = $("#btn-avatar").dropzone({ 
+        url: '{{ url('/avatar/upload') }}',
+        params: {
+            _token: "{{ csrf_token() }}"
+        },
+        acceptedFiles: 'image/jpg,image/jpeg,image/png',
+        maxFilesize: 2,
+        maxFiles: 1,
+        createImageThumbnails: false,
+        previewTemplate : '<div style="display:none"></div>',
+        init: function()
+        {
+            this.on("processing", function(file) {
+                $("#btn-avatar").html('<i class="fa fa-cog fa-spin push-5-r"></i>');
+            });
+            this.on("success", function(file) {
+                var ret = file.xhr.response;
+                if (ret == "OK") {
+                    var randomId = new Date().getTime();
+                    $("#btn-avatar").html('Tukar Avatar');
+                    $(".img-avatar").attr("src","/avatar?cache="+randomId);
+                }
+            });
+            this.on("complete", function() {
+                if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
+                    this.removeAllFiles();
+                }
+            });
+            this.on("error", function(file, errorMessage) {
+            console.log(errorMessage);
+            });
+        }
+    });
 </script>
 
 @endsection
@@ -59,7 +93,15 @@
                 <h3>
                     <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;Maklumat Profil</h3>
             </div>                     
-        <div class="card-body"> 
+        <div class="card-body">
+            <div class="row text-right">
+                <div class="col-md-12 offset-md-12 col-sm-12">
+                    <div class="text-right">
+                        <img class="img-avatar img-avatar96" title="{{ Auth::User()->name }}" src="{{ url('/avatar') }}" width="100"><br><br>
+                        <button id="btn-avatar" class="btn btn-success" type="button">Upload Avatar</button>
+                    </div>
+                </div>
+            </div>
             <div class="form-row">   
                 <div class="form-group col-md-6">                            
                     <label for="example1">Nama Sekolah</label>
@@ -67,7 +109,7 @@
                     <input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
                 </div>  
                 <div class="form-group col-md-4">
-                    <label for="NoTel">Alamat Emel Rasmi (1GovUc)</label>
+                    <label for="NoTel">Alamat Emel Rasmi (MyGovUc)</label>
                     <input class="form-control" type="text" name="emel" id="emel" value="{{ $maklumat->email }}" disabled>
                 </div>
             </div>

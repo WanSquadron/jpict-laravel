@@ -37,7 +37,55 @@
 <body class="animsition">
     
         <!-- HEADER MOBILE-->
-        
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                        <a class="logo" href="index.html">
+                            <img src="{{ asset('bootstrap/images/icon/logos.png')}}"/>
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="/dashboard">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                        </li>
+                        @if( Auth::User()->hasRole == "Sekolah")
+                        <li>
+                            <a href="/sekolah/permohonan/{{ Auth::User()->kodsekolah }}">
+                                <i class="fas fa-copy"></i>Permohonan</a>
+                        </li>
+                    @endif
+
+                    @if( Auth::User()->hasRole == "SuperAdmin")
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Permohonan &nbsp;
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                    <li>
+                                        <a href="/superadmin/permohonan">
+                                            <i class="fas fa-list-alt"></i>Senarai</a>
+                                    </li>
+                            </ul>
+
+                        </li>
+                    @endif
+                    </ul>
+                </div>
+            </nav>
+        </header>
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
@@ -207,39 +255,6 @@
             } );
         } );
     
-
-
-        var Upload_Avatar = $('#avatar_user').dropzone({
-            url: '{{ url('/profil/avatar') }}',
-            params: {
-                _token: "{{ csrf_token() }}",
-                _jenis: "avatar"
-            },
-            acceptedFiles: 'application/pdf',
-            maxFilesize: 2,
-            maxFiles: 1,
-            createImageThumbnails: false,
-            previewTemplate : '<div style="display:none"></div>',
-            init: function()
-            {
-                this.on("success", function(file) {
-                    var ret = file.xhr.response;
-                    var txt = ret.split('|');
-                    if (txt[0] == "OK") {
-                    } else {
-                        alert('Error: ' + txt[0]);
-                    }
-                });
-                this.on("complete", function() {
-                    if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
-                this.removeAllFiles();
-                    }
-                });
-                this.on("error", function(file, errorMessage) {
-                    console.log(errorMessage);
-                });
-            }
-        });
 </script>
 </body>
 </html>
