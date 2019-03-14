@@ -82,28 +82,26 @@ class HomeController extends Controller
         $FileType = strtolower($_FILES['file']['type']);
         $tmpName = $_FILES['file']['tmp_name']; 
         $isUploadedFile = is_uploaded_file($_FILES['file']['tmp_name']);
+        $name = Auth::User()->kodsekolah;
+        $newFilename = $name;
         if ($isUploadedFile == true)
         {
             $user = Auth::User();
-            $user->avatarType = $FileType;
-            $user->avatar = file_get_contents($tmpName);
+            //$user->avatarType = $FileType;
+            $user->avatar = $newFilename;
             $user->save();
-            
             $newPathfile = public_path() . "/avatar/".$newFilename;
-        // dalam folder public/upload/
-        // create folder upload dalam folder public
+            $isMove = move_uploaded_file($tmpName, $newPathfile);
 
-        $isMove = move_uploaded_file($tmpName, $newPathfile);
-        if ($isMove) {
-            echo "OK";
-        } else {
-            echo "Ralat semasa muat naik avatar anda. Sila cuba lagi !";
-        }
+            if ($isMove) {
+                 echo "OK";
+            } else { echo "Ralat! Sila cuba lagi !";}
         }
         else
-        {
-            echo "KO";
-        }
+            {   
+                echo "KO";
+            }
     }
+       
 
 }

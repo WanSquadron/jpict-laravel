@@ -41,41 +41,47 @@
     }
     return true;
 }
-
-var UserAvatar = $("#btn-avatar").dropzone({ 
-        url: '{{ url('/avatar/upload') }}',
-        params: {
-            _token: "{{ csrf_token() }}"
-        },
-        acceptedFiles: 'image/jpg,image/jpeg,image/png',
-        maxFilesize: 2,
-        maxFiles: 1,
-        createImageThumbnails: false,
-        previewTemplate : '<div style="display:none"></div>',
-        init: function()
-        {
-            this.on("processing", function(file) {
-                $("#btn-avatar").html('<i class="fa fa-cog fa-spin push-5-r"></i>');
-            });
-            this.on("success", function(file) {
-                var ret = file.xhr.response;
-                if (ret == "OK") {
-                    var randomId = new Date().getTime();
-                    $("#btn-avatar").html('Tukar Avatar');
-                    $(".img-avatar").attr("src","/avatar?cache="+randomId);
-                }
-            });
-            this.on("complete", function() {
-                if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
-                    this.removeAllFiles();
-                }
-            });
-            this.on("error", function(file, errorMessage) {
-            console.log(errorMessage);
-            });
-        }
-    });
 </script>
+@endsection
+
+@section('jquery')
+
+
+var avatar = $('#btn-avatar').dropzone({
+    url: '{{ url('/avatar/upload') }}',
+    params: {
+        _token: "{{ csrf_token() }}"
+    },
+    acceptedFiles: 'image/jpg, image/jpeg, image/png',
+    maxFilesize: 2,
+    maxFiles: 1,
+    createImageThumbnails: false,
+    previewTemplate : '<div style="display:none"></div>',
+    init: function()
+    {
+        this.on("processing", function(file) {
+            $("#btn-avatar").html('Sedang Dimuatnaik&nbsp;<i class="fa fa-cog fa-spin push-5-r"></i>');
+            $("#btn-avatar").attr("disabled","disabled");
+            $("#output").html('Sila tunggu sebentar...');
+        });
+        this.on("success", function(file) {
+            var ret = file.xhr.response;
+            var txt = ret.split('|');
+            if (txt[0] == "OK") {
+                $("#btn-avatar").removeAttr("disabled");
+            } else {
+                alert('Error: ' + txt[0]);
+            }
+        });
+        this.on("complete", function() {
+            alert('Berjaya!! ');
+        });
+        this.on("error", function(file, errorMessage) {
+            console.log(errorMessage);
+        });
+    }
+});
+
 
 @endsection
 
@@ -83,8 +89,6 @@ var UserAvatar = $("#btn-avatar").dropzone({
 
 <h4><i class="fa fa-edit"></i>&nbsp;&nbsp;Kemaskini Maklumat Profil Sekolah</h4>
 <hr/><br/><br/>
-
-<form data-toggle="validator" role="form" method="post" action="/sekolah/kemaskini-profil/{{ Auth::User()->kodsekolah }}" onsubmit="return ValidateBorang();">
 <div class="row">
 <div class="col-lg-12"> 
 <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
@@ -97,11 +101,21 @@ var UserAvatar = $("#btn-avatar").dropzone({
             <div class="row text-right">
                 <div class="col-md-12 offset-md-12 col-sm-12">
                     <div class="text-right">
-                        <img class="img-avatar img-avatar96" title="{{ Auth::User()->name }}" src="{{ url('/avatar') }}" width="100"><br><br>
-                        <button id="btn-avatar" class="btn btn-success" type="button">Upload Avatar</button>
+                        @if( Auth::User()->avatar == "default.jpg")
+                        <img title="{{ Auth::User()->name }}" src="{{ asset('avatar/default.jpg') }}" width="100"><br><br>
+                        @endif
+                        @if( Auth::User()->avatar != "default.jpg")
+                        <img title="{{ Auth::User()->name }}" src="{{ asset('bootstrap/images/icon/avatar-01.jpg')}}" width="100"><br><br>
+                        @endif
+                        <div id="output"></div>
+                        <button id="btn-avatar" class="btn btn-sm btn-success" type="button">Upload Avatar</button>
+                        <button type="button" id="btn-delete-avatar" class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </div>
                 </div>
             </div>
+            <form data-toggle="validator" role="form" method="post" action="/sekolah/kemaskini-profil/{{ Auth::User()->kodsekolah }}" onsubmit="return ValidateBorang();">
             <div class="form-row">   
                 <div class="form-group col-md-6">                            
                     <label for="example1">Nama Sekolah</label>

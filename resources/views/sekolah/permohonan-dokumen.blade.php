@@ -48,6 +48,7 @@ var Upload_BorangPermohonan = $('#wk_doc_1').dropzone({
         });
         this.on("error", function(file, errorMessage) {
             console.log(errorMessage);
+            $("#wk_doc_1_processing").html('Dokumen tidak berjaya dimuatnaik.', errorMessage);
         });
     }
 });

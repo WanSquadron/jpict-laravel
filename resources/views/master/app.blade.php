@@ -42,7 +42,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="{{ asset('bootstrap/images/icon/logos.png')}}"/>
+                            <img src="{{ asset('avatar/default.jpg')}}"/>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -148,7 +148,7 @@
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        <img src="{{ asset('bootstrap/images/icon/avatar-01.jpg')}}" />
+                                        <img src="{{ asset('avatar/default.jpg')}}" />
                                     </div>
                                     <div class="content">
                                         <a class="js-acc-btn" href="#">{{ ucwords(strtolower(Auth::User()->name)) }}</a>
@@ -157,7 +157,7 @@
                                         <div class="info clearfix">
                                             <button id="avatar_user" type="button">
                                             <div class="image">
-                                                <img src="{{ asset('bootstrap/images/icon/avatar-01.jpg')}}" />
+                                                <img src="{{ asset('avatar/default.jpg')}}" />
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">

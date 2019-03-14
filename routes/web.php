@@ -30,6 +30,7 @@ Route::group(['middleware' => ['role:Sekolah']], function()
 ## User Role Sekolah
 # Profil
 	Route::get('/avatar', 'HomeController@Avatar');
+	Route::get('/avatar/{id}', 'HomeController@Avatar');
 	Route::get('/sekolah','SekolahController@Index');
 	Route::get('/sekolah/{status}','SekolahController@Index');
 	Route::post('/avatar/upload', 'HomeController@UploadAvatar');
@@ -64,6 +65,7 @@ Route::group(['middleware' => ['role:SuperAdmin']], function()
 ## User Role Superadmin
 #Permohonan GET
 	Route::get('/avatar', 'HomeController@Avatar');
+	Route::get('/avatar/{id}', 'HomeController@Avatar');
 	Route::get('superadmin/permohonan', 'SuperadminController@SenaraiPermohonan');
 	Route::post('/avatar/upload', 'HomeController@UploadAvatar');
 });
