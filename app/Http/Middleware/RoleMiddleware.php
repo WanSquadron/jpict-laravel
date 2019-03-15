@@ -30,8 +30,6 @@ class RoleMiddleware
                 }
                 
             }
-
-
             else if(strtolower($role) == 'sekolah') 
             {
                 if(Auth::check() && ($user->hasRole == 'Sekolah')){
