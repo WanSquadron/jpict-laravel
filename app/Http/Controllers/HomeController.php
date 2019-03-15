@@ -39,40 +39,40 @@ class HomeController extends Controller
         if ($id != null)
         {
             $user = User::find($id);
-            $avatarType = $user->avatarType;
             $avatar = $user->avatar;
-            if (strlen($avatarType) != 0)
+
+            header("Cache-Control: no-cache, must-revalidate");
+            header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+
+            if ($avatar == '' || $avatar == 'default.jpg')
             {
-                header("Cache-Control: no-cache, must-revalidate");
-                header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-                header("Content-Type: $avatarType");
-                echo $avatar;
+                header("Content-Type: image/jpg");
+                echo file_get_contents(public_path()."/avatar/default.jpg");
             }
             else
             {
-                header("Cache-Control: no-cache, must-revalidate");
-                header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-                header("Content-Type: image/jpg");
-                echo file_get_contents(public_path()."/avatar/default.jpg");
+                $extensionFile = pathinfo($avatar, PATHINFO_EXTENSION);
+                header("Content-Type: image/" . $extensionFile);
+                echo file_get_contents(public_path()."/avatar/".$avatar);
             }
         }
         else
         {
-            $avatarType = Auth::user()->avatarType;
-            $avatar = Auth::user()->avatar;
-            if (strlen($avatarType) != 0)
+            $avatar = Auth::User()->avatar;
+
+            header("Cache-Control: no-cache, must-revalidate");
+            header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+
+            if ($avatar == '' || $avatar == 'default.jpg')
             {
-                header("Cache-Control: no-cache, must-revalidate");
-                header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-                header("Content-Type: $avatarType");
-                echo $avatar;
+                header("Content-Type: image/jpg");
+                echo file_get_contents(public_path()."/avatar/default.jpg");
             }
             else
             {
-                header("Cache-Control: no-cache, must-revalidate");
-                header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-                header("Content-Type: image/jpg");
-                echo file_get_contents(public_path()."/avatar/default.jpg");
+                $extensionFile = pathinfo($avatar, PATHINFO_EXTENSION);
+                header("Content-Type: image/" . $extensionFile);
+                echo file_get_contents(public_path()."/avatar/".$avatar);
             }
         }
     }
@@ -82,25 +82,44 @@ class HomeController extends Controller
         $FileType = strtolower($_FILES['file']['type']);
         $tmpName = $_FILES['file']['tmp_name']; 
         $isUploadedFile = is_uploaded_file($_FILES['file']['tmp_name']);
+        $extensionFile = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+
         $name = Auth::User()->kodsekolah;
-        $newFilename = $name;
+        $newFilename = $name.'.'.$extensionFile;
         if ($isUploadedFile == true)
         {
             $user = Auth::User();
-            //$user->avatarType = $FileType;
             $user->avatar = $newFilename;
             $user->save();
+
             $newPathfile = public_path() . "/avatar/".$newFilename;
             $isMove = move_uploaded_file($tmpName, $newPathfile);
-
-            if ($isMove) {
+            if ($isMove)
+            {
                  echo "OK";
-            } else { echo "Ralat! Sila cuba lagi !";}
+            }
+            else
+            {
+                echo "Ralat! Sila cuba lagi.";
+            }
         }
         else
-            {   
-                echo "KO";
-            }
+        {   
+            echo "KO";
+        }
+    }
+
+    public function DeleteAvatar()
+    {
+        $user = Auth::User();
+        $user->avatar = '';
+        $user->save();
+
+        $name = Auth::User()->kodsekolah;
+
+        if (file_exists(public_path().'/avatar/'.$name)) {
+            unlink(public_path().'/avatar/'.$name);
+        }
     }
        
 

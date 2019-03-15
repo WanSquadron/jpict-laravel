@@ -144,7 +144,7 @@
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        <img src="{{ asset('avatar/default.jpg')}}" />
+                                        <img class="img-avatar" src="/avtr" />
                                     </div>
                                     <div class="content">
                                         <a class="js-acc-btn" href="#">{{ ucwords(strtolower(Auth::User()->name)) }}</a>
@@ -153,7 +153,7 @@
                                         <div class="info clearfix">
                                             <button id="avatar_user" type="button">
                                             <div class="image">
-                                                <img src="{{ asset('avatar/default.jpg')}}" />
+                                                <img class="img-avatar" src="/avtr" />
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">

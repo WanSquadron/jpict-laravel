@@ -48,7 +48,7 @@
 
 
 var avatar = $('#btn-avatar').dropzone({
-    url: '{{ url('/avatar/upload') }}',
+    url: '{{ url('/avtr/upload') }}',
     params: {
         _token: "{{ csrf_token() }}"
     },
@@ -60,7 +60,7 @@ var avatar = $('#btn-avatar').dropzone({
     init: function()
     {
         this.on("processing", function(file) {
-            $("#btn-avatar").html('Sedang Dimuatnaik&nbsp;<i class="fa fa-cog fa-spin push-5-r"></i>');
+            $("#btn-avatar").html('Sedang Dimuatnaik <i class="fa fa-cog fa-spin"></i>');
             $("#btn-avatar").attr("disabled","disabled");
             $("#output").html('Sila tunggu sebentar...');
         });
@@ -69,17 +69,35 @@ var avatar = $('#btn-avatar').dropzone({
             var txt = ret.split('|');
             if (txt[0] == "OK") {
                 $("#btn-avatar").removeAttr("disabled");
+                var randomId = new Date().getTime();
+                $("#btn-avatar").html('Upload Avatar');
+                $("#output").html('');
+                $(".img-avatar").attr("src","/avtr/?cache="+randomId);
             } else {
                 alert('Error: ' + txt[0]);
             }
         });
         this.on("complete", function() {
-            alert('Berjaya!! ');
+            if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
+                this.removeAllFiles();
+            }
         });
         this.on("error", function(file, errorMessage) {
             console.log(errorMessage);
         });
     }
+});
+
+$('#btn-delete-avatar').click(function(){
+    $.ajax({
+        url: '{{ url('/avtr/delete') }}',
+        data: {
+            _token: "{{ csrf_token() }}"
+        }
+    }).done(function() {
+        var randomId = new Date().getTime();
+        $(".img-avatar").attr("src","/avtr/?cache="+randomId);
+    });
 });
 
 
@@ -101,11 +119,10 @@ var avatar = $('#btn-avatar').dropzone({
             <div class="row text-right">
                 <div class="col-md-12 offset-md-12 col-sm-12">
                     <div class="text-right">
-                        @if( Auth::User()->avatar == "default.jpg")
-                        <img title="{{ Auth::User()->name }}" src="{{ asset('avatar/default.jpg') }}" width="100"><br><br>
-                        @endif
-                        @if( Auth::User()->avatar != "default.jpg")
-                        <img title="{{ Auth::User()->name }}" src="{{ asset('bootstrap/images/icon/avatar-01.jpg')}}" width="100"><br><br>
+                        @if (Auth::User()->avatar != "default.jpg" || Auth::User()->avatar != "")
+                            <img class="img-avatar" title="{{ Auth::User()->name }}" src="/avtr" width="100"><br><br>
+                        @else
+                            <img class="img-avatar" title="{{ Auth::User()->name }}" src="{{ asset('avatar/default.jpg') }}" width="100"><br><br>
                         @endif
                         <div id="output"></div>
                         <button id="btn-avatar" class="btn btn-sm btn-success" type="button">Upload Avatar</button>
