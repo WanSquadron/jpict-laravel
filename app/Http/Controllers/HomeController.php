@@ -111,11 +111,12 @@ class HomeController extends Controller
 
     public function DeleteAvatar()
     {
+        $name = Auth::User()->avatar;
         $user = Auth::User();
         $user->avatar = '';
         $user->save();
 
-        $name = Auth::User()->kodsekolah;
+        
 
         if (file_exists(public_path().'/avatar/'.$name)) {
             unlink(public_path().'/avatar/'.$name);
