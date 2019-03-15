@@ -45,7 +45,8 @@ Route::group(['middleware' => ['role:Sekolah']], function()
 
 # Permohonan EDIT
 	Route::get('/sekolah/permohonan/kemaskini/{idmohon}', 'SekolahController@EditPermohonan');
-	Route::post('/sekolah/kemaskini-permohonan/{idmohon}', 'SekolahController@UpdatePermohonan');
+	Route::get('/sekolah/permohonan/kemaskini/peralatan/{idmohon}', 'SekolahController@Peralatan');
+	Route::post('/sekolah/permohonan/kemaskini/peralatan/{idmohon}', 'SekolahController@UpdatePermohonan');
 
 #Permohonan DELETE
 	Route::get('/sekolah/peralatan/padam/{id}', 'SekolahController@DeletePeralatan');

@@ -124,11 +124,7 @@
                             </ul>
 
                         </li>
-                    @endif
-                    <li>
-                        <a href="{{ url('/logout') }}">
-                            <i class="zmdi zmdi-power"></i>Log Keluar</a>
-                        </li>    
+                    @endif    
                     </ul>
                 </nav>
             </div>

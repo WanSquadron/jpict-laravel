@@ -155,7 +155,7 @@
 
 <div class="section__content section__content--p30">
     <div class="container-fluid">
-    	<form data-toggle="validator" role="form" method="post" action="/sekolah/kemaskini-permohonan/{{ $maklumat->idpermohonan }}" onsubmit="return ValidateBorang();">
+    	<form data-toggle="validator" role="form" method="post" action="/sekolah/permohonan/kemaskini/peralatan/{{ $maklumat->idpermohonan }}" onsubmit="return ValidateBorang();">
 		<div class="row">
             <div class="col-lg-12">						
 				<div class="card mb-3">	

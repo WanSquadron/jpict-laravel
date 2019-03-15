@@ -87,10 +87,15 @@ class SekolahController extends Controller
     {
         $kewangan = Auth::User()->Permohonan()->where('idpermohonan', '=', $idmohon)->first();
         $kew = $kewangan->fk_idsumberkewangan;
+        $dokumen = UploadDokumen::where([
+                                         ['fk_idpermohonan', $idmohon],
+                                         ['nama_fail', '!=', '']
+                                         ])->get();
 
         return view('sekolah.permohonan-dokumen',[
             'kew' => $kew,
-            'idmohon' => $idmohon
+            'idmohon' => $idmohon,
+            'dokumen' => $dokumen
         ]);
     }
 
@@ -366,28 +371,31 @@ class SekolahController extends Controller
 
     public function EditPermohonan ($idmohon)
     {
-        $maklumat = Auth::User()->Permohonan()->where('idpermohonan', '=', $idmohon)->first();
-        $surat_iringan = UploadDokumen::where([
-                                            ['fk_idpermohonan', '=', $idmohon],
-                                            ['fk_kodsurat', '=', '2']])
-                                            ->first();
-        $surat_kelulusan = UploadDokumen::where([
-                                            ['fk_idpermohonan', '=', $idmohon],
-                                            ['fk_kodsurat', '=', '5']])
-                                            ->first();
-        $minit_mesyuarat = UploadDokumen::where([
-                                            ['fk_idpermohonan', '=', $idmohon],
-                                            ['fk_kodsurat', '=', '6']])
-                                            ->first();
+        if(Auth::User()->Permohonan()->where('idpermohonan',$idmohon)->count() != 0)
+        {
+            $maklumat = Auth::User()->Permohonan()->where('idpermohonan', '=', $idmohon)->first();
+            $surat_iringan = UploadDokumen::where([
+                                                ['fk_idpermohonan', '=', $idmohon],
+                                                ['fk_kodsurat', '=', '2']])
+                                                ->first();
+            $surat_kelulusan = UploadDokumen::where([
+                                                ['fk_idpermohonan', '=', $idmohon],
+                                                ['fk_kodsurat', '=', '5']])
+                                                ->first();
+            $minit_mesyuarat = UploadDokumen::where([
+                                                ['fk_idpermohonan', '=', $idmohon],
+                                                ['fk_kodsurat', '=', '6']])
+                                                ->first();
 
-    return view('sekolah.permohonan-baru-edit', [ 
-        'maklumat' => $maklumat,
-        'surat_iringan' => $surat_iringan,
-        'surat_kelulusan' => $surat_kelulusan,
-        'minit_mesyuarat' => $minit_mesyuarat,
-        'peruntukan' => GlobalPeruntukanKewangan::all()
+            return view('sekolah.permohonan-baru-edit', [ 
+                'maklumat' => $maklumat,
+                'surat_iringan' => $surat_iringan,
+                'surat_kelulusan' => $surat_kelulusan,
+                'minit_mesyuarat' => $minit_mesyuarat,
+                'peruntukan' => GlobalPeruntukanKewangan::all()
 
-    ]);
+        ]);
+        } else { return view('errors.access-denied');}
 
     }
 
@@ -498,23 +506,27 @@ class SekolahController extends Controller
 
     public function Peralatan($idmohon) 
     {
-        $jumlaharga = 0;
-        $jumlah = 0;
+        if(Auth::User()->Permohonan()->where('idpermohonan',$idmohon)->count() != 0)
+        {
+            $jumlaharga = 0;
+            $jumlah = 0;
 
-        $pembelian = PembelianPeralatan::where('fk_idpermohonan', '=', $idmohon)->get();
+            $pembelian = PembelianPeralatan::where('fk_idpermohonan', '=', $idmohon)->get();
 
-            foreach($pembelian as $beli)
-            {
-                $jumlaharga += ($beli->hargaseunit * $beli->kuantiti);
-            }
+                foreach($pembelian as $beli)
+                {
+                    $jumlaharga += ($beli->hargaseunit * $beli->kuantiti);
+                }
 
-            return view('sekolah.permohonan-alatan',[ 
-                        'idmohon' => $idmohon,
-                        'perkakasan' => GlobalSenaraiPeralatan::all(),
-                        'peralatan' => PembelianPeralatan::where('fk_idpermohonan','=', $idmohon)->get(),
-                        'jumlaharga' => $jumlaharga,
-                        'jumlah' => $jumlah
-        ]);
+                return view('sekolah.permohonan-alatan',[ 
+                            'idmohon' => $idmohon,
+                            'perkakasan' => GlobalSenaraiPeralatan::all(),
+                            'peralatan' => PembelianPeralatan::where('fk_idpermohonan','=', $idmohon)->get(),
+                            'jumlaharga' => $jumlaharga,
+                            'jumlah' => $jumlah
+            ]);
+        }
+        else { return view('errors.access-denied');}
     }
 
     public  function SavePeralatan(Request $request, $id)
@@ -632,10 +644,13 @@ class SekolahController extends Controller
 
     public function Profil($kodsekolah)
     {
-        //$kodsekolah = htmlentities($request->input('kodsekolah'));
-        $maklumat = Auth::User()->where('kodsekolah', '=', $kodsekolah)->first();
+        if(Auth::User()->kodsekolah == $kodsekolah)
+        {
+            $maklumat = Auth::User()->where('kodsekolah', '=', $kodsekolah)->first();
 
-        return view('sekolah.profil', [ 'maklumat' => $maklumat ]);
+            return view('sekolah.profil', [ 'maklumat' => $maklumat ]);
+        } 
+        else { return view('errors.access-denied');}
     }
 
     public function KemaskiniProfil(Request $request, $kodsekolah)
@@ -680,10 +695,5 @@ class SekolahController extends Controller
         $permohonan = Permohonan::destroy($id);
 
        echo "setTimeout(function(){ window.location.href = '/sekolah/permohonan/".$kod->fk_kodsekolah."'; }, 5);";
-    }
-
-    public function Avatar(Request $request)
-    {
-        echo "hai";
     }
 }

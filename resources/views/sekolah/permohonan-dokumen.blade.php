@@ -375,6 +375,33 @@ var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
 @endsection
 
 @section('content')
+
+<h4> Senarai Dokumen yang telah dimuatnaik : </h4><br>
+
+        <div class="table-responsive table--no-card m-b-40">
+            <table class="table table-borderless table-striped table-earning">
+                <thead>
+                    <tr>
+                        <th class="text-left">#</th>
+                        <th class="text-left">Dokumen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @if (count($dokumen) == 0)
+                    <tr>
+                        <td colspan="6" class="text-center"><i>Tiada Maklumat Peralatan/Perisian</i></td>
+                    </tr>
+                @else
+                    @foreach($dokumen as $index => $doc)
+                        <tr>
+                            <td class="text-left">{{ $index +1 }}.</td>
+                            <td class="text-left"><a href="/upload/{{ $doc->nama_fail }}" target="_blank" top="0" left="0" width="550" height="600">{{ $doc->nama_fail }}</a></td>
+                        </tr>                    
+                    @endforeach
+                @endif
+
+            </table>
+        </div>
   
 <div class="row">
     <div class="col-lg-12">						
