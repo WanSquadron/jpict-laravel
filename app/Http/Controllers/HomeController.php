@@ -44,10 +44,10 @@ class HomeController extends Controller
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 
-            if ($avatar == '' || $avatar == 'default.jpg')
+            if ($avatar == '' || $avatar == 'default.png')
             {
                 header("Content-Type: image/jpg");
-                echo file_get_contents(public_path()."/avatar/default.jpg");
+                echo file_get_contents(public_path()."/avatar/default.png");
             }
             else
             {
@@ -63,10 +63,10 @@ class HomeController extends Controller
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 
-            if ($avatar == '' || $avatar == 'default.jpg')
+            if ($avatar == '' || $avatar == 'default.png')
             {
-                header("Content-Type: image/jpg");
-                echo file_get_contents(public_path()."/avatar/default.jpg");
+                header("Content-Type: image/png");
+                echo file_get_contents(public_path()."/avatar/default.png");
             }
             else
             {

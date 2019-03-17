@@ -75,10 +75,12 @@ class SekolahController extends Controller
         else
         {
            $senarai = Auth::User()->Permohonan()->get();
+           $status = 0;
 
             return view('sekolah.permohonan',[ 
                                             'senarai' => $senarai,
-                                            'kodsekolah' => $kodsekolah ]); 
+                                            'kodsekolah' => $kodsekolah,
+                                            'status' => $status ]); 
         }
     }
 
@@ -101,30 +103,24 @@ class SekolahController extends Controller
 
     public function SaveDokumen(Request $r)
     {
-
     $FileType = strtolower($_FILES['file']['type']);
     $tmpName = $_FILES['file']['tmp_name']; 
     $isUploadedFile = is_uploaded_file($_FILES['file']['tmp_name']);
     
     $JenisDokumen = strtolower($_POST['_jenis']);
     $NomborPermohonan = strtolower($_POST['_nomohon']);
-
     if ($isUploadedFile == true)
     {
         // dekat sini ko kene buat apa perlu buat dengan dokumen tersebut
         // 1. rename nama file @ whatever
         // 2. move the document to certain folder @ database
         // 3. and finally return "OK" when all success
-
         if ($JenisDokumen == 'borang-permohonan') {
-
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 1]
                                     ])->count();
-
             $newFilename = "Borang_Permohonan_".$NomborPermohonan.".pdf";
-
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
@@ -142,16 +138,12 @@ class SekolahController extends Controller
             }
             
         } 
-
         if ($JenisDokumen == 'surat-iringan') {
-
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 2]
                                     ])->count();
-
             $newFilename = "Surat_Iringan_Permohonan_".$NomborPermohonan.".pdf";
-
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
@@ -171,14 +163,11 @@ class SekolahController extends Controller
             
         }       
         else if($JenisDokumen == 'surat-kedudukankewangan') {
-
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 3]
                                     ])->count();
-
             $newFilename = "Surat_Kedudukan_Kewangan_".$NomborPermohonan.".pdf";
-
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
@@ -196,16 +185,12 @@ class SekolahController extends Controller
                 $dokumen->save();
             }
         }
-
         else if($JenisDokumen == 'borang-ppkp') {
-
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 4]
                                     ])->count();
-
             $newFilename = "Borang_PPKP_".$NomborPermohonan.".pdf";
-
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
@@ -222,16 +207,12 @@ class SekolahController extends Controller
                 $dokumen->save();
             }
         }
-
         else if($JenisDokumen == 'surat-kelulusangunaperuntukan') {
-
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 5]
                                     ])->count();
-
             $newFilename = "Surat_Kelulusan_Guna_Peruntukan_".$NomborPermohonan.".pdf";
-
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
@@ -250,14 +231,11 @@ class SekolahController extends Controller
             }
         }
         else if($JenisDokumen == 'surat-minitmesyuarat') {
-
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 6]
                                     ])->count();
-
             $newFilename = "Surat_Minit_Mesyuarat_".$NomborPermohonan.".pdf";
-
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
@@ -276,14 +254,11 @@ class SekolahController extends Controller
             }
         }
         else if($JenisDokumen == 'sebutharga-1') {
-
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 7]
                                     ])->count();
-
             $newFilename = "Sebut_Harga1_".$NomborPermohonan.".pdf";
-
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
@@ -301,14 +276,11 @@ class SekolahController extends Controller
             }
         }
         else if($JenisDokumen == 'sebutharga-2') {
-
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 8]
                                     ])->count();
-
             $newFilename = "Sebut_Harga2_".$NomborPermohonan.".pdf";
-
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
@@ -326,14 +298,11 @@ class SekolahController extends Controller
             }
         }
         else if($JenisDokumen == 'sebutharga-3') {
-
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 9]
                                     ])->count();
-
             $newFilename = "Sebut_Harga3_".$NomborPermohonan.".pdf";
-
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
@@ -350,21 +319,20 @@ class SekolahController extends Controller
                 $dokumen->save();
             }
         }
-
         $newPathfile = public_path() . "/upload/".$newFilename;
         // dalam folder public/upload/
         // create folder upload dalam folder public
-
         $isMove = move_uploaded_file($tmpName, $newPathfile);
         if ($isMove) {
             echo "OK";
+
         } else {
             echo "Ralat semasa muat naik dokumen kertas kerja anda. Sila cuba lagi !";
         }
     }
     else
     {
-      // failed upload
+      // fail
         echo "KO";
     }
 }
@@ -471,7 +439,7 @@ class SekolahController extends Controller
         $rujukan5 = new UploadDokumen;
         $rujukan5->fk_idpermohonan = $idpermohonan;
         $rujukan5->fk_kodsurat = "5";
-        $rujukan7->fail_deskripsi = "Surat Kelulusan Guna Peruntukan Kewangan";
+        $rujukan5->fail_deskripsi = "Surat Kelulusan Guna Peruntukan Kewangan";
         $rujukan5->no_rujukan = $gunaperuntukan;
         $rujukan5->save();
 

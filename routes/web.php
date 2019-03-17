@@ -20,12 +20,16 @@ Route::get('/dashboard', function () { return view('dashboard');});
 Route::get('/home', 'HomeController@index');
 Route::get('/access-denied', 'HomeController@AccessDenied');
 
-// Avatar
+## Avatar
 Route::get('/avtr', 'HomeController@Avatar');
 Route::post('/avtr/upload', 'HomeController@UploadAvatar');
 Route::get('/avtr/delete', 'HomeController@DeleteAvatar');
 Route::get('/avtr/{id}', 'HomeController@Avatar');
 
+## Profil
+Route::get('/sekolah/profil/{kodsekolah}', 'SekolahController@Profil');
+Route::post('sekolah/kemaskini-profil/{kodsekolah}', 'SekolahController@KemaskiniProfil');
+	
 ### Middleware Grouping
 Route::group(['middleware' => ['role:Sekolah']], function()
 {
@@ -34,9 +38,7 @@ Route::group(['middleware' => ['role:Sekolah']], function()
 # Profil
 	Route::get('/sekolah','SekolahController@Index');
 	Route::get('/sekolah/{status}','SekolahController@Index');
-	Route::get('/sekolah/profil/{kodsekolah}', 'SekolahController@Profil');
-	Route::post('sekolah/kemaskini-profil/{kodsekolah}', 'SekolahController@KemaskiniProfil');
-	
+
 # Permohonan GET
 	Route::get('/sekolah/peralatan/{idmohon}', 'SekolahController@Peralatan');
 	Route::get('/sekolah/permohonan/dokumen/{idmohon}', 'SekolahController@Dokumen');

@@ -8,8 +8,8 @@
     <h4>Selamat Datang {{ ucwords(strtolower(Auth::User()->name)) }}!</h4>
 <br/>
 <div class="row">
-    <div class="col-lg-12">
-        <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+    <div class="col-lg-8">
+        <div class="au-card au-card--no-shadow au-card--no-pad m-b-30">
             <div class="au-card-title" style="background-image:url('bootstrap/images/bg-title-01.jpg');">
                 <div class="bg-overlay bg-overlay--blue"></div>
                 <h3>
@@ -52,17 +52,38 @@
                             <span class="time">tamat</span>
                         </div>
                     </div>
-                    <div class="au-task__item au-task__item--danger">
-                        <div class="au-task__item-inner">
-                            <h5 class="task">
-                                <a href="">Hanya permohonan yang lengkap dengan dokumen sokongan yang diwajibkan dan permohonan yang barangannya belum dibeli sahaja akan diproses bagi mendapatkan kelulusan JPICT. Mana-mana permohonan yang tidak lengkap dan barangnya telah dibeli tidak akan diproses.</a>
-                            </h5>
-                            <span class="time">langkah 3</span>
-                        </div>
-                    </div>
                 </div>
                 <div class="au-task__footer">
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <div class="au-card au-card--no-shadow au-card--no-pad m-b-30">
+            <div class="au-card-title" style="background-image:url('bootstrap/images/bg-title-01.jpg');">
+                <div class="bg-overlay bg-overlay--blue"></div>
+                <h3>
+                    <i class="fa fa-calendar-o"></i>Takwim JPICTMN 2019</h3>
+            </div>
+            <div class="au-task__item au-task__item--success">
+                <div class="au-task__item-inner">
+                    <h5 class="task"><a>Mesyuarat JPICTMN Bil. 1/2019</a></h5>
+                    <span class="time">Tarikh : 19/3/2019<br/>Masa : 2.30ptg - 5.00ptg</span>
+                </div>
+            </div>
+            <div class="au-task__item au-task__item--primary">
+                <div class="au-task__item-inner">
+                    <h5 class="task"><a>Mesyuarat JPICTMN Bil. 2/2019</a></h5>
+                    <span class="time">Tarikh : 10/6/2019<br/>Masa : 2.30ptg - 5.00ptg</span>
+                </div>
+            </div>
+            <div class="au-task__item au-task__item--warning">
+                <div class="au-task__item-inner">
+                    <h5 class="task"><a>Mesyuarat JPICTMN Bil. 3/2019</a></h5>
+                    <span class="time">Tarikh : 17/09/2019<br/>Masa : 2.30ptg - 5.00ptg</span>
                 </div>
             </div>
         </div>

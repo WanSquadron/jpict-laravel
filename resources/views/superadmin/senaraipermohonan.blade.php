@@ -89,11 +89,11 @@ function confirmation(id)
                             <?php $dokumen = App\UploadDokumen::where([
                                                                         ['fk_idpermohonan', $list->idpermohonan],
                                                                         ['nama_fail', '!=', '']])->count(); ?>
-                            @if(($list->sumberperuntukan = "2" ) && ($dokumen >= 5))
-                                    Status : Dokumen Lengkap
-                            @elseif(($list->sumberperuntukan != "2" ) && ($dokumen >= "6"))
-                             Status : Dokumen Lengkap
-                            @else Status : Dokumen Tidak Lengkap
+                            @if(($list->fk_idsumberkewangan = '2' ) && ($dokumen >= 7))
+                                    Status : Dokumen Lengkap SUWA {{ $dokumen }}
+                            @elseif(($list->fk_idsumberkewangan != '2' ) && ($dokumen >= "6"))
+                             Status : Dokumen Lengkap {{ $dokumen }}
+                            @else Status : Dokumen Tidak Lengkap {{ $dokumen }}
                             @endif
                              
 

@@ -14,6 +14,7 @@
 
     @yield('css')
 
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <link href="{{ asset('bootstrap/css/font-face.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/font-awesome-4.7/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/font-awesome-5/css/fontawesome-all.min.css') }}" rel="stylesheet">
@@ -42,7 +43,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="{{ asset('avatar/default.jpg')}}"/>
+                            <img src="{{ asset('avatar/default.png')}}"/>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">

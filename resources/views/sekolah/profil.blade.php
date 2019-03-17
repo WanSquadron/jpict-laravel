@@ -104,32 +104,17 @@ $('#btn-delete-avatar').click(function(){
 
 @section('content')
 
-<h4><i class="fa fa-edit"></i>&nbsp;&nbsp;Kemaskini Maklumat Profil Sekolah</h4>
+<h4><i class="fa fa-edit"></i>&nbsp;&nbsp;Kemaskini Maklumat Profil</h4>
 <hr/><br/><br/>
 <div class="row">
-<div class="col-lg-12"> 
+<div class="col-lg-9"> 
 <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
             <div class="au-card-title" style="background-image:url('/bootstrap/images/bg-title-02.jpg');">
                 <div class="bg-overlay bg-overlay--blue"></div>
                 <h3>
-                    <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;Maklumat Profil</h3>
+                    <i class="zmdi zmdi-account-calendar"></i>&nbsp;&nbsp;&nbsp;Maklumat Profil</h3>
             </div>                     
         <div class="card-body">
-            <div class="row text-right">
-                <div class="col-md-12 offset-md-12 col-sm-12">
-                    <div class="text-right">
-                        @if (Auth::User()->avatar != "default.jpg" || Auth::User()->avatar != "")
-                            <img class="img-avatar" title="{{ Auth::User()->name }}" src="/avtr" width="100"><br>
-                            <button id="btn-avatar" class="btn btn-sm btn-success" type="button">Tukar Avatar</button>
-                        @else
-                            <img class="img-avatar" title="{{ Auth::User()->name }}" src="{{ asset('avatar/default.jpg') }}" width="100"><br>
-                            <button id="btn-avatar" class="btn btn-sm btn-success" type="button">Upload Avatar</button>
-                        @endif
-                        <button type="button" id="btn-delete-avatar" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>
-                        </button><br><br>
-                    </div>
-                </div>
-            </div>
             <form data-toggle="validator" role="form" method="post" action="/sekolah/kemaskini-profil/{{ Auth::User()->kodsekolah }}" onsubmit="return ValidateBorang();">
             <div class="form-row">   
                 <div class="form-group col-md-6">                            
@@ -170,6 +155,31 @@ $('#btn-delete-avatar').click(function(){
             </div>
          </div>
     </div> 
+</div>
+<div class="col-md-3">
+    <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+        <div class="au-card-title" style="background-image:url('/bootstrap/images/bg-title-02.jpg');">
+            <div class="bg-overlay bg-overlay--blue"></div>
+            <h3><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;Avatar</h3>
+            </div>                     
+        <div class="card-body">
+            <div class=".col-md-3 .ml-auto">
+                <div class="text-center">
+                    @if (Auth::User()->avatar != "default.jpg" || Auth::User()->avatar != "")
+                        <img class="img-avatar text-center" title="{{ Auth::User()->name }}" src="/avtr" width="100"><br>
+                        <h6 class="table-data_info"><i>Saiz avatar mestilah tidak melebihi 500kb</i></h6><br/>
+                        <button id="btn-avatar" class="btn btn-sm btn-success text-center" type="button">Tukar Avatar</button>
+                    @else
+                        <img class="img-avatar" title="{{ Auth::User()->name }}" src="{{ asset('avatar/default.png') }}" width="100"><br>
+                        <i>Saiz avatar mestilah tidak melebihi 500kb</i><br/>
+                        <button id="btn-avatar" class="btn btn-sm btn-success text-center" type="button">Upload Avatar</button>
+                    @endif
+                    <button type="button" id="btn-delete-avatar" class="btn btn-sm btn-danger text-center"><i class="fa fa-trash"></i>
+                    </button><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid">

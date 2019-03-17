@@ -45,6 +45,12 @@ function confirmation(id)
 </script>
 @endsection
 
+@section('jquery')
+
+jQuery('#dokumen').removeAttr("display");
+
+@endsection
+
 @section('content')
 
     	<div class="table-data__tool-right">
@@ -61,7 +67,6 @@ function confirmation(id)
                         <th class="text-left">No. Permohonan</th>
                         <th class="text-left">Sumber Peruntukan</th>
                         <th class="text-left">Tarikh Permohonan</th>
-                        <th class="text-left">Status Permohonan</th>
                         <th class="text-right">Tindakan</th>
                     </tr>
                 </thead>
@@ -76,21 +81,20 @@ function confirmation(id)
                          	<td class="text-left">{{ $index +1 }}.</td>
                             <td class="text-left">{{ $list->idpermohonan }}</td>
                             <td>{{ $list->sumberperuntukan->nama_sumberkewangan }} - {{ $list->keterangan }}<br/><br/>
-                                <b>Dokumen Sokongan :-</b> <br/>
-
+                                <a href="">Dokumen Sokongan</a>  <br/>
+                                
                                      @foreach(App\UploadDokumen::where('fk_idpermohonan',$list->idpermohonan)->get() as $index => $doc)
                                      {{ $index +1 }}. &nbsp; {{ $doc->fail_deskripsi }} : 
                                         @if(!empty($doc->nama_fail)) 
                                             <img src="{{ asset('bootstrap/images/icon/check.png')}}"/><br/>
+                                            <?php $status++;?>
                                             @else
                                                 <img src="{{ asset('bootstrap/images/icon/close.png')}}"/><br/>
                                         @endif
                                     @endforeach
-
-                                
+                               
                             </td>
                             <td>{{ $list->TarikhPermohonan }}</td>
-                            <td>Tidak Lengkap</td>
                             <td class="text-left">
                                 <div class="table-data-feature text-left">
                                     <a href="/sekolah/permohonan/kemaskini/{{ $list->idpermohonan }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Kemaskini">

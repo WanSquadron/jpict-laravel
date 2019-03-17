@@ -278,7 +278,7 @@ var Upload_SebutHarga1 = $('#wk_doc_7').dropzone({
                 $("#wk_doc_7_processing").html('Dokumen Sebutharga 1 berjaya dimuatnaik.');
 
             } else {
-                alert('Error: ' + txt[0]);
+                alert('Ada Error: ' + txt[0]);
             }
         });
         this.on("complete", function() {
@@ -389,7 +389,7 @@ var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
                 <tbody>
                 @if (count($dokumen) == 0)
                     <tr>
-                        <td colspan="6" class="text-center"><i>Tiada Maklumat Peralatan/Perisian</i></td>
+                        <td colspan="6" class="text-center"><i>Tiada maklumat dokumen yang telah dimuatnaik</i></td>
                     </tr>
                 @else
                     @foreach($dokumen as $index => $doc)
