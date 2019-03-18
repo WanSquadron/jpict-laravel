@@ -356,6 +356,7 @@ var Upload_SebutHarga2 = $('#wk_doc_9').dropzone({
             if (txt[0] == "OK") {
                 $("#wk_doc_9").removeAttr("disabled");
                 $("#wk_doc_9_processing").html('Dokumen Sebut Harga 2 berjaya dimuatnaik.');
+                window.location.reload();
 
             } else {
                 alert('Error: ' + txt[0]);
@@ -364,6 +365,7 @@ var Upload_SebutHarga2 = $('#wk_doc_9').dropzone({
         this.on("complete", function() {
             if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
         this.removeAllFiles();
+        window.location.reload();
             }
         });
         this.on("error", function(file, errorMessage) {

@@ -349,9 +349,10 @@ class SekolahController extends Controller
         if ($isMove) {
             echo "OK";
 
-        } else {
-            echo "Ralat semasa muat naik dokumen kertas kerja anda. Sila cuba lagi !";
+            } else {
+                echo "Ralat semasa muat naik dokumen kertas kerja anda. Sila cuba lagi !";
         }
+        
     }
     else
     {
