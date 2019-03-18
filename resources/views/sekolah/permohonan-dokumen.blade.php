@@ -33,11 +33,17 @@ var Upload_BorangPermohonan = $('#wk_doc_1').dropzone({
         this.on("success", function(file) {
             var ret = file.xhr.response;
             var txt = ret.split('|');
-            if (txt[0] == "OK") {
+            if (txt[0] == "OK")
+            {
                 $("#wk_doc_1").removeAttr("disabled");
                 $("#wk_doc_1_processing").html('Dokumen berjaya dimuatnaik.');
 
-            } else {
+                // List dokumen bila dah uploaded
+                var bil = parseInt($('#bil').val());
+                $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
+            }
+            else
+            {
                 alert('Error: ' + txt[0]);
             }
         });
@@ -428,21 +434,24 @@ var Upload_SebutHarga3 = $('#wk_doc_10').dropzone({
                         <th class="text-left">Dokumen</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="list-dokumen">
                 @if (count($dokumen) == 0)
                     <tr>
                         <td colspan="6" class="text-center"><i>Tiada maklumat dokumen yang telah dimuatnaik</i></td>
                     </tr>
                 @else
                     @foreach($dokumen as $index => $doc)
+                        {{ $bil = $index+1 }}
                         <tr>
-                            <td class="text-left">{{ $index +1 }}.</td>
+                            <td class="text-left">{{ $bil }}.</td>
                             <td class="text-left"><a href="/upload/{{ $doc->nama_fail }}" target="_blank" top="0" left="0" width="550" height="600">{{ $doc->nama_fail }}</a></td>
                         </tr>                    
+                        
                     @endforeach
                 @endif
-
+                </tbody>
             </table>
+            <input type="hidden" id="bil" value="{{ $bil }}">
         </div>
   
 <div class="row">

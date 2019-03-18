@@ -115,7 +115,8 @@ class SekolahController extends Controller
         // 1. rename nama file @ whatever
         // 2. move the document to certain folder @ database
         // 3. and finally return "OK" when all success
-        if ($JenisDokumen == 'borang-permohonan') {
+        if ($JenisDokumen == 'borang-permohonan')
+        {
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 1]
@@ -347,7 +348,7 @@ class SekolahController extends Controller
         // create folder upload dalam folder public
         $isMove = move_uploaded_file($tmpName, $newPathfile);
         if ($isMove) {
-            echo "OK";
+            echo "OK|$newFilename";
 
             } else {
                 echo "Ralat semasa muat naik dokumen kertas kerja anda. Sila cuba lagi !";
