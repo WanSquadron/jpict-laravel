@@ -373,11 +373,11 @@ class SekolahController extends Controller
                                                 ->first();
             $surat_kelulusan = UploadDokumen::where([
                                                 ['fk_idpermohonan', '=', $idmohon],
-                                                ['fk_kodsurat', '=', '5']])
+                                                ['fk_kodsurat', '=', '6']])
                                                 ->first();
             $minit_mesyuarat = UploadDokumen::where([
                                                 ['fk_idpermohonan', '=', $idmohon],
-                                                ['fk_kodsurat', '=', '6']])
+                                                ['fk_kodsurat', '=', '7']])
                                                 ->first();
 
             return view('sekolah.permohonan-baru-edit', [ 

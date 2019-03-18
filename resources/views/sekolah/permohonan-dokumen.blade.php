@@ -40,7 +40,9 @@ var Upload_BorangPermohonan = $('#wk_doc_1').dropzone({
 
                 // List dokumen bila dah uploaded
                 var bil = parseInt($('#bil').val());
+                $('#tiada-dokumen').remove();
                 $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
+                window.location.reload();
             }
             else
             {
@@ -82,6 +84,10 @@ var Upload_SuratIringanMohon = $('#wk_doc_2').dropzone({
             if (txt[0] == "OK") {
                 $("#wk_doc_2").removeAttr("disabled");
                 $("#wk_doc_2_processing").html('Dokumen berjaya dimuatnaik.');
+                var bil = parseInt($('#bil').val());
+                $('#tiada-dokumen').remove();
+                $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
+                window.location.reload();
 
             } else {
                 alert('Error: ' + txt[0]);
@@ -122,6 +128,10 @@ var Upload_KedudukanKewangan = $('#wk_doc_3').dropzone({
             if (txt[0] == "OK") {
                 $("#wk_doc_3").removeAttr("disabled");
                 $("#wk_doc_3_processing").html('Dokumen berjaya dimuatnaik.');
+                var bil = parseInt($('#bil').val());
+                $('#tiada-dokumen').remove();
+                $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
+                window.location.reload();
 
             } else {
                 alert('Error: ' + txt[0]);
@@ -162,6 +172,10 @@ var Upload_BorangPPKP = $('#wk_doc_4').dropzone({
             if (txt[0] == "OK") {
                 $("#wk_doc_4").removeAttr("disabled");
                 $("#wk_doc_4_processing").html('Dokumen berjaya dimuatnaik.');
+                var bil = parseInt($('#bil').val());
+                $('#tiada-dokumen').remove();
+                $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
+                window.location.reload();
 
             } else {
                 alert('Error: ' + txt[0]);
@@ -202,6 +216,10 @@ var Upload_KelulusanPeruntukan = $('#wk_doc_5').dropzone({
             if (txt[0] == "OK") {
                 $("#wk_doc_5").removeAttr("disabled");
                 $("#wk_doc_5_processing").html('Dokumen berjaya dimuatnaik.');
+                var bil = parseInt($('#bil').val());
+                $('#tiada-dokumen').remove();
+                $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
+                window.location.reload();
 
             } else {
                 alert('Error: ' + txt[0]);
@@ -242,6 +260,10 @@ var Upload_PenyataKewangan = $('#wk_doc_6').dropzone({
             if (txt[0] == "OK") {
                 $("#wk_doc_6").removeAttr("disabled");
                 $("#wk_doc_6_processing").html('Dokumen berjaya dimuatnaik.');
+                var bil = parseInt($('#bil').val());
+                $('#tiada-dokumen').remove();
+                $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
+                window.location.reload();
 
             } else {
                 alert('Error: ' + txt[0]);
@@ -282,6 +304,10 @@ var Upload_MinitMesyuarat = $('#wk_doc_7').dropzone({
             if (txt[0] == "OK") {
                 $("#wk_doc_7").removeAttr("disabled");
                 $("#wk_doc_7_processing").html('Dokumen berjaya dimuatnaik.');
+                var bil = parseInt($('#bil').val());
+                $('#tiada-dokumen').remove();
+                $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
+                window.location.reload();
 
             } else {
                 alert('Error: ' + txt[0]);
@@ -322,6 +348,10 @@ var Upload_SebutHarga1 = $('#wk_doc_8').dropzone({
             if (txt[0] == "OK") {
                 $("#wk_doc_8").removeAttr("disabled");
                 $("#wk_doc_8_processing").html('Dokumen Sebutharga 1 berjaya dimuatnaik.');
+                var bil = parseInt($('#bil').val());
+                $('#tiada-dokumen').remove();
+                $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
+                window.location.reload();
 
             } else {
                 alert('Ada Error: ' + txt[0]);
@@ -362,6 +392,9 @@ var Upload_SebutHarga2 = $('#wk_doc_9').dropzone({
             if (txt[0] == "OK") {
                 $("#wk_doc_9").removeAttr("disabled");
                 $("#wk_doc_9_processing").html('Dokumen Sebut Harga 2 berjaya dimuatnaik.');
+                var bil = parseInt($('#bil').val());
+                $('#tiada-dokumen').remove();
+                $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
                 window.location.reload();
 
             } else {
@@ -404,6 +437,10 @@ var Upload_SebutHarga3 = $('#wk_doc_10').dropzone({
             if (txt[0] == "OK") {
                 $("#wk_doc_10").removeAttr("disabled");
                 $("#wk_doc_10_processing").html('Dokumen Sebutharga 3 berjaya dimuatnaik.');
+                var bil = parseInt($('#bil').val());
+                $('#tiada-dokumen').remove();
+                $('#list-dokumen').append('<tr><td class="text-left">' + (bil+1) + '.</td><td class="text-left"><a href="/upload/' + txt[1] + '" target="_blank" top="0" left="0" width="550" height="600">'+ txt[1] +'</a></td></tr>');
+                window.location.reload();
 
             } else {
                 alert('Error: ' + txt[0]);
@@ -435,18 +472,18 @@ var Upload_SebutHarga3 = $('#wk_doc_10').dropzone({
                     </tr>
                 </thead>
                 <tbody id="list-dokumen">
+                @php ($bil = 0)
                 @if (count($dokumen) == 0)
-                    <tr>
+                    <tr id="tiada-dokumen">
                         <td colspan="6" class="text-center"><i>Tiada maklumat dokumen yang telah dimuatnaik</i></td>
                     </tr>
                 @else
                     @foreach($dokumen as $index => $doc)
-                        {{ $bil = $index+1 }}
+                        @php ($bil = $index+1)
                         <tr>
                             <td class="text-left">{{ $bil }}.</td>
                             <td class="text-left"><a href="/upload/{{ $doc->nama_fail }}" target="_blank" top="0" left="0" width="550" height="600">{{ $doc->nama_fail }}</a></td>
-                        </tr>                    
-                        
+                        </tr>
                     @endforeach
                 @endif
                 </tbody>
