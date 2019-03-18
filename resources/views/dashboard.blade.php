@@ -31,7 +31,7 @@
                     <div class="au-task__item au-task__item--warning">
                         <div class="au-task__item-inner">
                             <h5 class="task">
-                                <a href="">Sebelum melakukan permohonan secara atas talian, pemohon perlu memastikan segala dokumen sokongan telah mendapat kelulusan. Dokumen tersebut mestilah <i><b>"diimbas/scan"</b></i> dan disimpan dalam format .pdf . Lain-lain format tidak akan diterima oleh sistem ini.</a>
+                                <a href="" data-target="#scrollmodal">Sebelum melakukan permohonan secara atas talian, pemohon perlu memastikan segala dokumen sokongan telah mendapat kelulusan. Dokumen tersebut mestilah <i><b>"diimbas/scan"</b></i> dan disimpan dalam format .pdf . Lain-lain format tidak akan diterima oleh sistem ini. </a><br><a href="/dokumen"><button type="button" class="btn btn-sm btn-success text-center">Klik untuk melihat senarai dokumen</button></a>
                             </h5>
                             <span class="time">langkah 2</span>
                         </div>
@@ -70,24 +70,25 @@
             </div>
             <div class="au-task__item au-task__item--success">
                 <div class="au-task__item-inner">
-                    <h5 class="task"><a>Mesyuarat JPICTMN Bil. 1/2019</a></h5>
-                    <span class="time">Tarikh : 19/3/2019<br/>Masa : 2.30ptg - 5.00ptg</span>
+                    <h5 class="task"><a class="text-success"><b>Mesyuarat JPICTMN Bil. 1/2019</b></a></h5>
+                    <span class="time">Tarikh : 19/03/2019<br/>Masa : 2.30ptg - 5.00ptg<br/>Tarikh Akhir Terima Permohonan : 26/02/2019</span>
                 </div>
             </div>
             <div class="au-task__item au-task__item--primary">
                 <div class="au-task__item-inner">
-                    <h5 class="task"><a>Mesyuarat JPICTMN Bil. 2/2019</a></h5>
-                    <span class="time">Tarikh : 10/6/2019<br/>Masa : 2.30ptg - 5.00ptg</span>
+                    <h5 class="task"><a class="text-success"><b>Mesyuarat JPICTMN Bil. 2/2019</b></a></h5>
+                    <span class="time">Tarikh : 25/07/2019<br/>Masa : 2.30ptg - 5.00ptg<br/>Tarikh Akhir Terima Permohonan : 04/07/2019</span>
                 </div>
             </div>
             <div class="au-task__item au-task__item--warning">
                 <div class="au-task__item-inner">
-                    <h5 class="task"><a>Mesyuarat JPICTMN Bil. 3/2019</a></h5>
-                    <span class="time">Tarikh : 17/09/2019<br/>Masa : 2.30ptg - 5.00ptg</span>
+                    <h5 class="task"><a class="text-success"><b>Mesyuarat JPICTMN Bil. 3/2019</b></a></h5>
+                    <span class="time">Tarikh : 24/10/2019<br/>Masa : 2.30ptg - 5.00ptg<br/>Tarikh Akhir Terima Permohonan : 03/10/2019</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
 

@@ -212,11 +212,11 @@ var Upload_KelulusanPeruntukan = $('#wk_doc_5').dropzone({
     }
 });
 
-var Upload_MinitMesyuarat = $('#wk_doc_6').dropzone({
+var Upload_PenyataKewangan = $('#wk_doc_6').dropzone({
     url: '{{ url('/sekolah/upload') }}',
     params: {
         _token: "{{ csrf_token() }}",
-        _jenis: "surat-minitmesyuarat",
+        _jenis: "penyata-kewangan",
         _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
@@ -252,11 +252,11 @@ var Upload_MinitMesyuarat = $('#wk_doc_6').dropzone({
     }
 });
 
-var Upload_SebutHarga1 = $('#wk_doc_7').dropzone({
+var Upload_MinitMesyuarat = $('#wk_doc_7').dropzone({
     url: '{{ url('/sekolah/upload') }}',
     params: {
         _token: "{{ csrf_token() }}",
-        _jenis: "sebutharga-1",
+        _jenis: "surat-minitmesyuarat",
         _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
@@ -275,10 +275,10 @@ var Upload_SebutHarga1 = $('#wk_doc_7').dropzone({
             var txt = ret.split('|');
             if (txt[0] == "OK") {
                 $("#wk_doc_7").removeAttr("disabled");
-                $("#wk_doc_7_processing").html('Dokumen Sebutharga 1 berjaya dimuatnaik.');
+                $("#wk_doc_7_processing").html('Dokumen berjaya dimuatnaik.');
 
             } else {
-                alert('Ada Error: ' + txt[0]);
+                alert('Error: ' + txt[0]);
             }
         });
         this.on("complete", function() {
@@ -292,11 +292,11 @@ var Upload_SebutHarga1 = $('#wk_doc_7').dropzone({
     }
 });
 
-var Upload_SebutHarga2 = $('#wk_doc_8').dropzone({
+var Upload_SebutHarga1 = $('#wk_doc_8').dropzone({
     url: '{{ url('/sekolah/upload') }}',
     params: {
         _token: "{{ csrf_token() }}",
-        _jenis: "sebutharga-2",
+        _jenis: "sebutharga-1",
         _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
@@ -315,10 +315,10 @@ var Upload_SebutHarga2 = $('#wk_doc_8').dropzone({
             var txt = ret.split('|');
             if (txt[0] == "OK") {
                 $("#wk_doc_8").removeAttr("disabled");
-                $("#wk_doc_8_processing").html('Dokumen Sebut Harga 2 berjaya dimuatnaik.');
+                $("#wk_doc_8_processing").html('Dokumen Sebutharga 1 berjaya dimuatnaik.');
 
             } else {
-                alert('Error: ' + txt[0]);
+                alert('Ada Error: ' + txt[0]);
             }
         });
         this.on("complete", function() {
@@ -332,11 +332,11 @@ var Upload_SebutHarga2 = $('#wk_doc_8').dropzone({
     }
 });
 
-var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
+var Upload_SebutHarga2 = $('#wk_doc_9').dropzone({
     url: '{{ url('/sekolah/upload') }}',
     params: {
         _token: "{{ csrf_token() }}",
-        _jenis: "sebutharga-3",
+        _jenis: "sebutharga-2",
         _nomohon: "{{ $idmohon }}"
     },
     acceptedFiles: 'application/pdf',
@@ -355,7 +355,47 @@ var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
             var txt = ret.split('|');
             if (txt[0] == "OK") {
                 $("#wk_doc_9").removeAttr("disabled");
-                $("#wk_doc_9_processing").html('Dokumen Sebutharga 3 berjaya dimuatnaik.');
+                $("#wk_doc_9_processing").html('Dokumen Sebut Harga 2 berjaya dimuatnaik.');
+
+            } else {
+                alert('Error: ' + txt[0]);
+            }
+        });
+        this.on("complete", function() {
+            if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
+        this.removeAllFiles();
+            }
+        });
+        this.on("error", function(file, errorMessage) {
+            console.log(errorMessage);
+        });
+    }
+});
+
+var Upload_SebutHarga3 = $('#wk_doc_10').dropzone({
+    url: '{{ url('/sekolah/upload') }}',
+    params: {
+        _token: "{{ csrf_token() }}",
+        _jenis: "sebutharga-3",
+        _nomohon: "{{ $idmohon }}"
+    },
+    acceptedFiles: 'application/pdf',
+    maxFilesize: 2,
+    maxFiles: 1,
+    createImageThumbnails: false,
+    previewTemplate : '<div style="display:none"></div>',
+    init: function()
+    {
+        this.on("processing", function(file) {
+            $("#wk_doc_10").attr("disabled","disabled");
+            $("#wk_doc_10_processing").html('Sila tunggu sebentar...');
+        });
+        this.on("success", function(file) {
+            var ret = file.xhr.response;
+            var txt = ret.split('|');
+            if (txt[0] == "OK") {
+                $("#wk_doc_10").removeAttr("disabled");
+                $("#wk_doc_10_processing").html('Dokumen Sebutharga 3 berjaya dimuatnaik.');
 
             } else {
                 alert('Error: ' + txt[0]);
@@ -431,6 +471,7 @@ var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
 					 	<button id="wk_doc_3" class="btn btn-primary" type="button">Muatnaik</button><br>
 					</div>
 				</div>
+                @if($kew == 2)
                 <div class="form-row">
                     <div class="form-group col-md-12">                            
                         <label for="example1">4. Borang PPKP (Lampiran 10) :</label><br>
@@ -438,7 +479,7 @@ var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
                         <button id="wk_doc_4" class="btn btn-primary" type="button">Muatnaik</button><br>
                     </div>
                 </div>
-				@if($kew == 2)
+				
 				<div class="form-row">
 					<div class="form-group col-md-12">                            
 						<label for="example1">5. Surat Kelulusan Penggunaan Peruntukan :</label><br>
@@ -447,28 +488,39 @@ var Upload_SebutHarga3 = $('#wk_doc_9').dropzone({
 					</div>
 				</div>
 				@endif
+                <div class="row">
+                    <div class="form-group col-md-12">
+                @if($kew == 2)
+                        <label for="PenyataKewangan">6. Penyata Kewangan Peruntukan digunakan :</label>
+                @else
+                        <label for="PenyataKewangan">4. Penyata Kewangan Peruntukan digunakan :</label>
+                @endif
+                        <div id="wk_doc_6_processing"></div>
+                        <button id="wk_doc_6" class="btn btn-primary" type="button">Muatnaik</button><br>
+                    </div>
+                </div>
 				<div class="form-row">
 					<div class="form-group col-md-12">    
 					@if($kew == 2)                        
-						<label for="example1">6. Minit Mesyuarat Persetujuan Penggunaan Peruntukan :</label>
+						<label for="example1">7. Minit Mesyuarat Persetujuan Penggunaan Peruntukan :</label>
 					@else <label for="example1">5. Minit Mesyuarat Persetujuan Penggunaan Peruntukan :</label>
 					@endif<br>
 						<div id="wk_doc_6_processing"></div>
-					 	<button id="wk_doc_6" class="btn btn-primary" type="button">Muatnaik</button><br>
+					 	<button id="wk_doc_7" class="btn btn-primary" type="button">Muatnaik</button><br>
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-12">  
 					@if($kew == 2)                          
-						<label for="example1">7. Tiga (3) Sebutharga daripada Syarikat :</label>
+						<label for="example1">8. Tiga (3) Sebutharga daripada Syarikat :</label>
 					@else <label for="example1">6. Tiga (3) Sebutharga daripada Syarikat :</label>
 					@endif <br>
-						<div id="wk_doc_7_processing"></div>
 						<div id="wk_doc_8_processing"></div>
 						<div id="wk_doc_9_processing"></div>
-					 	<button id="wk_doc_7" class="btn btn-primary" type="button">Muatnaik Sebut Harga 1</button>
-					 	<button id="wk_doc_8" class="btn btn-primary" type="button">Muatnaik Sebut Harga 2</button>
-					 	<button id="wk_doc_9" class="btn btn-primary" type="button">Muatnaik Sebut Harga 3</button><br>
+						<div id="wk_doc_10_processing"></div>
+					 	<button id="wk_doc_8" class="btn btn-primary" type="button">Muatnaik Sebut Harga 1</button>
+					 	<button id="wk_doc_9" class="btn btn-primary" type="button">Muatnaik Sebut Harga 2</button>
+					 	<button id="wk_doc_10" class="btn btn-primary" type="button">Muatnaik Sebut Harga 3</button><br>
 					</div>
 				</div>
 			</div>

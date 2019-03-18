@@ -29,6 +29,9 @@ Route::get('/avtr/{id}', 'HomeController@Avatar');
 ## Profil
 Route::get('/sekolah/profil/{kodsekolah}', 'SekolahController@Profil');
 Route::post('sekolah/kemaskini-profil/{kodsekolah}', 'SekolahController@KemaskiniProfil');
+
+##Senarai Dokumen Wajib
+Route::get('/dokumen', function() {return view('dokumen');});
 	
 ### Middleware Grouping
 Route::group(['middleware' => ['role:Sekolah']], function()

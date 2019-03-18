@@ -230,23 +230,46 @@ class SekolahController extends Controller
                 $dokumen->save();
             }
         }
-        else if($JenisDokumen == 'surat-minitmesyuarat') {
+        else if($JenisDokumen == 'penyata-kewangan') {
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 6]
+                                    ])->count();
+            $newFilename = "Penyata_Kewangan_".$NomborPermohonan.".pdf";
+            if(empty($validate)) {
+                $dokumen = new UploadDokumen;
+                $dokumen->fk_idpermohonan = $NomborPermohonan;
+                $dokumen->fk_kodsurat = "6";
+                $dokumen->nama_fail = $newFilename;
+                $dokumen->fail_deskripsi = "Penyata Kewangan Peruntukan";
+                $dokumen->save();  
+            } else {
+                $dokumen = UploadDokumen::where([
+                                            ['fk_idpermohonan', '=', $NomborPermohonan],
+                                            ['fk_kodsurat', '=', 6]
+                                        ])->first();
+                $dokumen->nama_fail = $newFilename;
+                $dokumen->fail_deskripsi = "Penyata Kewangan Peruntukan";
+                $dokumen->save();
+            }
+        }
+        else if($JenisDokumen == 'surat-minitmesyuarat') {
+            $validate = UploadDokumen::where([
+                                        ['fk_idpermohonan', '=', $NomborPermohonan],
+                                        ['fk_kodsurat', '=', 7]
                                     ])->count();
             $newFilename = "Surat_Minit_Mesyuarat_".$NomborPermohonan.".pdf";
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
-                $dokumen->fk_kodsurat = "6";
+                $dokumen->fk_kodsurat = "7";
                 $dokumen->nama_fail = $newFilename;
                 $dokumen->fail_deskripsi = "Surat Minit Mesyuarat Kelulusan Peruntukan Kewangan";
                 $dokumen->save();  
             } else {
                 $dokumen = UploadDokumen::where([
                                             ['fk_idpermohonan', '=', $NomborPermohonan],
-                                            ['fk_kodsurat', '=', 6]
+                                            ['fk_kodsurat', '=', 7]
                                         ])->first();
                 $dokumen->nama_fail = $newFilename;
                 $dokumen->fail_deskripsi = "Surat Minit Mesyuarat Kelulusan Peruntukan Kewangan";
@@ -256,37 +279,15 @@ class SekolahController extends Controller
         else if($JenisDokumen == 'sebutharga-1') {
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
-                                        ['fk_kodsurat', '=', 7]
+                                        ['fk_kodsurat', '=', 8]
                                     ])->count();
             $newFilename = "Sebut_Harga1_".$NomborPermohonan.".pdf";
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
-                $dokumen->fk_kodsurat = "7";
-                $dokumen->nama_fail = $newFilename;
-                $dokumen->fail_deskripsi = "Surat Sebutharga Pertama";
-                $dokumen->save();  
-            } else {
-                $dokumen = UploadDokumen::where([
-                                            ['fk_idpermohonan', '=', $NomborPermohonan],
-                                            ['fk_kodsurat', '=', 7]
-                                        ])->first();
-                $dokumen->nama_fail = $newFilename;
-                $dokumen->save();
-            }
-        }
-        else if($JenisDokumen == 'sebutharga-2') {
-            $validate = UploadDokumen::where([
-                                        ['fk_idpermohonan', '=', $NomborPermohonan],
-                                        ['fk_kodsurat', '=', 8]
-                                    ])->count();
-            $newFilename = "Sebut_Harga2_".$NomborPermohonan.".pdf";
-            if(empty($validate)) {
-                $dokumen = new UploadDokumen;
-                $dokumen->fk_idpermohonan = $NomborPermohonan;
                 $dokumen->fk_kodsurat = "8";
                 $dokumen->nama_fail = $newFilename;
-                $dokumen->fail_deskripsi = "Surat Sebutharga Kedua";
+                $dokumen->fail_deskripsi = "Surat Sebutharga Pertama";
                 $dokumen->save();  
             } else {
                 $dokumen = UploadDokumen::where([
@@ -297,23 +298,45 @@ class SekolahController extends Controller
                 $dokumen->save();
             }
         }
-        else if($JenisDokumen == 'sebutharga-3') {
+        else if($JenisDokumen == 'sebutharga-2') {
             $validate = UploadDokumen::where([
                                         ['fk_idpermohonan', '=', $NomborPermohonan],
                                         ['fk_kodsurat', '=', 9]
+                                    ])->count();
+            $newFilename = "Sebut_Harga2_".$NomborPermohonan.".pdf";
+            if(empty($validate)) {
+                $dokumen = new UploadDokumen;
+                $dokumen->fk_idpermohonan = $NomborPermohonan;
+                $dokumen->fk_kodsurat = "9";
+                $dokumen->nama_fail = $newFilename;
+                $dokumen->fail_deskripsi = "Surat Sebutharga Kedua";
+                $dokumen->save();  
+            } else {
+                $dokumen = UploadDokumen::where([
+                                            ['fk_idpermohonan', '=', $NomborPermohonan],
+                                            ['fk_kodsurat', '=', 9]
+                                        ])->first();
+                $dokumen->nama_fail = $newFilename;
+                $dokumen->save();
+            }
+        }
+        else if($JenisDokumen == 'sebutharga-3') {
+            $validate = UploadDokumen::where([
+                                        ['fk_idpermohonan', '=', $NomborPermohonan],
+                                        ['fk_kodsurat', '=', 10]
                                     ])->count();
             $newFilename = "Sebut_Harga3_".$NomborPermohonan.".pdf";
             if(empty($validate)) {
                 $dokumen = new UploadDokumen;
                 $dokumen->fk_idpermohonan = $NomborPermohonan;
-                $dokumen->fk_kodsurat = "9";
+                $dokumen->fk_kodsurat = "10";
                 $dokumen->nama_fail = $newFilename;
                 $dokumen->fail_deskripsi = "Surat Sebutharga Ketiga";
                 $dokumen->save();  
             } else {
                 $dokumen = UploadDokumen::where([
                                             ['fk_idpermohonan', '=', $NomborPermohonan],
-                                            ['fk_kodsurat', '=', 9]
+                                            ['fk_kodsurat', '=', 10]
                                         ])->first();
                 $dokumen->nama_fail = $newFilename;
                 $dokumen->save();
@@ -435,38 +458,46 @@ class SekolahController extends Controller
             $rujukan4->fk_kodsurat = "4";
             $rujukan4->fail_deskripsi = "Borang PPKP(Lampiran 10)";
             $rujukan4->save();
+        
+            $rujukan5 = new UploadDokumen;
+            $rujukan5->fk_idpermohonan = $idpermohonan;
+            $rujukan5->fk_kodsurat = "5";
+            $rujukan5->fail_deskripsi = "Surat Kelulusan Guna Peruntukan Kewangan";
+            $rujukan5->no_rujukan = $gunaperuntukan;
+            $rujukan5->save();
         }
-        $rujukan5 = new UploadDokumen;
-        $rujukan5->fk_idpermohonan = $idpermohonan;
-        $rujukan5->fk_kodsurat = "5";
-        $rujukan5->fail_deskripsi = "Surat Kelulusan Guna Peruntukan Kewangan";
-        $rujukan5->no_rujukan = $gunaperuntukan;
-        $rujukan5->save();
 
         $rujukan6 = new UploadDokumen;
         $rujukan6->fk_idpermohonan = $idpermohonan;
         $rujukan6->fk_kodsurat = "6";
-        $rujukan6->fail_deskripsi="Surat Minit Mesyuarat Kelulusan Peruntukan Kewangan";
+        $rujukan6->fail_deskripsi="Penyata Kewangan Peruntukan";
         $rujukan6->no_rujukan = $minit_mesyuarat;
         $rujukan6->save();
 
         $rujukan7 = new UploadDokumen;
         $rujukan7->fk_idpermohonan = $idpermohonan;
         $rujukan7->fk_kodsurat = "7";
-        $rujukan7->fail_deskripsi = "Surat Sebutharga Pertama";
+        $rujukan7->fail_deskripsi="Surat Minit Mesyuarat Kelulusan Peruntukan Kewangan";
+        $rujukan7->no_rujukan = $minit_mesyuarat;
         $rujukan7->save();
 
         $rujukan8 = new UploadDokumen;
         $rujukan8->fk_idpermohonan = $idpermohonan;
         $rujukan8->fk_kodsurat = "8";
-        $rujukan8->fail_deskripsi="Surat Sebutharga Kedua";
+        $rujukan8->fail_deskripsi = "Surat Sebutharga Pertama";
         $rujukan8->save();
 
         $rujukan9 = new UploadDokumen;
         $rujukan9->fk_idpermohonan = $idpermohonan;
         $rujukan9->fk_kodsurat = "9";
-        $rujukan9->fail_deskripsi = "Surat Sebutharga Ketiga";
+        $rujukan9->fail_deskripsi="Surat Sebutharga Kedua";
         $rujukan9->save();
+
+        $rujukan10 = new UploadDokumen;
+        $rujukan10->fk_idpermohonan = $idpermohonan;
+        $rujukan10->fk_kodsurat = "10";
+        $rujukan10->fail_deskripsi = "Surat Sebutharga Ketiga";
+        $rujukan10->save();
 
         GlobalNomborPermohonan::increment('nombor_permohonan'); 
     	return redirect('/sekolah/peralatan/'.$idpermohonan);
