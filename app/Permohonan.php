@@ -32,7 +32,19 @@ class Permohonan extends Model
     public function getNamaSekolahAttribute()
     {
         $namasekolah = \App\User::where('kodsekolah', $this->fk_kodsekolah)->first();
-        return $namasekolah->name."(".$this->fk_kodsekolah.")";
+        return $namasekolah->name;
+    }
+
+    public function getNamaKodSekolahAttribute()
+    {
+        $namakod = \App\User::where('kodsekolah', $this->fk_kodsekolah)->first();
+        return $namakod->name."(".$this->fk_kodsekolah.")";
+    }
+
+    public function getNamaSumberKewanganAttribute()
+    {
+        $namasumber = \App\GlobalPeruntukanKewangan::where('idsumberkewangan', $this->fk_idsumberkewangan)->first();
+        return $namasumber->nama_sumberkewangan;
     }
 }
 

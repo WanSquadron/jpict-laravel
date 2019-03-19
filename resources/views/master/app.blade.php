@@ -32,6 +32,13 @@
     <link href="{{ asset('bootstrap/css/theme.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/dropzone/dropzone.min.css') }}" rel="stylesheet">
     <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="{{ asset('bootstrap/vendor/datepicker/themes/classic.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/vendor/datepicker/themes/classic.date.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/vendor/datepicker/themes/classic.time.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/vendor/datepicker/themes/default.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/vendor/datepicker/themes/default.date.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/vendor/datepicker/themes/default.time.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/vendor/datepicker/themes/rtl.css') }}" rel="stylesheet">
 
 </head>
 
@@ -75,12 +82,20 @@
                                     <i class="fas fa-angle-down"></i>
                                 </span></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li>
-                                        <a href="/superadmin/permohonan">
-                                            <i class="fas fa-list-alt"></i>Senarai</a>
-                                    </li>
+                                <li>
+                                    <a href="/superadmin/permohonan"><i class="fas fa-list-alt"></i>Senarai</a>
+                                </li>
                             </ul>
-
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-watch"></i>Mesyuarat &nbsp;
+                                <span class="arrow"><i class="fas fa-angle-down"></i></span></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="/superadmin/senarai">Senarai</a>
+                                </li>
+                            </ul>
                         </li>
                     @endif
                     </ul>
@@ -118,12 +133,14 @@
                                     <i class="fas fa-angle-down"></i>
                                 </span></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li>
-                                        <a href="/superadmin/permohonan">
-                                            <i class="fas fa-list-alt"></i>Senarai</a>
-                                    </li>
+                                <li>
+                                    <a href="/superadmin/permohonan"><i class="fas fa-list-alt"></i>Senarai</a>
+                                </li>
                             </ul>
-
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="/superadmin/mesyuarat">
+                                <i class="fas fa-suitcase"></i>Mesyuarat &nbsp;</a>
                         </li>
                     @endif    
                     </ul>
@@ -219,6 +236,8 @@
     <script src="{{ asset('bootstrap/js/main.js') }}"></script>
     <script src="{{ asset('bootstrap/js/ajax.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/dropzone/dropzone.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/vendor/datepicker/legacy.js') }}"></script>
+    <script src="{{ asset('bootstrap/vendor/datepicker/picker.js') }}"></script>
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 
@@ -235,22 +254,7 @@
             jQuery('#statbli').select2();
             jQuery('#pralatn').select2();
 
-            $('#mohon').DataTable( {
-                "language": {
-                    "lengthMenu": "Papar _MENU_ rekod / halaman",
-                    "zeroRecords": "Maaf, tiada maklumat diperolehi",
-                    "info": "_PAGE_ - _PAGES_ / _MAX_ rekod",
-                    "infoEmpty": "Tiada Maklumat",
-                    "infoFiltered": "(Filter _MAX_ jumlah rekod)",
-                    "search": "Filter :",
-                    "paginate":
-                    {
-                    "previous": "<",
-                    "next": ">"
-                    }
-                }
-            } );
-        } );
+            $('#mohon').DataTable();
     
 </script>
 </body>

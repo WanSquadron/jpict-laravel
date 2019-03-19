@@ -71,5 +71,10 @@ Route::group(['middleware' => ['role:SuperAdmin']], function()
 ## User Role Superadmin
 #Permohonan GET
 	Route::get('superadmin/permohonan', 'SuperadminController@SenaraiPermohonan');
+	Route::get('superadmin/permohonan/{idmohon}', 'SuperadminController@ViewPermohonan');
+
+#Mesyuarat GET
+	Route::get('superadmin/mesyuarat', 'SuperadminController@SenaraiMesyuarat');
+	Route::get('superadmin/mesyuarat/{cmd}', 'SuperadminController@TambahMesyuarat');
 });
 

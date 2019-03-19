@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h3>Sistem Jawatankuasa Pemandu ICT Maklumat Negeri Perak<br/></h3><hr/>
+<h3>Sistem Jawatankuasa Pemandu ICT Negeri Perak<br/></h3><hr/>
     <h4>Selamat Datang {{ ucwords(strtolower(Auth::User()->name)) }}!</h4>
 <br/>
 <div class="row">
@@ -66,7 +66,7 @@
             <div class="au-card-title" style="background-image:url('bootstrap/images/bg-title-01.jpg');">
                 <div class="bg-overlay bg-overlay--blue"></div>
                 <h3>
-                    <i class="fa fa-calendar-o"></i>Takwim JPICTMN 2019</h3>
+                    <i class="fa fa-calendar-o"></i>Takwim JPICT 2019</h3>
             </div>
             <div class="au-task__item au-task__item--success">
                 <div class="au-task__item-inner">

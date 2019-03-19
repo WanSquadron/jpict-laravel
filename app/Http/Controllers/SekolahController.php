@@ -16,7 +16,7 @@ use App\GlobalStatusBeli;
 use App\Maklumat;
 use App\PembelianPeralatan;
 use App\Permohonan;
-use App\SesiMesyuarat;
+use App\GlobalMesyuarat;
 use App\UploadDokumen;
 
 
@@ -400,7 +400,7 @@ class SekolahController extends Controller
     public function SavePermohonan(Request $request)
     {
     	$numohon = GlobalNomborPermohonan::first();
-        $mesyuarat = SesiMesyuarat::where('sesi_mesyuarat', '=', 1)->first();
+        $mesyuarat = GlobalMesyuarat::where('active', '=', 'YES')->first();
     	$idpermohonan = date('Y')."-".$mesyuarat->sesi_mesyuarat."-".$numohon->nombor_permohonan;
     	$kodsek  = htmlentities($request->input('kodsek'),ENT_QUOTES);
     	$pegawai = htmlentities($request->input('pegawai'),ENT_QUOTES);
@@ -611,14 +611,14 @@ class SekolahController extends Controller
 
         $rujukan2 = UploadDokumen::where([
                                          ['fk_idpermohonan', '=', $idmohon],
-                                         ['fk_kodsurat', '=', '5']])
+                                         ['fk_kodsurat', '=', '6']])
                                         ->first();
         $rujukan2->no_rujukan = $gunaperuntukan;
         $rujukan2->save();
 
         $rujukan3 = UploadDokumen::where([
                                          ['fk_idpermohonan', '=', $idmohon],
-                                         ['fk_kodsurat', '=', '6']])
+                                         ['fk_kodsurat', '=', '7']])
                                         ->first();
         $rujukan3->no_rujukan = $minit_mesyuarat;
         $rujukan3->save();
@@ -684,6 +684,8 @@ class SekolahController extends Controller
 
         foreach($dokumen as $doc)
         {
+            
+          
             $padamdokumen = UploadDokumen::destroy($doc->id);
         }
 

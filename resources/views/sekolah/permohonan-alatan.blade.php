@@ -180,7 +180,7 @@ function DeleteData(id) {
             <div class="col-lg-12">                     
                 <div class="card mb-3"> 
                     <div class="card-header">
-                        <i class="fa fa-users"></i>  D. &nbsp;&nbsp;&nbsp;Maklumat Peralatan & Perisian
+                        <i class="fa fa-cogs"></i>  D. &nbsp;&nbsp;&nbsp;Maklumat Peralatan & Perisian
                     </div>  
                     <div class="card-body"> 
                         <div class="form-row">   

@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Title Page-->
-    <title>Sistem Jawatankuasa Pemandu ICT Maklumat Negeri Perak - Log Masuk</title>
+    <title>Sistem Jawatankuasa Pemandu ICT Negeri Perak - Log Masuk</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ asset('bootstrap/css/font-face.css') }}" rel="stylesheet" media="all">
@@ -49,7 +49,7 @@
                                 <img src="bootstrap/images/icon/logos.png" alt="JPICTMN Perak">
                         </div>
                         <div class="row text-center">
-                            <h4>Sistem Jawatankuasa Pemandu ICT Maklumat Negeri Perak</h4>
+                            <h4><span class="text-center">Sistem Jawatankuasa Pemandu ICT Negeri Perak</span></h4>
                             <br/><br/>
                         </div>
                         <div class="login-form">

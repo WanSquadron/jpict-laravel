@@ -91,7 +91,7 @@ function confirmation(id)
                                                                         ['nama_fail', '!=', '']])->count(); ?>
                             @if(($list->fk_idsumberkewangan = '2' ) && ($dokumen >= 7))
                                     Status : Dokumen Lengkap SUWA {{ $dokumen }}
-                            @elseif(($list->fk_idsumberkewangan != '2' ) && ($dokumen >= "6"))
+                            @elseif(($list->fk_idsumberkewangan != '2' ) || ($dokumen >= "6"))
                              Status : Dokumen Lengkap {{ $dokumen }}
                             @else Status : Dokumen Tidak Lengkap {{ $dokumen }}
                             @endif
@@ -102,7 +102,7 @@ function confirmation(id)
                     <td>{{ $list->TarikhPermohonan }}</td>
                     <td class="text-left">
                         <div class="table-data-feature text-left">
-                            <a href="#"><button class="item" data-toggle="tooltip" data-placement="top" title="Kemaskini">
+                            <a href="/superadmin/permohonan/{{ $list->idpermohonan }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Lihat Permohonan">
                                 <i class="fa fa-desktop"></i>
                             </button></a>&nbsp;&nbsp;
                             <button class="item" data-toggle="tooltip" data-placement="top" onclick="javascript:confirmation('{{ $list->id }}'); return false;" title="Padam">
