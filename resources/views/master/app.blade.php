@@ -255,6 +255,7 @@
             jQuery('#pralatn').select2();
 
             $('#mohon').DataTable();
+        }
     
 </script>
 </body>
