@@ -216,6 +216,7 @@
 
 
     <script src="{{ asset('bootstrap/vendor/jquery-3.2.1.min.js') }}"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('bootstrap/vendor/bootstrap-4.1/popper.min.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/slick/slick.min.js') }}"></script>
@@ -238,7 +239,7 @@
     <script src="{{ asset('bootstrap/vendor/dropzone/dropzone.min.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/datepicker/legacy.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/datepicker/picker.js') }}"></script>
-    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('js/datatables.js') }}"></script>
 
 
     @yield('js')
@@ -254,10 +255,9 @@
             jQuery('#statbli').select2();
             jQuery('#pralatn').select2();
 
-            $('#mohon').DataTable();
-        }
-    
-</script>
+            $('#mohon').dataTable();
+        });
+    </script>
 </body>
 </html>
 <!-- end document-->>
