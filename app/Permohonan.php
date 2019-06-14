@@ -46,5 +46,11 @@ class Permohonan extends Model
         $namasumber = \App\GlobalPeruntukanKewangan::where('idsumberkewangan', $this->fk_idsumberkewangan)->first();
         return $namasumber->nama_sumberkewangan;
     }
+
+    public function getStatusSyorAttribute()
+    {
+        $statusyor = \App\GlobalSyor::where('idsyor', $this->fk_idsyor)->first();
+        return $statusyor->syor_deskripsi;
+    }
 }
 

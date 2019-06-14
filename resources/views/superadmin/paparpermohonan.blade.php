@@ -2,6 +2,29 @@
 
 @section('content')
 
+<script type="text/javascript">
+
+
+ function ValidateBorang() 
+ {
+ 	if($('#justifikasi').val().length == 0){
+ 		Swal({
+  				type: 'error',
+  				title: 'Tidak Lengkap!',
+  				text: 'Sila Lengkapkan Justifikasi Anda!',
+		});
+ 		$('#justifikasi').focus();
+ 		return false;
+ 	}
+ 	return true;
+ }
+
+
+
+
+ </script>
+
+
 <h4>Maklumat Permohonan JPICT {{ ucwords(strtolower($mohon->getNamaSekolahAttribute() )) }}</h4><hr/>
 
 <div class="section__content section__content--p30">
@@ -171,6 +194,49 @@
 			            </table>
 			        </div>
 			    </div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">						
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fa fa-truck"></i>   D.&nbsp;&nbsp;&nbsp;Justifikasi & Sokongan
+				</div>						
+				<div class="card-body">
+					<form data-toggle="validator" role="form" method="post" action="/superadmin/syor/{{ $mohon->idpermohonan }}" onsubmit="return ValidateBorang();">
+			            <div class="form-row">
+			            	<div class="col-md-8">
+			            		<label>Justifikasi :</label>
+			            		<textarea class="form-control" id="justifikasi" name="justifikasi" placeholder="Sila Isikan Justifikasi Anda...">{{ $mohon->syor_justifikasi }}</textarea>
+			            		<input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
+			            	</div>
+			            </div>
+			            <div class="form-row">
+			            	<div class="col-md-4">
+			            		<label>Syor Keputusan :</label>
+			            		<select name="syor" id="syor" class="form-control">
+			            			@foreach($syor as $keputusan)
+			            				<option value="{{ $keputusan->idsyor }}"
+			            					@if($keputusan->idsyor == $mohon->syor_keputusan) 
+			            						selected 
+			            						@endif 
+			            				> {{ $keputusan->syor_deskripsi }} </option>
+			            			@endforeach
+			            		</select>
+			            	</div>
+			            </div>
+			            <div class="row">
+			            	<div class="col-md-6">
+			            		<label>No. Rujukan Surat Terima Permohonan</label>
+			            		<input type="text" class="form-control" name="surat_terima" id="surat_terima" placeholder="Sila Isikan No. Rujukan Surat Terima Permohonan" value=" @if ($surat != '') {{ $surat->norujukan }} @endif"><br>
+			            	</div>
+			            </div>
+			            <input type="submit" class="btn btn-success" id="simpan" name="simpan" value="Simpan">
+			        </div>
+			    </div>
+			   	</form>
 			</div>
 		</div>
 	</div>

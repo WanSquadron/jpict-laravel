@@ -18,6 +18,11 @@ use App\PembelianPeralatan;
 use App\Permohonan;
 use App\GlobalMesyuarat;
 use App\UploadDokumen;
+use App\RujukanSurat;
+
+use Dompdf\Dompdf;
+use Dompdf\Options;
+Use App\Template;
 
 
 class SekolahController extends Controller
@@ -400,8 +405,7 @@ class SekolahController extends Controller
     public function SavePermohonan(Request $request)
     {
     	$numohon = GlobalNomborPermohonan::first();
-        $mesyuarat = GlobalMesyuarat::where('active', '=', 'YES')->first();
-    	$idpermohonan = date('Y')."-".$mesyuarat->sesi_mesyuarat."-".$numohon->nombor_permohonan;
+    	$idpermohonan = "JPICT".date('Y')."-".$numohon->nombor_permohonan;
     	$kodsek  = htmlentities($request->input('kodsek'),ENT_QUOTES);
     	$pegawai = htmlentities($request->input('pegawai'),ENT_QUOTES);
     	$notelfn = htmlentities($request->input('notelfn'),ENT_QUOTES);
@@ -423,6 +427,7 @@ class SekolahController extends Controller
         $mohon->fk_kodppd = Auth::User()->fk_kodppd;
     	$mohon->fk_idsumberkewangan = $sumberp;
         $mohon->fk_statusmohon = '1';
+        $mohon->fk_idsyor = '4';
     	$mohon->keterangan = $ketrngn;
     	$mohon->tujuanbeli = $tujubli;
     	$mohon->justifikasi = $justfks;
@@ -681,6 +686,7 @@ class SekolahController extends Controller
         $kod = Permohonan::where('id', '=', $id)->first();
         $dokumen = UploadDokumen::where('fk_idpermohonan', '=', $kod->idpermohonan)->get();
         $alatan = PembelianPeralatan::where('fk_idpermohonan', '=', $kod->idpermohonan)->get();
+        $surat = RujukanSurat::where('fk_idpermohonan', '=', $kod->idpermohonan)->get();
 
         foreach($dokumen as $doc)
         {
@@ -694,9 +700,38 @@ class SekolahController extends Controller
             $padamalat = PembelianPeralatan::destroy($alat->id);
         }
 
-        
+        $rujukansurat = RujukanSurat::destroy($id);
         $permohonan = Permohonan::destroy($id);
 
        echo "setTimeout(function(){ window.location.href = '/sekolah/permohonan/".$kod->fk_kodsekolah."'; }, 5);";
+    }
+
+    public function Surat($idmohon)
+    {
+        $mohon = Auth::User()->Permohonan()->where('idpermohonan',$idmohon)->first();
+        $surat = RujukanSurat::where('fk_idpermohonan', $idmohon)->first();
+
+        $rujukankami = $surat->norujukan;
+        $jawatan = "KETUA SEKTO";
+        $alamat = "IPOH";
+        $ds = DIRECTORY_SEPARATOR;
+        $t = new Template;
+        $t->Load(public_path().$ds."surat".$ds."surat_terima.html");
+        $t->Replace('RUJUKANKAMI', $rujukankami);
+        $t->Replace('JAWATAN', $jawatan);
+        $t->Replace('ALAMAT', $alamat);
+        $_output = $t->Evaluate();
+
+
+        // DOMPDF
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dpdf = new Dompdf($options);
+        $options->set('defaultFont', 'Century Gothic');
+        $dpdf->loadHtml($_output);
+        $dpdf->setPaper('A4', 'potrait');
+        $dpdf->render();
+        $dpdf->add_info('Title','Surat Terima Permohonan Kelulusan JPICT');
+        $dpdf->stream("surat_terima.html",array('Attachment'=>0));
     }
 }

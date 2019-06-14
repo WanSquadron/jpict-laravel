@@ -47,6 +47,7 @@ Route::group(['middleware' => ['role:Sekolah']], function()
 	Route::get('/sekolah/permohonan/dokumen/{idmohon}', 'SekolahController@Dokumen');
 	Route::get('/sekolah/permohonan/{kodsekolah}','SekolahController@SenaraiPermohonan');
 	Route::get('/sekolah/permohonan-baru/{kodsekolah}', 'SekolahController@CreatePermohonan');
+	Route::get('/sekolah/surat_terima/{idmohon}', 'SekolahController@Surat');
 
 # Permohonan EDIT
 	Route::get('/sekolah/permohonan/kemaskini/{idmohon}', 'SekolahController@EditPermohonan');
@@ -71,10 +72,21 @@ Route::group(['middleware' => ['role:SuperAdmin']], function()
 ## User Role Superadmin
 #Permohonan GET
 	Route::get('superadmin/permohonan', 'SuperadminController@SenaraiPermohonan');
-	Route::get('superadmin/permohonan/{idmohon}', 'SuperadminController@ViewPermohonan');
+	Route::get('superadmin/permohonan/{stat}', 'SuperadminController@SenaraiPermohonan');
+	Route::get('superadmin/permohonan/view/{idmohon}', 'SuperadminController@ViewPermohonan');
+
+	###Bahagian Mesyuarat untuk Dibuat Keputusan Lulus/Ditolak
+	Route::get('superadmin/mesyuarat/permohonan', 'SuperadminController@MesyuaratPermohonan');
+	Route::get('superadmin/mesyuarat/permohonan/view/{id}', 'SuperadminController@ViewPermohonanMesyuarat');
 
 #Mesyuarat GET
 	Route::get('superadmin/mesyuarat', 'SuperadminController@SenaraiMesyuarat');
 	Route::get('superadmin/mesyuarat/{cmd}', 'SuperadminController@TambahMesyuarat');
+
+#Permohonan DELETE
+	Route::get('/superadmin/permohonan/padam/{id}', 'SuperadminController@DeletePermohonan');
+
+#Permohonan POST
+	Route::post('superadmin/syor/{idpermohonan}', 'SuperadminController@SaveSyor');
 });
 

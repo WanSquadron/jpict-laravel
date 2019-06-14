@@ -4,14 +4,14 @@
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Sistem Jawatankuasa Pemandu ICT Maklumat Negeri Perak">
+    <meta name="description" content="Sistem Pengurusan JPICT Jabatan Pendidikan Negeri Perak">
     <meta name="author" content="Sektor Pengurusan Maklumat ICT JPN Perak">
     <meta name="keywords" content="jpictmn jpict">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Title Page-->
-    <title>Sistem Jawatankuasa Pemandu ICT Negeri Perak - Log Masuk</title>
+    <title>Sistem Pengurusan JPICT Jabatan Pendidikan Negeri Perak - Log Masuk</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ asset('bootstrap/css/font-face.css') }}" rel="stylesheet" media="all">
@@ -48,9 +48,9 @@
                         <div class="login-logo">
                                 <img src="bootstrap/images/icon/logos.png" alt="JPICTMN Perak">
                         </div>
-                        <div class="row text-center">
-                            <h4><span class="text-center">Sistem Jawatankuasa Pemandu ICT Negeri Perak</span></h4>
-                            <br/><br/>
+                        <div class="form-group">
+                            <h4><p align="center">Sistem Pengurusan JPICT<br> Jabatan Pendidikan Negeri Perak</p></h4>
+                            <br>
                         </div>
                         <div class="login-form">
                             <form action="{{ route('login') }}" method="POST">

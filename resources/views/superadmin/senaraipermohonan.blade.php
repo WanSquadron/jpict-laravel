@@ -1,8 +1,8 @@
 @extends('master.app')
 
 @section('js')
-<script type="text/javascript">
 
+<script type="text/javascript">
 function confirmation(id) 
  {
     if (id.length == 0) { return false; }
@@ -21,7 +21,7 @@ function confirmation(id)
                 $.ajax({
                     method: "GET",
                     _token: "{{ csrf_token() }}",
-                    url: "/sekolah/permohonan/padam/"+id,
+                    url: "/superadmin/permohonan/padam/"+id,
                     success: function(data) {
                         resolve();
                         eval(data);
@@ -40,9 +40,16 @@ function confirmation(id)
     });
 }
 
+@if ($stat == 'success')    
 
-
+    Swal({
+                type: 'success',
+                title: 'Berjaya!',
+                text: 'Maklumat telah disimpan'
+        });
+@endif
 </script>
+
 @endsection
 
 @section('content')
@@ -55,7 +62,7 @@ function confirmation(id)
             	<th class="text-left">#</th>
                 <th class="text-left">Maklumat Pemohon</th>
                 <th class="text-left">Sumber Peruntukan</th>
-                <th class="text-left">Tarikh Permohonan</th>
+                <th class="text-left">Status</th>
                 <th class="text-right">Tindakan</th>
             </tr>
         </thead>
@@ -68,9 +75,14 @@ function confirmation(id)
         	   @foreach($senarai as $index => $list)
                  <tr>
                  	<td class="text-left">{{ $index +1 }}.</td>
-                    <td class="text-left"><b><a href="/superadmin/permohonan/{{ $list->idpermohonan }}">ID Permohonan : {{ $list->idpermohonan }}</a></b><br/> {{ ucwords(strtolower($list->NamaSekolah)) }}</td>
+                    <td class="text-left"><p class="text-success strong">No. Permohonan : {{$list->idpermohonan }}</p>
+                    {{ $list->fk_kodsekolah }} <br> 
+                    {{ ucwords(strtolower($list->NamaSekolah)) }} <br>
+                    Tarikh Permohonan : {{ $list->TarikhPermohonan }}
+                </td>
                     <td>{{ $list->sumberperuntukan->nama_sumberkewangan }} - {{ $list->keterangan }}<br/><br/>
-                        <b>Dokumen Sokongan :-</b> <br/>
+                        <a href="#" onclick="javascript:$('#d{{ $index +1}}').toggle(); return false;">Dokumen Sokongan</a> <br/>
+                        <div id="d{{ $index + 1 }}" style="display:none">
 
                              @foreach(App\UploadDokumen::where('fk_idpermohonan',$list->idpermohonan)->get() as $index => $doc)
                              {{ $index +1 }}. &nbsp; 
@@ -90,19 +102,19 @@ function confirmation(id)
                                                                         ['fk_idpermohonan', $list->idpermohonan],
                                                                         ['nama_fail', '!=', '']])->count(); ?>
                             @if(($list->fk_idsumberkewangan = '2' ) && ($dokumen >= 7))
-                                    Status : Dokumen Lengkap SUWA {{ $dokumen }}
+                            <p class="text-success">Status : Dokumen Lengkap SUWA {{ $dokumen }} </p>
                             @elseif(($list->fk_idsumberkewangan != '2' ) || ($dokumen >= "6"))
-                             Status : Dokumen Lengkap {{ $dokumen }}
-                            @else Status : Dokumen Tidak Lengkap {{ $dokumen }}
+                             <p class="text-success">Status : Dokumen Lengkap {{ $dokumen }} </p>
+                            @else <p class="text-danger">Status : Dokumen Tidak Lengkap {{ $dokumen }} </p>
                             @endif
                              
-
+                        </div>
                         
                     </td>
-                    <td>{{ $list->TarikhPermohonan }}</td>
-                    <td class="text-left">
+                    <td>{{ $list->statussyor }}</td>
+                    <td>
                         <div class="table-data-feature text-left">
-                            <a href="/superadmin/permohonan/{{ $list->idpermohonan }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Lihat Permohonan">
+                            <a href="/superadmin/permohonan/view/{{ $list->idpermohonan }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Lihat Permohonan">
                                 <i class="fa fa-desktop"></i>
                             </button></a>&nbsp;&nbsp;
                             <button class="item" data-toggle="tooltip" data-placement="top" onclick="javascript:confirmation('{{ $list->id }}'); return false;" title="Padam">

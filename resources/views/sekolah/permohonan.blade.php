@@ -40,8 +40,6 @@ function confirmation(id)
     });
 }
 
-
-
 </script>
 @endsection
 
@@ -52,6 +50,7 @@ jQuery('#dokumen').removeAttr("display");
 @endsection
 
 @section('content')
+
 
     	<div class="table-data__tool-right">
     		<a href="/sekolah/permohonan-baru/{{ $kodsekolah }}">
@@ -67,7 +66,8 @@ jQuery('#dokumen').removeAttr("display");
                         <th class="text-left">No. Permohonan</th>
                         <th class="text-left">Sumber Peruntukan</th>
                         <th class="text-left">Tarikh Permohonan</th>
-                        <th class="text-right">Tindakan</th>
+                        <th class="text-center">Tindakan</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -81,7 +81,8 @@ jQuery('#dokumen').removeAttr("display");
                          	<td class="text-left">{{ $index +1 }}.</td>
                             <td class="text-left">{{ $list->idpermohonan }}</td>
                             <td>{{ $list->sumberperuntukan->nama_sumberkewangan }} - {{ $list->keterangan }}<br/><br/>
-                                <a href="">Dokumen Sokongan</a>  <br/>
+                                <a href="#" onclick="javascript:$('#d{{ $index +1}}').toggle(); return false;" title="Klik untuk lihat senarai dokumen yang telah dimuatnaik">Dokumen Sokongan</a> <br/>
+                                <div id="d{{ $index + 1 }}" style="display:none">
                                 
                                      @foreach(App\UploadDokumen::where('fk_idpermohonan',$list->idpermohonan)->get() as $index => $doc)
                                      {{ $index +1 }}. &nbsp; {{ $doc->fail_deskripsi }} : 
@@ -92,17 +93,20 @@ jQuery('#dokumen').removeAttr("display");
                                                 <img src="{{ asset('bootstrap/images/icon/close.png')}}"/><br/>
                                         @endif
                                     @endforeach
-                               
+                               </div>
                             </td>
                             <td>{{ $list->TarikhPermohonan }}</td>
                             <td class="text-left">
                                 <div class="table-data-feature text-left">
+                                    @if($list->fk_idsyor == "4")
                                     <a href="/sekolah/permohonan/kemaskini/{{ $list->idpermohonan }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Kemaskini">
-                                        <i class="zmdi zmdi-edit"></i>
-                                    </button></a>&nbsp;&nbsp;
+                                        <i class="zmdi zmdi-edit red" aria-hidden="true"></i>
+                                    </button></a>&nbsp;&nbsp; 
                                     <button class="item" data-toggle="tooltip" data-placement="top" onclick="javascript:confirmation('{{ $list->id }}'); return false;" title="Padam">
                                         <i class="zmdi zmdi-delete"></i>
                                     </button></a>
+
+                                    @else <p class="text-success">Sedang diproses</p> @endif
                                 </div>
                             </td>
                          </tr>

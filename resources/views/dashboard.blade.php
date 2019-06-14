@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h3>Sistem Jawatankuasa Pemandu ICT Negeri Perak<br/></h3><hr/>
+<h3>Sistem Pengurusan JPICT Jabatan Pendidikan Negeri Perak<br/></h3><hr/>
     <h4>Selamat Datang {{ ucwords(strtolower(Auth::User()->name)) }}!</h4>
 <br/>
 <div class="row">

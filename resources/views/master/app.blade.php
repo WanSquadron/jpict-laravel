@@ -10,7 +10,7 @@
 
     @yield('title')
 
-    <title>Sistem Jawatankuasa Pemandu ICT - Jabatan Pendidikan Negeri Perak</title>
+    <title>Sistem Pengurusan JPICT - Jabatan Pendidikan Negeri Perak</title>
 
     @yield('css')
 
@@ -32,13 +32,7 @@
     <link href="{{ asset('bootstrap/css/theme.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/vendor/dropzone/dropzone.min.css') }}" rel="stylesheet">
     <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="{{ asset('bootstrap/vendor/datepicker/themes/classic.css') }}" rel="stylesheet">
-    <link href="{{ asset('bootstrap/vendor/datepicker/themes/classic.date.css') }}" rel="stylesheet">
-    <link href="{{ asset('bootstrap/vendor/datepicker/themes/classic.time.css') }}" rel="stylesheet">
-    <link href="{{ asset('bootstrap/vendor/datepicker/themes/default.css') }}" rel="stylesheet">
-    <link href="{{ asset('bootstrap/vendor/datepicker/themes/default.date.css') }}" rel="stylesheet">
-    <link href="{{ asset('bootstrap/vendor/datepicker/themes/default.time.css') }}" rel="stylesheet">
-    <link href="{{ asset('bootstrap/vendor/datepicker/themes/rtl.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/vendor/pickadate/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -139,9 +133,43 @@
                             </ul>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="/superadmin/mesyuarat">
-                                <i class="fas fa-suitcase"></i>Mesyuarat &nbsp;</a>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Mesyuarat JPICT &nbsp;
+                            <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="/superadmin/mesyuarat/permohonan/analisis"><i class="fas fa-list-alt"></i>Analisis</a>
+                                </li>
+                                <li>
+                                    <a href="/superadmin/permohonan/permohonan/kiu"><i class="fas fa-list-alt"></i>Kinta Utara</a>
+                                </li>
+                                <li>
+                                    <a href="/superadmin/permohonan/permohonan/kis"><i class="fas fa-list-alt"></i>Kinta Selatan</a>
+                                </li>
+                                <li>
+                                    <a href="/superadmin/permohonan/permohonan/pet"><i class="fas fa-list-alt"></i>Perak Tengah</a>
+                                </li>
+                                <li>
+                                    <a href="/superadmin/permohonan/permohonan/hup"><i class="fas fa-list-alt"></i>Hulu Perak</a>
+                                </li>
+                            </ul>
                         </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-cog"></i>Konfigurasi Sistem &nbsp;
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a class="js-arrow" href="/superadmin/mesyuarat">
+                                    <i class="fas fa-suitcase"></i>Mesyuarat &nbsp;</a>
+                                </li>
+                            </ul>
+                        </li>
+
                     @endif    
                     </ul>
                 </nav>
@@ -237,8 +265,7 @@
     <script src="{{ asset('bootstrap/js/main.js') }}"></script>
     <script src="{{ asset('bootstrap/js/ajax.js') }}"></script>
     <script src="{{ asset('bootstrap/vendor/dropzone/dropzone.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/vendor/datepicker/legacy.js') }}"></script>
-    <script src="{{ asset('bootstrap/vendor/datepicker/picker.js') }}"></script>
+    <script src="{{ asset('bootstrap/vendor/pickadate/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('js/datatables.js') }}"></script>
 
 
@@ -254,8 +281,10 @@
             jQuery('#sumberp').select2();
             jQuery('#statbli').select2();
             jQuery('#pralatn').select2();
-
             $('#mohon').dataTable();
+            $('#datepicker').datepicker();
+            $('#sandbox-container .input-group.date').datepicker({
+});
         });
     </script>
 </body>
