@@ -127,12 +127,6 @@ $('#btn-delete-avatar').click(function(){
                     <input class="form-control" type="text" name="emel" id="emel" value="{{ $maklumat->email }}" disabled>
                 </div>
             </div>
-            <div class="form-row">  
-                <div class="form-group col-md-12">
-                    <label for="NoMykad">Alamat Sekolah </label>
-                    <input class="form-control" type="text" name="alamat" id="alamat" value="{{ $maklumat->alamat }}" >
-                </div>
-            </div>
             <div class="form-row"> 
                 <div class="form-group col-md-6">
                     <label for="Poskod">Poskod </label>

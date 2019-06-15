@@ -661,7 +661,6 @@ class SekolahController extends Controller
 
     public function KemaskiniProfil(Request $request, $kodsekolah)
     {
-        $alamat = htmlentities($request->input('alamat'),ENT_QUOTES);
         $poskod = htmlentities($request->input('poskod'),ENT_QUOTES);
         $notelfn = htmlentities($request->input('notelfn'),ENT_QUOTES);
         $nofaks = htmlentities($request->input('nofaks'),ENT_QUOTES);
@@ -669,7 +668,6 @@ class SekolahController extends Controller
         $profil = Auth::User()->where('kodsekolah', '=', $kodsekolah)->first();
         $profil->notelsekolah = $notelfn;
         $profil->nofaksekolah = $nofaks;
-        $profil->alamat = $alamat;
         $profil->poskod = $poskod;
         $profil->save();
 

@@ -9,6 +9,11 @@ class Permohonan extends Model
 {
     protected $table = 'permohonan';
 
+    public function Permohonan()
+    {
+        return $this->belongsTo('App\User', 'kodsekolah', 'fk_kodsekolah');
+    }
+
     public function SumberPeruntukan() 
     {
     	return $this->hasOne('App\GlobalPeruntukanKewangan', 'idsumberkewangan', 'fk_idsumberkewangan');

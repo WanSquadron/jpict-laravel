@@ -1,5 +1,22 @@
 @extends('master.app')
 
+@section('js')
+
+<script type="text/javascript">
+@if ($status == 'success')    
+
+    Swal({
+                type: 'success',
+                title: 'Berjaya!',
+                text: 'Penghantaran Emel telah berjaya'
+        });
+@endif
+
+
+ </script>
+
+ @endsection
+
 @section('content')
 
 <script type="text/javascript">
@@ -18,11 +35,7 @@
  	}
  	return true;
  }
-
-
-
-
- </script>
+</script>
 
 
 <h4>Maklumat Permohonan JPICT {{ ucwords(strtolower($mohon->getNamaSekolahAttribute() )) }}</h4><hr/>
@@ -233,11 +246,11 @@
 			            		<input type="text" class="form-control" name="surat_terima" id="surat_terima" placeholder="Sila Isikan No. Rujukan Surat Terima Permohonan" value=" @if ($surat != '') {{ $surat->norujukan }} @endif"><br>
 			            	</div>
 			            </div>
-			            <input type="submit" class="btn btn-success" id="simpan" name="simpan" value="Simpan">
+			            <input type="submit" class="btn btn-success" id="simpan" name="simpan" value="Simpan"><br><br>
 			            </form>
 			            <form data-toggle="validator" role="form" method="post" action="/superadmin/email/{{ $mohon->idpermohonan }}">
 			            	<input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
-			            	<input type="submit" class="btn btn-success" id="simpan" name="simpan" value="Emel Surat Terima Permohonan">
+			            	<input type="submit" class="btn btn-danger" id="simpan" name="simpan" value="Emel Surat Terima Permohonan">
 			            </form>
 			        </div>
 			    </div>

@@ -74,6 +74,7 @@ Route::group(['middleware' => ['role:SuperAdmin']], function()
 	Route::get('/superadmin/permohonan', 'SuperadminController@SenaraiPermohonan');
 	Route::get('/superadmin/permohonan/{stat}', 'SuperadminController@SenaraiPermohonan');
 	Route::get('/superadmin/permohonan/view/{idmohon}', 'SuperadminController@ViewPermohonan');
+	Route::get('/superadmin/permohonan/view/{idmohon}/{status}', 'SuperadminController@ViewPermohonan');
 
 	###Bahagian Mesyuarat untuk Dibuat Keputusan Lulus/Ditolak
 	Route::get('/superadmin/mesyuarat/permohonan', 'SuperadminController@MesyuaratPermohonan');

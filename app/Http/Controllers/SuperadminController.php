@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Permohonan;
 use App\GlobalMesyuarat;
@@ -174,6 +175,9 @@ class SuperadminController extends Controller
 
     public function EmelTerimaPermohonan(Request $r, $idmohon)
     {
+        $kod = Permohonan::where('idpermohonan',$idmohon)->first();
+        $user = User::where('kodsekolah', $kod->fk_kodsekolah)->first();
+       // $tarikh_hantar = strtotime($kod->created_at, "D/m/Y h:i:s");
 
 
         # PHP MAILER
@@ -192,11 +196,25 @@ class SuperadminController extends Controller
         $mail->addAddress("syazwan.shahferi@moe.gov.my");
         $mail->isHTML(true);
         $mail->Subject = "Surat Makluman Penerimaan Borang Permohonan JPICT";
-        $mail->Body = "Assalamualaikum & Salam Sejahtera. Salam Perak Excellent. Salam ICT Excellent.<br><br>Borang Permohonan bagi mendapatkan Kelulusan JPICT Negeri Perak telah diterima oleh kami.<br><br>Oleh yang demikian, permohonan ini akan dibawa ke mesyuarat terdekat bagi mendapatkan kelulusan. Surat makluman tentang kelulusan akan diberitahu kelak. <br>Sekian, terima kasih.<br><br><br><br><hr/><small>Surat ini dijana secara automatik daripada Sistem Pengurusan JPICT JPN Perak, tiada tandatangan diperlukan.</small>";
+        $mail->Body = "Assalamualaikum & Salam Sejahtera. Salam Perak Excellent. Salam ICT Excellent.<br><br>Borang Permohonan bagi mendapatkan Kelulusan JPICT Negeri Perak telah diterima oleh kami.<br><br>Berikut adalah maklumat permohonan :-<br><br>
+        <table border=0>
+        <tr><td>Nama Sekolah/Kod</td>
+        <td>&nbsp;&nbsp; : $user->name / $user->kodsekolah</td>
+        </tr>
+        <tr><td>No. Permohonan</td>
+        <td>&nbsp;&nbsp : $idmohon </td>
+        </tr>
+        <td> Tarikh Permohonan Dihantar </td>
+        <td>&nbsp;&nbsp; : $kod->created_at->format('d/m/Y h:i:s') </td>
+        </tr>
+        </table><br><br>
+        Oleh yang demikian, permohonan ini akan dibawa ke mesyuarat terdekat bagi mendapatkan kelulusan. Surat makluman tentang kelulusan akan diberitahu kelak. <br>Sekian, terima kasih.<br><br><br><br><hr/><small>Surat ini dijana secara automatik daripada Sistem Pengurusan JPICT JPN Perak, tiada tandatangan diperlukan.</small>";
         if (!$mail->send()) {
             echo "swal('error','Ops !','Terdapat ralat semasa penghantaran e-mel !<br><br><b>Nota :<br></b> Sila pastikan kata laluan anda yang betul serta semak <a target=\'_blank\' href=\'https://www.google.com/settings/security/lesssecureapps\'><b>https://www.google.com/settings/security/lesssecureapps</b></a> dan Pilih <b>\'Turn on\'</b> dan cuba semula.'); ";
         } else {
             echo "SweetAlert('success','Berjaya !','Rekod tugasan harian telah berjaya diemelkan !');";
-        }
+
+            return redirect('superadmin/permohonan/view/'.$idmohon.'/?status=success');
+        } 
     }
 }
