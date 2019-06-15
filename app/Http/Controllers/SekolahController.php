@@ -712,7 +712,7 @@ class SekolahController extends Controller
         $surat = RujukanSurat::where('fk_idpermohonan', $idmohon)->first();
 
         $rujukankami = $surat->norujukan;
-        $jawatan = "KETUA SEKTO";
+        $jawatan = "KETUA SEKTOR";
         $alamat = "IPOH";
         $ds = DIRECTORY_SEPARATOR;
         $t = new Template;

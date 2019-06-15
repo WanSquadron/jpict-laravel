@@ -143,7 +143,7 @@
                                     <a href="/superadmin/mesyuarat/permohonan/analisis"><i class="fas fa-list-alt"></i>Analisis</a>
                                 </li>
                                 <li>
-                                    <a href="/superadmin/permohonan/permohonan/kiu"><i class="fas fa-list-alt"></i>Kinta Utara</a>
+                                    <a href="/superadmin/mesyuarat/permohonan"><i class="fas fa-list-alt"></i>Kinta Utara</a>
                                 </li>
                                 <li>
                                     <a href="/superadmin/permohonan/permohonan/kis"><i class="fas fa-list-alt"></i>Kinta Selatan</a>

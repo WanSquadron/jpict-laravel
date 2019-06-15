@@ -79,7 +79,7 @@
                     <td>{{ $list->statussyor }}</td>
                     <td>
                         <div class="table-data-feature text-left">
-                            <a href="/superadmin/mesyuarat/permohonan/view/{{ $list->idpermohonan }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Lihat Permohonan">
+                            <a href="/superadmin/mesyuarat/permohonan/{{ $list->idpermohonan }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Lihat Permohonan">
                                 <i class="fa fa-desktop"></i>
                             </button></a>&nbsp;&nbsp;
                         </div>

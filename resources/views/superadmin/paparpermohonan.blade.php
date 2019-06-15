@@ -234,9 +234,14 @@
 			            	</div>
 			            </div>
 			            <input type="submit" class="btn btn-success" id="simpan" name="simpan" value="Simpan">
+			            </form>
+			            <form data-toggle="validator" role="form" method="post" action="/superadmin/email/{{ $mohon->idpermohonan }}">
+			            	<input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
+			            	<input type="submit" class="btn btn-success" id="simpan" name="simpan" value="Emel Surat Terima Permohonan">
+			            </form>
 			        </div>
 			    </div>
-			   	</form>
+			   	
 			</div>
 		</div>
 	</div>

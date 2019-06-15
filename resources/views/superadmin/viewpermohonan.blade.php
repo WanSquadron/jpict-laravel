@@ -1,29 +1,23 @@
 @extends('master.app')
 
-@section('content')
+@section('js')
 
 <script type="text/javascript">
 
+@if ($status == 'success')    
 
- function ValidateBorang() 
- {
- 	if($('#justifikasi').val().length == 0){
- 		Swal({
-  				type: 'error',
-  				title: 'Tidak Lengkap!',
-  				text: 'Sila Lengkapkan Justifikasi Anda!',
-		});
- 		$('#justifikasi').focus();
- 		return false;
- 	}
- 	return true;
- }
+    Swal({
+                type: 'success',
+                title: 'Berjaya!',
+                text: 'Maklumat telah disimpan'
+        });
+@endif
 
+</script>
 
+@endsection
 
-
- </script>
-
+@section('content')
 
 <h4>Maklumat Permohonan JPICT {{ ucwords(strtolower($mohon->getNamaSekolahAttribute() )) }}</h4><hr/>
 
@@ -205,7 +199,6 @@
 					<i class="fa fa-truck"></i>   D.&nbsp;&nbsp;&nbsp;Justifikasi & Kelulusan 
 				</div>						
 				<div class="card-body">
-					<form data-toggle="validator" role="form" method="post" action="/superadmin/syor/{{ $mohon->idpermohonan }}" onsubmit="return ValidateBorang();">
 			            <div class="form-row">
 			            	<div class="col-md-8">
 			            		<label>Justifikasi :</label>
@@ -221,8 +214,7 @@
 			                        <th class="text-left">#</th>
 			                        <th class="text-left">Peralatan/Perisian</th>
 			                        <th class="text-left">Diluluskan</th>
-			                        <th class="text-center">Ditolak</th>
-			                        <th class="text-left">Tindakan</th>
+			                        <th class="text-left">Ditolak</th>
 			                    </tr>
 			                </thead>
 			                <tbody>
@@ -231,21 +223,30 @@
 			                        <td colspan="6" class="text-center"><i>Tiada Maklumat Peralatan/Perisian</i></td>
 			                    </tr>
 			                @else
+			                <form data-toggle="validator" role="form" method="post" action="/superadmin/mesyuarat/kelulusan/{{ $alatan->fk_idpermohonan }}">
+			               
 			                    @foreach($peralatan as $index => $alatan)
+			                    	
 			                        <tr id="alatan_{{ $alatan->id }}">
 			                            <td class="text-left">{{ $index +1 }}.</td>
 			                            <td class="text-left">{{ $alatan->alat->nama_peralatan }} - {{ $alatan->catatan }}</td>
-			                            <td class="text-left"><input type="text" class="form-control" name="jumlahlulus{{ $alatan->id }}" id="jumlahlulus{{ $alatan->id }}" value="{{ $alatan->kuantiti_lulus }}" size="5"></td>
-			                            <td class="text-center"><input type="text" class="form-control" name="jumlahtaklulus{{ $alatan->id }}" id="jumlahtaklulus{{ $alatan->id }}" value="{{ $alatan->kuantiti_gagal }}" size="5"></td>
-			                            <td class="text-left"><input class="btn btn-primary" type="submit" name="submit" value="Simpan"></td>
-			                        </tr>                    
+			                            <td class="text-left">
+			                            	<input type="text" class="form-control" name="kuantitilulus{{ $alatan->id }}" id="kuantitilulus{{ $alatan->id }}" value="{{ $alatan->kuantiti_lulus }}" size="5">
+			                            	<input class="form-control" type="hidden" name="_token" value="{{ csrf_token() }}">
+			                            </td>
+			                            <td class="text-center">
+			                            	<input type="text" class="form-control" name="kuantitigagal{{ $alatan->id }}" id="kuantitigagal{{ $alatan->id }}" value="{{ $alatan->kuantiti_gagal }}" size="5">
+			                            </td>
+			                        </tr>   
+			                                         
 			                    @endforeach
+
 			                @endif
 			            	</tbody>
 			            </table>
 			        </div>
 			    </div>
-			            <input type="submit" class="btn btn-success" id="simpan" name="simpan" value="Simpan">
+			         <input type="submit" class="btn btn-success" id="simpan" name="simpan" value="Simpan">   
 			    </div>
 			   	</form>
 			</div>
